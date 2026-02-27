@@ -1,0 +1,725 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "ETF"
+    }
+  ],
+  "paths": {
+    "/api/etf/getUsBtcEtf": {
+      "get": {
+        "summary": "美股BTCETF(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "ETF"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ticker": {
+                            "type": "string",
+                            "description": "交易对"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "类型"
+                          },
+                          "price": {
+                            "type": "number",
+                            "description": "价格"
+                          },
+                          "marketCap": {
+                            "type": "integer",
+                            "description": "市值"
+                          },
+                          "priceChgRate": {
+                            "type": "number",
+                            "description": "价格变化比"
+                          },
+                          "priceChg": {
+                            "type": "number",
+                            "description": "价格变化"
+                          },
+                          "custodian": {
+                            "type": "string",
+                            "description": "发行机构"
+                          },
+                          "etfName": {
+                            "type": "string",
+                            "description": "名字"
+                          },
+                          "fee": {
+                            "type": "number",
+                            "description": "手续费"
+                          },
+                          "feeWaiver": {
+                            "type": "number",
+                            "description": "手续费减免"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "状态"
+                          },
+                          "volume": {
+                            "type": "string",
+                            "description": "交易量"
+                          },
+                          "outstanding": {
+                            "type": "integer",
+                            "description": "流通股"
+                          },
+                          "netInflow": {
+                            "type": "number",
+                            "description": "日净流入"
+                          },
+                          "netInflowDate": {
+                            "type": "integer",
+                            "description": "日净流入日期"
+                          },
+                          "cumNet": {
+                            "type": "number",
+                            "description": "总净流入"
+                          },
+                          "totalNav": {
+                            "type": "number",
+                            "description": "资产净值"
+                          },
+                          "prem": {
+                            "type": "number",
+                            "description": "溢价"
+                          },
+                          "assertVo": {
+                            "type": "object",
+                            "properties": {
+                              "ticker": {
+                                "type": "string"
+                              },
+                              "btcAmount": {
+                                "type": "number",
+                                "description": "BTC总量"
+                              },
+                              "btcAmount24hPercent": {
+                                "type": "number",
+                                "description": "1d变化比"
+                              },
+                              "btcAmount24hChange": {
+                                "type": "number",
+                                "description": "1d变化"
+                              },
+                              "btcAmount7dPercent": {
+                                "type": "number",
+                                "description": "7d变化比"
+                              },
+                              "btcAmount7dChange": {
+                                "type": "number",
+                                "description": "7d变化"
+                              }
+                            },
+                            "required": [
+                              "ticker",
+                              "btcAmount24hChange",
+                              "btcAmount",
+                              "btcAmount7dChange",
+                              "btcAmount7dPercent",
+                              "btcAmount24hPercent"
+                            ]
+                          },
+                          "sort": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "custodian",
+                          "etfName",
+                          "fee",
+                          "feeWaiver",
+                          "marketCap",
+                          "price",
+                          "status",
+                          "ticker",
+                          "type",
+                          "volume",
+                          "outstanding",
+                          "priceChg",
+                          "priceChgRate",
+                          "netInflow",
+                          "netInflowDate",
+                          "cumNet",
+                          "totalNav",
+                          "prem",
+                          "assertVo",
+                          "sort"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/etf/getUsEthEtf": {
+      "get": {
+        "summary": "美股ETHETF(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "ETF"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ticker": {
+                            "type": "string",
+                            "description": "交易对"
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "类型"
+                          },
+                          "price": {
+                            "type": "number",
+                            "description": "价格"
+                          },
+                          "marketCap": {
+                            "type": "integer",
+                            "description": "市值"
+                          },
+                          "priceChgRate": {
+                            "type": "number",
+                            "description": "价格变化比"
+                          },
+                          "priceChg": {
+                            "type": "number",
+                            "description": "价格变化"
+                          },
+                          "custodian": {
+                            "type": "string",
+                            "description": "发行机构"
+                          },
+                          "etfName": {
+                            "type": "string",
+                            "description": "名字"
+                          },
+                          "fee": {
+                            "type": "number",
+                            "description": "手续费"
+                          },
+                          "feeWaiver": {
+                            "type": "number",
+                            "description": "手续费减免"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "状态"
+                          },
+                          "volume": {
+                            "type": "string",
+                            "description": "交易量"
+                          },
+                          "outstanding": {
+                            "type": "integer",
+                            "description": "流通股"
+                          },
+                          "netInflow": {
+                            "type": "number",
+                            "description": "日净流入"
+                          },
+                          "netInflowDate": {
+                            "type": "integer",
+                            "description": "日净流入日期"
+                          },
+                          "cumNet": {
+                            "type": "number",
+                            "description": "总净流入"
+                          },
+                          "totalNav": {
+                            "type": "number",
+                            "description": "资产净值"
+                          },
+                          "prem": {
+                            "type": "number",
+                            "description": "溢价"
+                          },
+                          "assertVo": {
+                            "type": "object",
+                            "properties": {
+                              "ticker": {
+                                "type": "string"
+                              },
+                              "btcAmount": {
+                                "type": "number",
+                                "description": "BTC总量"
+                              },
+                              "btcAmount24hPercent": {
+                                "type": "number",
+                                "description": "1d变化比"
+                              },
+                              "btcAmount24hChange": {
+                                "type": "number",
+                                "description": "1d变化"
+                              },
+                              "btcAmount7dPercent": {
+                                "type": "number",
+                                "description": "7d变化比"
+                              },
+                              "btcAmount7dChange": {
+                                "type": "number",
+                                "description": "7d变化"
+                              }
+                            },
+                            "required": [
+                              "ticker",
+                              "btcAmount24hChange",
+                              "btcAmount",
+                              "btcAmount7dChange",
+                              "btcAmount7dPercent",
+                              "btcAmount24hPercent"
+                            ]
+                          },
+                          "sort": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": [
+                          "custodian",
+                          "etfName",
+                          "fee",
+                          "feeWaiver",
+                          "marketCap",
+                          "price",
+                          "status",
+                          "ticker",
+                          "type",
+                          "volume",
+                          "outstanding",
+                          "priceChg",
+                          "priceChgRate",
+                          "netInflow",
+                          "netInflowDate",
+                          "cumNet",
+                          "totalNav",
+                          "prem",
+                          "assertVo",
+                          "sort"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/etf/usBtcInflow": {
+      "get": {
+        "summary": "美股BTC ETF净流入流出(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "ETF"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "list": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "ticker": {
+                                  "type": "string"
+                                },
+                                "change": {
+                                  "type": "integer"
+                                },
+                                "changeUsd": {
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "ticker",
+                                "change",
+                                "changeUsd"
+                              ]
+                            }
+                          },
+                          "date": {
+                            "type": "integer",
+                            "description": "日期"
+                          },
+                          "change": {
+                            "type": "number",
+                            "description": "变化数量"
+                          },
+                          "changeUsd": {
+                            "type": "number",
+                            "description": "变化金额"
+                          }
+                        },
+                        "required": [
+                          "list",
+                          "date",
+                          "change",
+                          "changeUsd"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/etf/usEthInflow": {
+      "get": {
+        "summary": "美股ETH ETF净流入流出(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "ETF"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "list": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "ticker": {
+                                  "type": "string"
+                                },
+                                "change": {
+                                  "type": "integer"
+                                },
+                                "changeUsd": {
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "ticker",
+                                "change",
+                                "changeUsd"
+                              ]
+                            }
+                          },
+                          "date": {
+                            "type": "integer",
+                            "description": "日期"
+                          },
+                          "change": {
+                            "type": "number",
+                            "description": "变化数量"
+                          },
+                          "changeUsd": {
+                            "type": "number",
+                            "description": "变化金额"
+                          }
+                        },
+                        "required": [
+                          "list",
+                          "date",
+                          "change",
+                          "changeUsd"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/etf/hkEtfInflow": {
+      "get": {
+        "summary": "港股ETH ETF净流入流出 (套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "ETF"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": {
+                            "type": "string",
+                            "description": "时间"
+                          },
+                          "totalUSD": {
+                            "type": "integer",
+                            "description": "总金额"
+                          },
+                          "totalBTC": {
+                            "type": "integer",
+                            "description": "总BTC"
+                          },
+                          "totalVolume": {
+                            "type": "number",
+                            "description": "总交易量"
+                          },
+                          "totalSeed": {
+                            "type": "integer",
+                            "description": "总资产净值"
+                          },
+                          "totalHoldBtc": {
+                            "type": "number",
+                            "description": "总持有BTC数量"
+                          },
+                          "amcusd": {
+                            "type": "integer",
+                            "description": "AMC 变化金额"
+                          },
+                          "amcbtc": {
+                            "type": "integer",
+                            "description": "AMC 变化数量"
+                          },
+                          "boseraUSD": {
+                            "type": "integer",
+                            "description": "Bosera 变化金额"
+                          },
+                          "boseraBTC": {
+                            "type": "integer",
+                            "description": "Bosera 变化金额"
+                          },
+                          "harvestUSD": {
+                            "type": "integer",
+                            "description": "Harvest 变化金额"
+                          },
+                          "harvestBTC": {
+                            "type": "integer",
+                            "description": "Harvest 变化数量"
+                          }
+                        },
+                        "required": [
+                          "date",
+                          "totalUSD",
+                          "totalBTC",
+                          "totalVolume",
+                          "totalSeed",
+                          "totalHoldBtc",
+                          "amcusd",
+                          "amcbtc",
+                          "boseraUSD",
+                          "boseraBTC",
+                          "harvestUSD",
+                          "harvestBTC"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

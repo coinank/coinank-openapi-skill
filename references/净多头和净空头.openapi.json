@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "净多头和净空头"
+    }
+  ],
+  "paths": {
+    "/api/netPositions/getNetPositions": {
+      "get": {
+        "summary": "净多头和净空头 (套餐3)",
+        "deprecated": false,
+        "description": "返回固定周期内的多头和空头持仓变化，需要从一个时间点开始累计\n</br><font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "净多头和净空头"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance,OKX,Bybit,Bitget",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "交易对",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m,5m,15m,30m,1h,2h,4h,6h,8h,12h,1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "返回此时间戳之前的数据",
+            "required": true,
+            "example": "1725978872354",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "最大500",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "begin": {
+                            "type": "integer",
+                            "description": "time"
+                          },
+                          "netLongsHigh": {
+                            "type": "integer",
+                            "description": "net long high"
+                          },
+                          "netLongsClose": {
+                            "type": "integer",
+                            "description": "net long close"
+                          },
+                          "netLongsLow": {
+                            "type": "integer",
+                            "description": "net long low"
+                          },
+                          "netShortsClose": {
+                            "type": "integer",
+                            "description": "net short high"
+                          },
+                          "netShortsHigh": {
+                            "type": "integer",
+                            "description": "net shortclose"
+                          },
+                          "netShortsLow": {
+                            "type": "integer",
+                            "description": "net short low"
+                          }
+                        },
+                        "required": [
+                          "begin",
+                          "netLongsHigh",
+                          "netLongsClose",
+                          "netLongsLow",
+                          "netShortsClose",
+                          "netShortsHigh",
+                          "netShortsLow"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

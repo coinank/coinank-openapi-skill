@@ -1,0 +1,2745 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "未平仓合约"
+    }
+  ],
+  "paths": {
+    "/api/openInterest/all": {
+      "get": {
+        "summary": "持仓列表（按交易所排序）(套餐1)",
+        "deprecated": false,
+        "description": "币种聚合持仓实时列表，按交易所统计并排序 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "tags": [
+          "未平仓合约"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "coinCount": {
+                            "type": "number",
+                            "description": "持仓数量"
+                          },
+                          "coinValue": {
+                            "type": "number",
+                            "description": "持仓金额"
+                          },
+                          "exchangeName": {
+                            "type": "string",
+                            "description": "交易所名字 例: Binance"
+                          },
+                          "rate": {
+                            "type": "integer",
+                            "description": "在所有交易所中占的比例"
+                          },
+                          "change15M": {
+                            "type": "number",
+                            "description": "在最近15分钟内变动的比例"
+                          },
+                          "change5M": {
+                            "type": "number",
+                            "description": "同上"
+                          },
+                          "change30M": {
+                            "type": "number"
+                          },
+                          "change1H": {
+                            "type": "number"
+                          },
+                          "change4H": {
+                            "type": "number"
+                          },
+                          "change24H": {
+                            "type": "number"
+                          },
+                          "change2D": {
+                            "type": "number"
+                          },
+                          "change3D": {
+                            "type": "number"
+                          },
+                          "change7D": {
+                            "type": "number"
+                          },
+                          "turnover24h": {
+                            "type": "number",
+                            "description": "24小时成交额"
+                          },
+                          "baseCoin": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "coinCount",
+                          "coinValue",
+                          "exchangeName",
+                          "rate",
+                          "change15M",
+                          "change5M",
+                          "change30M",
+                          "change1H",
+                          "change4H",
+                          "change24H",
+                          "change2D",
+                          "change3D",
+                          "change7D",
+                          "turnover24h",
+                          "baseCoin"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/openInterest/v2/chart": {
+      "get": {
+        "summary": "币种聚合持仓历史(套餐1)",
+        "deprecated": false,
+        "description": "按照级别返回币种聚合持仓的历史数据，不传exchange查所有，传查单个。 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "tags": [
+          "未平仓合约"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance,OKX,Bybit,Gate,Huobi,Bitget,Bitmex,dYdX,Bitfinex,CME,Kraken,Deribit",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "default 100 max 500",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "USD  or  COIN name   eg:BTC",
+            "required": true,
+            "example": "USD",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "tss": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "time array"
+                        },
+                        "prices": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "price array"
+                        },
+                        "dataValues": {
+                          "type": "object",
+                          "properties": {
+                            "Binance": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "Bitfinex": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "Bitget": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "Bitmex": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "Bybit": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "CME": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "Deribit": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "Gate": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "Huobi": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "Kraken": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "Okex": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "dYdX": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            }
+                          },
+                          "required": [
+                            "Binance",
+                            "Bitfinex",
+                            "Bitget",
+                            "Bitmex",
+                            "Bybit",
+                            "CME",
+                            "Deribit",
+                            "Gate",
+                            "Huobi",
+                            "Kraken",
+                            "Okex",
+                            "dYdX"
+                          ],
+                          "description": "array"
+                        }
+                      },
+                      "required": [
+                        "tss",
+                        "prices",
+                        "dataValues"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "tss": [
+                      1725983155339,
+                      1725980400000,
+                      1725976800000,
+                      1725973200000,
+                      1725969600000,
+                      1725966000000,
+                      1725962400000,
+                      1725958800000,
+                      1725955200000,
+                      1725951600000,
+                      1725948000000
+                    ],
+                    "prices": [
+                      56912.9,
+                      56706,
+                      57169.1,
+                      57190.1,
+                      57140,
+                      57054.9,
+                      57024.5,
+                      57183.2,
+                      56797.5,
+                      56910.8
+                    ],
+                    "dataValues": {
+                      "Binance": [
+                        120064.604,
+                        119987.073,
+                        120637.148,
+                        119831.719,
+                        119756.309,
+                        119966.931,
+                        120298.03,
+                        120208.275,
+                        119984.354,
+                        119790.445,
+                        119769.907
+                      ],
+                      "Bitfinex": [
+                        6553.24445106,
+                        6563.50838433,
+                        6564.30373245,
+                        6565.44079997,
+                        6564.57050874,
+                        6564.78958296,
+                        6563.30326223,
+                        6564.35177527,
+                        6562.49401847,
+                        6563.60862149,
+                        6563.62747918
+                      ],
+                      "Bitget": [
+                        91176.017,
+                        91156.989,
+                        91694.265,
+                        91001.263,
+                        90716.941,
+                        90761.874,
+                        90114.833,
+                        90169.876,
+                        90580.466,
+                        90875.465,
+                        90786.742
+                      ],
+                      "Bitmex": [
+                        5862.262528,
+                        5892.339614,
+                        5903.806408,
+                        5831.606786,
+                        5853.634247,
+                        5869.66811,
+                        5906.56616,
+                        5911.467407,
+                        5905.314446,
+                        5913.112091,
+                        5901.991381
+                      ],
+                      "Bybit": [
+                        75497.183,
+                        75654.84,
+                        75663.685,
+                        75607.541,
+                        75791.95,
+                        75548.608,
+                        75462.941,
+                        75313.028,
+                        74976.065,
+                        74649.104,
+                        74391.153
+                      ],
+                      "CME": [
+                        142718.6,
+                        142718.6,
+                        142308.5,
+                        142308.5,
+                        142308.5,
+                        142308.5,
+                        142308.5,
+                        142308.5,
+                        142308.5,
+                        142308.5,
+                        142308.5
+                      ],
+                      "Deribit": [
+                        25497.8641,
+                        25517.147315,
+                        25625.450156,
+                        25406.305523,
+                        25370.527753,
+                        25355.198763,
+                        25387.177116,
+                        25422.254835,
+                        25336.893361,
+                        25368.869826,
+                        25339.073729
+                      ],
+                      "Gate": [
+                        25963.9028,
+                        26036.881695,
+                        26267.314378,
+                        26586.410453,
+                        26484.299734,
+                        26507.897198,
+                        26418.056439,
+                        26438.646628,
+                        26280.266389,
+                        25812.400218,
+                        25842.611021
+                      ],
+                      "Huobi": [
+                        23205.545781461908,
+                        23191.24589118508,
+                        23193.854247420237,
+                        23181.89791320997,
+                        23168.84454164386,
+                        23169.81517330811,
+                        23172.436555349595,
+                        23173.02820572803,
+                        23169.529430016366,
+                        23174.27700444777,
+                        23163.94807383126
+                      ],
+                      "Kraken": [
+                        2479.6463,
+                        2463.674159,
+                        2474.417779,
+                        2471.998527,
+                        2460.555688,
+                        2469.771801,
+                        2482.111262,
+                        2509.844415,
+                        2523.95659,
+                        2479.971858,
+                        2479.019931
+                      ],
+                      "Okex": [
+                        41228.85016306558,
+                        41385.870247391074,
+                        41833.44733247992,
+                        41795.05436075757,
+                        41769.52299043537,
+                        41815.73358259631,
+                        41828.35042357681,
+                        41739.85350282579,
+                        41925.69886276071,
+                        41930.22776238521,
+                        41917.09707298473
+                      ],
+                      "dYdX": [
+                        829.4755,
+                        832.3095,
+                        843.9636,
+                        862.0358,
+                        866.5939,
+                        866.7901,
+                        868.0943,
+                        870.2486,
+                        870.866,
+                        877.1698,
+                        881.3488
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/openInterest/symbol/Chart": {
+      "get": {
+        "summary": "交易对持仓历史(套餐1)",
+        "deprecated": false,
+        "description": "返回交易对持仓历史<font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "tags": [
+          "未平仓合约"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance OKX Bybit Gate Bybit Bitget 交易所",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "交易对",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m  30m 1h 2h 4h 6h 8h 12h  1d ",
+            "required": true,
+            "example": "1d",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "毫秒时间戳",
+            "required": true,
+            "example": 1740174208186,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "最大500 默认500",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ts": {
+                            "type": "integer",
+                            "description": "时间戳"
+                          },
+                          "coinCount": {
+                            "type": "number",
+                            "description": "持仓数据"
+                          },
+                          "coinValue": {
+                            "type": "number",
+                            "description": "持仓金额（USD）"
+                          }
+                        },
+                        "required": [
+                          "ts",
+                          "coinCount",
+                          "coinValue"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": [
+                    {
+                      "ts": 1725948000000,
+                      "volume": 0,
+                      "coinCount": 86935.155,
+                      "coinValue": 4945297598.66
+                    },
+                    {
+                      "ts": 1725951600000,
+                      "volume": 0,
+                      "coinCount": 86917.811,
+                      "coinValue": 4936740445.62
+                    },
+                    {
+                      "ts": 1725955200000,
+                      "volume": 0,
+                      "coinCount": 87216.816,
+                      "coinValue": 4986368526.03
+                    },
+                    {
+                      "ts": 1725958800000,
+                      "volume": 0,
+                      "coinCount": 87343.364,
+                      "coinValue": 4980729129.09
+                    },
+                    {
+                      "ts": 1725962400000,
+                      "volume": 0,
+                      "coinCount": 87451.509,
+                      "coinValue": 4990918834.69
+                    },
+                    {
+                      "ts": 1725966000000,
+                      "volume": 0,
+                      "coinCount": 87157.282,
+                      "coinValue": 4981831797.57
+                    },
+                    {
+                      "ts": 1725969600000,
+                      "volume": 0,
+                      "coinCount": 86948.442,
+                      "coinValue": 4972590092.82
+                    },
+                    {
+                      "ts": 1725973200000,
+                      "volume": 0,
+                      "coinCount": 86945.24,
+                      "coinValue": 4970511563.89
+                    },
+                    {
+                      "ts": 1725976800000,
+                      "volume": 0,
+                      "coinCount": 87523.516,
+                      "coinValue": 4962758404.23
+                    },
+                    {
+                      "ts": 1725980400000,
+                      "volume": 0,
+                      "coinCount": 86977.184,
+                      "coinValue": 4948793024.36
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/openInterest/kline": {
+      "get": {
+        "summary": "交易对持仓K线(套餐1)",
+        "deprecated": false,
+        "description": "返回交易对持仓（数量）k线的开高收低 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "tags": [
+          "未平仓合约"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m  30m 1h 2h 4h 6h 8h 12h  1d ",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "毫秒时间戳",
+            "required": true,
+            "example": 1725983462353,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "begin": {
+                            "type": "integer",
+                            "description": "开始时间戳"
+                          },
+                          "open": {
+                            "type": "integer",
+                            "description": "开"
+                          },
+                          "close": {
+                            "type": "integer",
+                            "description": "高"
+                          },
+                          "low": {
+                            "type": "integer",
+                            "description": "低"
+                          },
+                          "high": {
+                            "type": "integer",
+                            "description": "收"
+                          }
+                        },
+                        "required": [
+                          "begin",
+                          "open",
+                          "close",
+                          "low",
+                          "high"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": [
+                    {
+                      "id": "66dfe072b1dc79a6978962fe",
+                      "begin": 1725948000000,
+                      "open": 86935,
+                      "close": 86918,
+                      "low": 86854,
+                      "high": 86942
+                    },
+                    {
+                      "id": "66dfee81b1dc79a697dd3d06",
+                      "begin": 1725951600000,
+                      "open": 86918,
+                      "close": 87217,
+                      "low": 86809,
+                      "high": 87224
+                    },
+                    {
+                      "id": "66dffc93b1dc79a69731643b",
+                      "begin": 1725955200000,
+                      "open": 87217,
+                      "close": 87343,
+                      "low": 87217,
+                      "high": 87655
+                    },
+                    {
+                      "id": "66e00aa3b1dc79a697855e07",
+                      "begin": 1725958800000,
+                      "open": 87343,
+                      "close": 87452,
+                      "low": 87133,
+                      "high": 87452
+                    },
+                    {
+                      "id": "66e018b2b1dc79a697d97aa1",
+                      "begin": 1725962400000,
+                      "open": 87452,
+                      "close": 87157,
+                      "low": 87139,
+                      "high": 87485
+                    },
+                    {
+                      "id": "66e026c1b1dc79a6972d387d",
+                      "begin": 1725966000000,
+                      "open": 87157,
+                      "close": 86948,
+                      "low": 86948,
+                      "high": 87193
+                    },
+                    {
+                      "id": "66e034d5b1dc79a6977e8d3f",
+                      "begin": 1725969600000,
+                      "open": 86948,
+                      "close": 86945,
+                      "low": 86790,
+                      "high": 86972
+                    },
+                    {
+                      "id": "66e042e1b1dc79a697d14e93",
+                      "begin": 1725973200000,
+                      "open": 86945,
+                      "close": 87524,
+                      "low": 86923,
+                      "high": 87809
+                    },
+                    {
+                      "id": "66e050f9b1dc79a6972247b8",
+                      "begin": 1725976800000,
+                      "open": 87524,
+                      "close": 86977,
+                      "low": 86977,
+                      "high": 87597
+                    },
+                    {
+                      "id": "66e05f02b1dc79a69776cd21",
+                      "begin": 1725980400000,
+                      "open": 86977,
+                      "close": 87165,
+                      "low": 86832,
+                      "high": 87185
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/openInterest/aggKline": {
+      "get": {
+        "summary": "聚合持仓k线(套餐1)",
+        "deprecated": false,
+        "description": "返回按币种聚合的持仓k线 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "tags": [
+          "未平仓合约"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m  30m 1h 2h 4h 6h 8h 12h  1d ",
+            "required": true,
+            "example": "1m",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "毫秒时间戳",
+            "required": true,
+            "example": 1726158495618,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": 500,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "begin": {
+                            "type": "integer",
+                            "description": "时间戳"
+                          },
+                          "open": {
+                            "type": "integer",
+                            "description": "开"
+                          },
+                          "close": {
+                            "type": "integer",
+                            "description": "收"
+                          },
+                          "low": {
+                            "type": "integer",
+                            "description": "低"
+                          },
+                          "high": {
+                            "type": "integer",
+                            "description": "高"
+                          }
+                        },
+                        "required": [
+                          "begin",
+                          "open",
+                          "close",
+                          "low",
+                          "high"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": [
+                    {
+                      "begin": 1725948000000,
+                      "open": 31838378474,
+                      "close": 31813083312,
+                      "low": 31761680092,
+                      "high": 31846846111
+                    },
+                    {
+                      "begin": 1725951600000,
+                      "open": 31813083312,
+                      "close": 32054974251,
+                      "low": 31794605163,
+                      "high": 32091157332
+                    },
+                    {
+                      "begin": 1725955200000,
+                      "open": 32054974251,
+                      "close": 31980029319,
+                      "low": 31980029319,
+                      "high": 32156023059
+                    },
+                    {
+                      "begin": 1725958800000,
+                      "open": 31980029319,
+                      "close": 32021363049,
+                      "low": 31944239965,
+                      "high": 32177569207
+                    },
+                    {
+                      "begin": 1725962400000,
+                      "open": 32021363049,
+                      "close": 32081355478,
+                      "low": 31961788585,
+                      "high": 32081355478
+                    },
+                    {
+                      "begin": 1725966000000,
+                      "open": 32081355478,
+                      "close": 32107608699,
+                      "low": 32012682588,
+                      "high": 32126711676
+                    },
+                    {
+                      "begin": 1725969600000,
+                      "open": 32107608699,
+                      "close": 32108441040,
+                      "low": 32040341091,
+                      "high": 32191753369
+                    },
+                    {
+                      "begin": 1725973200000,
+                      "open": 32108441040,
+                      "close": 31948012539,
+                      "low": 31838828682,
+                      "high": 32118418182
+                    },
+                    {
+                      "begin": 1725976800000,
+                      "open": 31948012539,
+                      "close": 31957877431,
+                      "low": 31860497121,
+                      "high": 32112077357
+                    },
+                    {
+                      "begin": 1725980400000,
+                      "open": 31957877431,
+                      "close": 31875905253,
+                      "low": 31780246373,
+                      "high": 32063729090
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/tickers/topOIByEx": {
+      "get": {
+        "summary": "实时持仓（币种）(套餐1)",
+        "deprecated": false,
+        "description": "返回币种实时持仓，按交易所统计 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "tags": [
+          "未平仓合约"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "exchanges": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "交易所列表"
+                        },
+                        "oi": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "持仓列表"
+                        }
+                      },
+                      "required": [
+                        "exchanges",
+                        "oi"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/instruments/oiVsMc": {
+      "get": {
+        "summary": "历史持仓市值比（套餐 2）",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "未平仓合约"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "币种",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "返回此时间戳之前的数据",
+            "required": true,
+            "example": "1753368162349",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "最大500 默认500",
+            "required": true,
+            "example": "100",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m  30m 1h 2h 4h 6h 8h 12h  1d ",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "baseCoin": {
+                            "type": "string",
+                            "description": "币种"
+                          },
+                          "price": {
+                            "type": "number",
+                            "description": "价格"
+                          },
+                          "openInterest": {
+                            "type": "number",
+                            "description": "持仓"
+                          },
+                          "fundingRate": {
+                            "type": "number",
+                            "description": "资金费率"
+                          },
+                          "marketCap": {
+                            "type": "number",
+                            "description": "市值"
+                          },
+                          "symbol": {
+                            "type": "string",
+                            "description": "交易对"
+                          },
+                          "exchangeName": {
+                            "type": "string"
+                          },
+                          "oiVsMar": {
+                            "type": "number",
+                            "description": "持仓市值比"
+                          },
+                          "volVsMar": {
+                            "type": "number",
+                            "description": "交易量市值比"
+                          },
+                          "oiVsVol": {
+                            "type": "number",
+                            "description": "持仓交易量比"
+                          },
+                          "ts": {
+                            "type": "integer",
+                            "description": "时间戳"
+                          }
+                        },
+                        "required": [
+                          "baseCoin",
+                          "price",
+                          "openInterest",
+                          "fundingRate",
+                          "marketCap",
+                          "symbol",
+                          "exchangeName",
+                          "oiVsMar",
+                          "volVsMar",
+                          "oiVsVol",
+                          "ts"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": [
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117896.4,
+                      "openInterest": 79413913327.43117,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2346929329628.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033837,
+                      "volVsMar": 0.0141,
+                      "oiVsVol": 2.399764,
+                      "ts": 1753005600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117880,
+                      "openInterest": 79385051935.34827,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2345206686200,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033848,
+                      "volVsMar": 0.014148,
+                      "oiVsVol": 2.392299,
+                      "ts": 1753009200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117869.2,
+                      "openInterest": 79396106479.41289,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2344813267580,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033874,
+                      "volVsMar": 0.014213,
+                      "oiVsVol": 2.383286,
+                      "ts": 1753012800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118055.5,
+                      "openInterest": 79646449617.97966,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2348883764733.8,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033908,
+                      "volVsMar": 0.014625,
+                      "oiVsVol": 2.318393,
+                      "ts": 1753016400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118378.8,
+                      "openInterest": 79809138012.71437,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2355219627079.9,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033892,
+                      "volVsMar": 0.014942,
+                      "oiVsVol": 2.268211,
+                      "ts": 1753020000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118433,
+                      "openInterest": 79970140698.1386,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2356218968649,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033948,
+                      "volVsMar": 0.015341,
+                      "oiVsVol": 2.212883,
+                      "ts": 1753023600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118669.3,
+                      "openInterest": 80226936477.71474,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2361131032544.7,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033978,
+                      "volVsMar": 0.015328,
+                      "oiVsVol": 2.216624,
+                      "ts": 1753027200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118543.7,
+                      "openInterest": 80115732601.19034,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2357981001093.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033976,
+                      "volVsMar": 0.015719,
+                      "oiVsVol": 2.161379,
+                      "ts": 1753030800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118003.3,
+                      "openInterest": 79577352750.44325,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2348833542500,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033932,
+                      "volVsMar": 0.016495,
+                      "oiVsVol": 2.057067,
+                      "ts": 1753034400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118329.2,
+                      "openInterest": 79755495860.39197,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2354358879621.1,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033875,
+                      "volVsMar": 0.016748,
+                      "oiVsVol": 2.022635,
+                      "ts": 1753038000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118153.8,
+                      "openInterest": 79568456831.90024,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2351368559481.9,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033839,
+                      "volVsMar": 0.016553,
+                      "oiVsVol": 2.044209,
+                      "ts": 1753041600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118062.4,
+                      "openInterest": 79521811186.9259,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2349408225850,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033854,
+                      "volVsMar": 0.016941,
+                      "oiVsVol": 1.998398,
+                      "ts": 1753045200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117982.8,
+                      "openInterest": 79480252758.24918,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2347277362606.8,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.03386,
+                      "volVsMar": 0.016312,
+                      "oiVsVol": 2.075787,
+                      "ts": 1753048800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117438.6,
+                      "openInterest": 79483598235.66089,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2336366900186.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.03402,
+                      "volVsMar": 0.019516,
+                      "oiVsVol": 1.743133,
+                      "ts": 1753052400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117230.4,
+                      "openInterest": 79319399807.22725,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2332600530520,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033991,
+                      "volVsMar": 0.020144,
+                      "oiVsVol": 1.687409,
+                      "ts": 1753056000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117323.3,
+                      "openInterest": 79329829160.96944,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2333892552928.9,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034009,
+                      "volVsMar": 0.021278,
+                      "oiVsVol": 1.598289,
+                      "ts": 1753059600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117261.1,
+                      "openInterest": 79271465217.68585,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2332927525448.3,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033979,
+                      "volVsMar": 0.021637,
+                      "oiVsVol": 1.570372,
+                      "ts": 1753063200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118146.5,
+                      "openInterest": 79657157215.56638,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2347276043956.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033935,
+                      "volVsMar": 0.02237,
+                      "oiVsVol": 1.516988,
+                      "ts": 1753066800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118374.7,
+                      "openInterest": 79936188749.89641,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2355128217331.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033941,
+                      "volVsMar": 0.022942,
+                      "oiVsVol": 1.479385,
+                      "ts": 1753070400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118306.7,
+                      "openInterest": 79937275759.53035,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2353348662948.9,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033967,
+                      "volVsMar": 0.023209,
+                      "oiVsVol": 1.463505,
+                      "ts": 1753074000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118397.9,
+                      "openInterest": 79953121200.13739,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2354715626122.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033954,
+                      "volVsMar": 0.023359,
+                      "oiVsVol": 1.453574,
+                      "ts": 1753077600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119158.5,
+                      "openInterest": 80586304522.52008,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2370283796997.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033998,
+                      "volVsMar": 0.024808,
+                      "oiVsVol": 1.370465,
+                      "ts": 1753081200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119342.8,
+                      "openInterest": 80576165124.67351,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2373722688753.9,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033945,
+                      "volVsMar": 0.025687,
+                      "oiVsVol": 1.321467,
+                      "ts": 1753084800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118990.2,
+                      "openInterest": 80384550125.616,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2367140890320,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033958,
+                      "volVsMar": 0.026289,
+                      "oiVsVol": 1.291702,
+                      "ts": 1753088400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118680,
+                      "openInterest": 80163978412.36676,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2361431209448.7,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033947,
+                      "volVsMar": 0.026671,
+                      "oiVsVol": 1.272776,
+                      "ts": 1753092000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118553.9,
+                      "openInterest": 80158284115.37123,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2358787123680,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033975,
+                      "volVsMar": 0.027091,
+                      "oiVsVol": 1.254102,
+                      "ts": 1753095600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118054,
+                      "openInterest": 80034464418.7054,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2351459171603,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034045,
+                      "volVsMar": 0.027539,
+                      "oiVsVol": 1.236221,
+                      "ts": 1753099200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118140.3,
+                      "openInterest": 80656835632.4272,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2350445670403.6,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034315,
+                      "volVsMar": 0.028542,
+                      "oiVsVol": 1.202278,
+                      "ts": 1753102800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118805.9,
+                      "openInterest": 81241914372.06209,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2363267130840,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034378,
+                      "volVsMar": 0.029815,
+                      "oiVsVol": 1.153031,
+                      "ts": 1753106400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118794.3,
+                      "openInterest": 80833472989.3707,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2363464155226.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034202,
+                      "volVsMar": 0.029908,
+                      "oiVsVol": 1.143551,
+                      "ts": 1753110000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118304.2,
+                      "openInterest": 80674668379.39636,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2353227029407.1,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034321,
+                      "volVsMar": 0.030604,
+                      "oiVsVol": 1.121435,
+                      "ts": 1753113600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117769.7,
+                      "openInterest": 80476845740.63548,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2343249359647.9,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034344,
+                      "volVsMar": 0.032088,
+                      "oiVsVol": 1.070301,
+                      "ts": 1753117200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117814.1,
+                      "openInterest": 80573592667.2493,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2344156841680.8,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034369,
+                      "volVsMar": 0.032501,
+                      "oiVsVol": 1.057466,
+                      "ts": 1753120800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117131.4,
+                      "openInterest": 79907152751.09619,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2328678277068,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034314,
+                      "volVsMar": 0.033614,
+                      "oiVsVol": 1.020812,
+                      "ts": 1753124400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 116720.9,
+                      "openInterest": 79674672446.56511,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2320601282209.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034333,
+                      "volVsMar": 0.035199,
+                      "oiVsVol": 0.975403,
+                      "ts": 1753128000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 116901.9,
+                      "openInterest": 79697955722.56833,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2325891500445.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034287,
+                      "volVsMar": 0.035627,
+                      "oiVsVol": 0.962376,
+                      "ts": 1753131600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117171.8,
+                      "openInterest": 80023496236.39792,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2331627852530.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034323,
+                      "volVsMar": 0.035629,
+                      "oiVsVol": 0.963366,
+                      "ts": 1753135200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117307.7,
+                      "openInterest": 80123984545.67444,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2333999642187.5,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034329,
+                      "volVsMar": 0.032691,
+                      "oiVsVol": 1.050102,
+                      "ts": 1753138800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117330.2,
+                      "openInterest": 80159125425.78223,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2334356247358.8,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034336,
+                      "volVsMar": 0.032381,
+                      "oiVsVol": 1.060379,
+                      "ts": 1753142400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117073.1,
+                      "openInterest": 80177741702.26378,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2329397446086,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034418,
+                      "volVsMar": 0.031734,
+                      "oiVsVol": 1.084597,
+                      "ts": 1753146000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117700.1,
+                      "openInterest": 80114837794.9025,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2341714591700,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034212,
+                      "volVsMar": 0.034534,
+                      "oiVsVol": 0.990659,
+                      "ts": 1753149600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 116980,
+                      "openInterest": 79860730797.0824,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2327611755884.1,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034316,
+                      "volVsMar": 0.034669,
+                      "oiVsVol": 0.989792,
+                      "ts": 1753153200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117177,
+                      "openInterest": 79992202725.11954,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2329782020200,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034334,
+                      "volVsMar": 0.034573,
+                      "oiVsVol": 0.993104,
+                      "ts": 1753156800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 116500.1,
+                      "openInterest": 79682195505.11995,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2320748676602,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034308,
+                      "volVsMar": 0.035005,
+                      "oiVsVol": 0.980094,
+                      "ts": 1753160400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117277.5,
+                      "openInterest": 79245240969.70761,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2332968847769.1,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033967,
+                      "volVsMar": 0.035756,
+                      "oiVsVol": 0.949955,
+                      "ts": 1753164000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117788.5,
+                      "openInterest": 79423865385.3346,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2343584517162.1,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033889,
+                      "volVsMar": 0.034982,
+                      "oiVsVol": 0.968776,
+                      "ts": 1753167600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117959.5,
+                      "openInterest": 79541483468.65881,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2345755392638.8,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033905,
+                      "volVsMar": 0.035828,
+                      "oiVsVol": 0.946307,
+                      "ts": 1753171200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118258,
+                      "openInterest": 79463378643.54878,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2353837115593,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033759,
+                      "volVsMar": 0.036105,
+                      "oiVsVol": 0.935016,
+                      "ts": 1753174800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118368,
+                      "openInterest": 79591301223.78787,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2355609711723.8,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033794,
+                      "volVsMar": 0.036352,
+                      "oiVsVol": 0.929649,
+                      "ts": 1753178400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118941.2,
+                      "openInterest": 79969622310.90477,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2365813533915,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033805,
+                      "volVsMar": 0.036601,
+                      "oiVsVol": 0.923584,
+                      "ts": 1753182000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119142.2,
+                      "openInterest": 80247262975.76953,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2370552725385,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033851,
+                      "volVsMar": 0.037185,
+                      "oiVsVol": 0.910345,
+                      "ts": 1753185600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119241.1,
+                      "openInterest": 80302833356.88599,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2372407093632.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033842,
+                      "volVsMar": 0.036591,
+                      "oiVsVol": 0.924878,
+                      "ts": 1753189200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118128.5,
+                      "openInterest": 79509102127.3918,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2349960557303.6,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033856,
+                      "volVsMar": 0.038564,
+                      "oiVsVol": 0.877928,
+                      "ts": 1753192800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119056.9,
+                      "openInterest": 79415754710.81044,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2367373501392.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033545,
+                      "volVsMar": 0.039947,
+                      "oiVsVol": 0.839759,
+                      "ts": 1753196400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118899.8,
+                      "openInterest": 79395711011.72452,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2365461503672.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033564,
+                      "volVsMar": 0.040193,
+                      "oiVsVol": 0.835079,
+                      "ts": 1753200000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118669,
+                      "openInterest": 79341023375.24811,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2361252504834.3,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033601,
+                      "volVsMar": 0.039162,
+                      "oiVsVol": 0.857984,
+                      "ts": 1753203600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119195.9,
+                      "openInterest": 79616119931.49661,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2371519004090.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033571,
+                      "volVsMar": 0.038854,
+                      "oiVsVol": 0.864031,
+                      "ts": 1753207200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119768,
+                      "openInterest": 80284827996.74721,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2382960555424.8,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.03363,
+                      "volVsMar": 0.039989,
+                      "oiVsVol": 0.840975,
+                      "ts": 1753210800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119287.9,
+                      "openInterest": 79739165435.65921,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2372731817988.6,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033606,
+                      "volVsMar": 0.039759,
+                      "oiVsVol": 0.845235,
+                      "ts": 1753214400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119716.2,
+                      "openInterest": 80104186123.88356,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2382211479723,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.03361,
+                      "volVsMar": 0.039608,
+                      "oiVsVol": 0.848553,
+                      "ts": 1753218000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119424.4,
+                      "openInterest": 79958024417.14206,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2376071008044.9,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033651,
+                      "volVsMar": 0.039548,
+                      "oiVsVol": 0.850889,
+                      "ts": 1753221600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119854.3,
+                      "openInterest": 80391732204.44817,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2384626306534.9,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033711,
+                      "volVsMar": 0.039592,
+                      "oiVsVol": 0.851449,
+                      "ts": 1753225200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119993.7,
+                      "openInterest": 80790315119.22066,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2387594366590.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033837,
+                      "volVsMar": 0.039823,
+                      "oiVsVol": 0.849689,
+                      "ts": 1753228800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119587.5,
+                      "openInterest": 80568546727.84431,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2378856300907.5,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033868,
+                      "volVsMar": 0.040108,
+                      "oiVsVol": 0.844434,
+                      "ts": 1753232400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119521.8,
+                      "openInterest": 80641251351.02394,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2378877406789,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033898,
+                      "volVsMar": 0.036994,
+                      "oiVsVol": 0.916323,
+                      "ts": 1753236000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119096.7,
+                      "openInterest": 80332398314.65929,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2369706875792,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033908,
+                      "volVsMar": 0.0372,
+                      "oiVsVol": 0.9115,
+                      "ts": 1753239600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118614.6,
+                      "openInterest": 79908957606.49338,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2359189346438.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033872,
+                      "volVsMar": 0.037131,
+                      "oiVsVol": 0.912232,
+                      "ts": 1753243200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118966.9,
+                      "openInterest": 80044492464.86562,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2366646566700,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033821,
+                      "volVsMar": 0.036975,
+                      "oiVsVol": 0.914713,
+                      "ts": 1753246800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118618.7,
+                      "openInterest": 79721224606.91763,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2359951065930.6,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.03378,
+                      "volVsMar": 0.036318,
+                      "oiVsVol": 0.930134,
+                      "ts": 1753250400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118400.1,
+                      "openInterest": 79571309532.16397,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2355703235984.1,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033778,
+                      "volVsMar": 0.036214,
+                      "oiVsVol": 0.932737,
+                      "ts": 1753254000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118326.9,
+                      "openInterest": 79461729901.53033,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2354257657400,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033751,
+                      "volVsMar": 0.034715,
+                      "oiVsVol": 0.972256,
+                      "ts": 1753257600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118388.1,
+                      "openInterest": 79472994452.06023,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2355475446205.8,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033739,
+                      "volVsMar": 0.033894,
+                      "oiVsVol": 0.99542,
+                      "ts": 1753261200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118002,
+                      "openInterest": 79227623517.41762,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2348257958100.9,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033738,
+                      "volVsMar": 0.034159,
+                      "oiVsVol": 0.987673,
+                      "ts": 1753264800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118331.1,
+                      "openInterest": 79452078282.49716,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2354348816639.1,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033738,
+                      "volVsMar": 0.034267,
+                      "oiVsVol": 0.984569,
+                      "ts": 1753268400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118484.7,
+                      "openInterest": 79816628900.4951,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2357874699660,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033852,
+                      "volVsMar": 0.033606,
+                      "oiVsVol": 1.007317,
+                      "ts": 1753272000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117943.4,
+                      "openInterest": 79521414578.07776,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2345533024770,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033903,
+                      "volVsMar": 0.034015,
+                      "oiVsVol": 0.996698,
+                      "ts": 1753275600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117369.5,
+                      "openInterest": 79448991993.05505,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2335831953433.7,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.034013,
+                      "volVsMar": 0.033618,
+                      "oiVsVol": 1.011747,
+                      "ts": 1753279200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118164,
+                      "openInterest": 79485380333.6915,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2349699954532,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033827,
+                      "volVsMar": 0.031926,
+                      "oiVsVol": 1.059566,
+                      "ts": 1753282800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118521.3,
+                      "openInterest": 79637706727.61533,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2358376188144,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033768,
+                      "volVsMar": 0.031873,
+                      "oiVsVol": 1.05943,
+                      "ts": 1753286400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117671.2,
+                      "openInterest": 79334364504.39983,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2341257353116.8,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033875,
+                      "volVsMar": 0.032497,
+                      "oiVsVol": 1.042378,
+                      "ts": 1753290000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118070.1,
+                      "openInterest": 79239580629.37096,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2349304406621.7,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033751,
+                      "volVsMar": 0.032856,
+                      "oiVsVol": 1.027237,
+                      "ts": 1753293600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118334.7,
+                      "openInterest": 79311857880.12294,
+                      "fundingRate": 0.0000961,
+                      "marketCap": 2355617263392,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033669,
+                      "volVsMar": 0.030715,
+                      "oiVsVol": 1.09616,
+                      "ts": 1753297200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118325.5,
+                      "openInterest": 79134246272.28444,
+                      "fundingRate": 0.00007409,
+                      "marketCap": 2354062505857.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033616,
+                      "volVsMar": 0.03,
+                      "oiVsVol": 1.120498,
+                      "ts": 1753300800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117841.2,
+                      "openInterest": 78804232366.2263,
+                      "fundingRate": 0.00005937,
+                      "marketCap": 2346507829867.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033597,
+                      "volVsMar": 0.030342,
+                      "oiVsVol": 1.107301,
+                      "ts": 1753304400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118118.5,
+                      "openInterest": 78733276334.74837,
+                      "fundingRate": 0.00007022,
+                      "marketCap": 2349232714339,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033505,
+                      "volVsMar": 0.030858,
+                      "oiVsVol": 1.085784,
+                      "ts": 1753308000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118537.8,
+                      "openInterest": 78704398599.50124,
+                      "fundingRate": 0.00009129,
+                      "marketCap": 2358247699434,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033374,
+                      "volVsMar": 0.030923,
+                      "oiVsVol": 1.079244,
+                      "ts": 1753311600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118713.4,
+                      "openInterest": 78721133242.76888,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2361200745603.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033339,
+                      "volVsMar": 0.030781,
+                      "oiVsVol": 1.083116,
+                      "ts": 1753315200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119024,
+                      "openInterest": 78791055753.53589,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2367822213932.8,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033275,
+                      "volVsMar": 0.031065,
+                      "oiVsVol": 1.071138,
+                      "ts": 1753318800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 119060.2,
+                      "openInterest": 78778287858.29208,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2368885674527.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033255,
+                      "volVsMar": 0.031032,
+                      "oiVsVol": 1.071624,
+                      "ts": 1753322400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118930.2,
+                      "openInterest": 78822443060.74124,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2365702291900,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033318,
+                      "volVsMar": 0.030285,
+                      "oiVsVol": 1.100175,
+                      "ts": 1753326000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118447.7,
+                      "openInterest": 78507242351.34735,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2357261361581.7,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033316,
+                      "volVsMar": 0.030607,
+                      "oiVsVol": 1.088529,
+                      "ts": 1753329600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117906.9,
+                      "openInterest": 78069774603.8494,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2346568938952.3,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033269,
+                      "volVsMar": 0.031302,
+                      "oiVsVol": 1.062845,
+                      "ts": 1753333200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117556.6,
+                      "openInterest": 77386201473.7149,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2339350830335.4,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.03308,
+                      "volVsMar": 0.03234,
+                      "oiVsVol": 1.022885,
+                      "ts": 1753336800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 117418.3,
+                      "openInterest": 77367583963.2207,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2338569141664,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033124,
+                      "volVsMar": 0.032943,
+                      "oiVsVol": 1.005498,
+                      "ts": 1753340400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118356.4,
+                      "openInterest": 77751210586.70363,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2354893972357.6,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.033001,
+                      "volVsMar": 0.034381,
+                      "oiVsVol": 0.959856,
+                      "ts": 1753344000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118733.7,
+                      "openInterest": 77829455912.579,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2362291598304,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.032946,
+                      "volVsMar": 0.034905,
+                      "oiVsVol": 0.943892,
+                      "ts": 1753347600000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118460.2,
+                      "openInterest": 77529845337.28557,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2357171025255,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.032891,
+                      "volVsMar": 0.034703,
+                      "oiVsVol": 0.947784,
+                      "ts": 1753351200000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118349.9,
+                      "openInterest": 77147598319.5091,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2355233489576,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.032755,
+                      "volVsMar": 0.034544,
+                      "oiVsVol": 0.948209,
+                      "ts": 1753354800000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118570,
+                      "openInterest": 77540627090.44325,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2359155131511.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.032874,
+                      "volVsMar": 0.034584,
+                      "oiVsVol": 0.950555,
+                      "ts": 1753358400000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118468.6,
+                      "openInterest": 77356497461.7375,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2357663495330,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.032802,
+                      "volVsMar": 0.033965,
+                      "oiVsVol": 0.965744,
+                      "ts": 1753362000000
+                    },
+                    {
+                      "baseCoin": "BTC",
+                      "price": 118171.2,
+                      "openInterest": 77279742597.7936,
+                      "fundingRate": 0.0001,
+                      "marketCap": 2351222922534.2,
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "oiVsMar": 0.032863,
+                      "volVsMar": 0.031751,
+                      "oiVsVol": 1.035015,
+                      "ts": 1753365600000
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

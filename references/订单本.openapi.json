@@ -1,0 +1,500 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "订单本"
+    }
+  ],
+  "paths": {
+    "/api/orderBook/v2/bySymbol": {
+      "get": {
+        "summary": "交易对差值列表  (套餐3)",
+        "deprecated": false,
+        "description": "返回订单簿上距离价格固定范围的买单卖单的差值.</br>\n支持的范围: 0.0025  0.005   0.0075   0.01  0.03  0.05  0.1</br>\nproductType:SWAP  SPOT</br>\next为当前时刻的实时数据</br>\n</br><font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "订单本"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "交易对",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "合约:Binance,Bybit,Okex,Huobi,Bitfinex        \n现货:Binance,Bybit,Okex,,Bitfinex,Kraken,Coinbase ",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "rate",
+            "in": "query",
+            "description": " 0.0025  0.005   0.0075   0.01  0.03  0.05  0.1",
+            "required": true,
+            "example": "0.01",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP  or  SPOT",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "返回比时间戳之前的数据",
+            "required": true,
+            "example": "1725980145357",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "最大 500",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "oneOf": [
+                            {
+                              "type": "integer",
+                              "description": "time"
+                            },
+                            {
+                              "type": "number",
+                              "description": "挂单买 金额"
+                            },
+                            {
+                              "type": "string",
+                              "description": "挂单买  币数量"
+                            },
+                            {
+                              "type": "string",
+                              "description": "挂单卖  金额"
+                            },
+                            {
+                              "type": "string",
+                              "description": "挂单卖   币数量"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/orderBook/v2/byExchange": {
+      "get": {
+        "summary": "交易所聚合差值列表  (套餐3)",
+        "deprecated": false,
+        "description": "返回按交易所聚合的订单簿买单卖单差值</br>\ntype: 0.0025  0.005   0.0075   0.01  0.03  0.05  0.1</br>\nproductType:SWAP  SPOT</br>\next为当前时刻的实时数据</br>",
+        "tags": [
+          "订单本"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "币种",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP  or  SPOT",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "返回比时间戳之前的数据",
+            "required": true,
+            "example": "1725980145357",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Max 500",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchanges",
+            "in": "query",
+            "description": "SWAP :Binance,Bybit,OKX,Huobi,Bitfinex        \nSPOT:Binance,Bybit,OKX,,Bitfinex,Kraken,Coinbase       Use commas to connect multiple exchanges",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "0.0025  0.005   0.0075   0.01  0.03  0.05  0.1",
+            "required": true,
+            "example": "0.01",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "oneOf": [
+                            {
+                              "type": "number",
+                              "description": "time"
+                            },
+                            {
+                              "type": "number",
+                              "description": "挂单买 金额"
+                            },
+                            {
+                              "type": "string",
+                              "description": "挂单买币数量"
+                            },
+                            {
+                              "type": "number",
+                              "description": "挂单卖 金额"
+                            },
+                            {
+                              "type": "string",
+                              "description": "挂单卖 币数量"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/orderBook/getHeatMap": {
+      "get": {
+        "summary": "挂单流动性热力图  (套餐4)",
+        "deprecated": false,
+        "description": "根据时间定时取快照而算出的流动性热图 \n</br><font color = 'red'> # Required API Level: VIP4 and Above</font>",
+        "tags": [
+          "订单本"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "交易对",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m,3m,5m",
+            "required": true,
+            "example": "1m",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "返回此时间戳之前的数据",
+            "required": true,
+            "example": "1725980875358",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "最大500",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ts": {
+                            "type": "integer",
+                            "description": "时间列表"
+                          },
+                          "bids": {
+                            "type": "object",
+                            "properties": {
+                              "counts": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              },
+                              "prices": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "required": [
+                              "counts",
+                              "prices"
+                            ],
+                            "description": "买单币数量"
+                          },
+                          "asks": {
+                            "type": "object",
+                            "properties": {
+                              "counts": {
+                                "type": "array",
+                                "items": {
+                                  "oneOf": [
+                                    {
+                                      "type": "number"
+                                    },
+                                    {
+                                      "type": "integer"
+                                    }
+                                  ]
+                                }
+                              },
+                              "prices": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "required": [
+                              "counts",
+                              "prices"
+                            ],
+                            "description": "卖单币数量"
+                          }
+                        },
+                        "required": [
+                          "ts",
+                          "bids",
+                          "asks"
+                        ]
+                      }
+                    },
+                    "ext": {
+                      "type": "integer",
+                      "description": "step"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data",
+                    "ext"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

@@ -1,0 +1,417 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "资金流"
+    }
+  ],
+  "paths": {
+    "/api/fund/fundReal": {
+      "get": {
+        "summary": "实时资金流入流出（套餐3)",
+        "deprecated": false,
+        "description": "返回币种实时资金流入流出\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "资金流"
+        ],
+        "parameters": [
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP 合约  SPOT现货",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "当前页",
+            "required": true,
+            "example": 1,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "每页大小",
+            "required": true,
+            "example": 50,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "排序字段",
+            "required": true,
+            "example": "h1net",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortType",
+            "in": "query",
+            "description": "desc 降序 asc 升序",
+            "required": true,
+            "example": "desc",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "只查某一个币",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "baseCoin": {
+                                "type": "string"
+                              },
+                              "m5net": {
+                                "type": "number",
+                                "description": "最近5分钟内净流入"
+                              },
+                              "m15net": {
+                                "type": "number"
+                              },
+                              "m30net": {
+                                "type": "number"
+                              },
+                              "h1net": {
+                                "type": "number"
+                              },
+                              "h2net": {
+                                "type": "number"
+                              },
+                              "h4net": {
+                                "type": "number"
+                              },
+                              "h6net": {
+                                "type": "number"
+                              },
+                              "h8net": {
+                                "type": "number"
+                              },
+                              "h12net": {
+                                "type": "number"
+                              },
+                              "d1net": {
+                                "type": "number"
+                              },
+                              "d3net": {
+                                "type": "number"
+                              },
+                              "d2net": {
+                                "type": "number"
+                              },
+                              "d5net": {
+                                "type": "number"
+                              },
+                              "d7net": {
+                                "type": "number"
+                              },
+                              "d30net": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "baseCoin",
+                              "m5net",
+                              "m15net",
+                              "m30net",
+                              "h1net",
+                              "h2net",
+                              "h4net",
+                              "h6net",
+                              "h8net",
+                              "h12net",
+                              "d1net",
+                              "d3net",
+                              "d2net",
+                              "d5net",
+                              "d7net",
+                              "d30net"
+                            ]
+                          }
+                        },
+                        "pagination": {
+                          "type": "object",
+                          "properties": {
+                            "current": {
+                              "type": "integer"
+                            },
+                            "total": {
+                              "type": "integer"
+                            },
+                            "pageSize": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "current",
+                            "total",
+                            "pageSize"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "list",
+                        "pagination"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/fund/getFundHisList": {
+      "get": {
+        "summary": "历史资金流入流出 （套餐3)",
+        "deprecated": false,
+        "description": "返回币种历史资金流入流出\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "资金流"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "GOAT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "毫秒时间戳",
+            "required": true,
+            "example": "1729775700000",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": 500,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "5m",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "baseCoin": {
+                            "type": "string",
+                            "description": "coin"
+                          },
+                          "m5net": {
+                            "type": "number",
+                            "description": "Net FundFlow value in 5 minte"
+                          },
+                          "m15net": {
+                            "type": "number"
+                          },
+                          "m30net": {
+                            "type": "number"
+                          },
+                          "h1net": {
+                            "type": "number"
+                          },
+                          "h2net": {
+                            "type": "number"
+                          },
+                          "h4net": {
+                            "type": "number"
+                          },
+                          "h6net": {
+                            "type": "number"
+                          },
+                          "h8net": {
+                            "type": "number"
+                          },
+                          "h12net": {
+                            "type": "number"
+                          },
+                          "d1net": {
+                            "type": "number"
+                          },
+                          "d3net": {
+                            "type": "number"
+                          },
+                          "d7net": {
+                            "type": "number"
+                          },
+                          "d15net": {
+                            "type": "number"
+                          },
+                          "d30net": {
+                            "type": "number"
+                          },
+                          "ts": {
+                            "type": "integer",
+                            "description": "time"
+                          }
+                        },
+                        "required": [
+                          "baseCoin",
+                          "m5net",
+                          "m15net",
+                          "m30net",
+                          "h1net",
+                          "h2net",
+                          "h4net",
+                          "h6net",
+                          "h8net",
+                          "h12net",
+                          "d1net",
+                          "d3net",
+                          "d7net",
+                          "d15net",
+                          "d30net",
+                          "ts"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

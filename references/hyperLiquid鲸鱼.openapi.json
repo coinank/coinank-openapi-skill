@@ -1,0 +1,312 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "hyperLiquid鲸鱼"
+    }
+  ],
+  "paths": {
+    "/api/hyper/topPosition": {
+      "get": {
+        "summary": "鲸鱼持仓列表（套餐2）",
+        "deprecated": false,
+        "description": "返回大于100万持仓的仓位列表",
+        "tags": [
+          "hyperLiquid鲸鱼"
+        ],
+        "parameters": [
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "排序字段",
+            "required": true,
+            "example": "positionValue",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortType",
+            "in": "query",
+            "description": "desc 降序 asc 升序",
+            "required": true,
+            "example": "desc",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "当前页",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "每页大小 默认50",
+            "required": true,
+            "example": "50",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "币种  可不填",
+            "required": false,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "搜索地址  可不填",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "unPnl",
+            "in": "query",
+            "description": "1盈利 2亏损  可不填",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "side",
+            "in": "query",
+            "description": "Long  多单  Short  空单  可不填",
+            "required": false,
+            "example": "Long",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fund",
+            "in": "query",
+            "description": "1 盈利  2亏损  可不填",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "address": {
+                                "type": "string",
+                                "description": "地址"
+                              },
+                              "baseCoin": {
+                                "type": "string",
+                                "description": "币种"
+                              },
+                              "price": {
+                                "type": "number",
+                                "description": "当前价格"
+                              },
+                              "side": {
+                                "type": "string",
+                                "description": "持仓方向 Long  Short"
+                              },
+                              "positionValue": {
+                                "type": "number",
+                                "description": "仓位金额"
+                              },
+                              "size": {
+                                "type": "number",
+                                "description": "仓位数量"
+                              },
+                              "unrealizedPnl": {
+                                "type": "number",
+                                "description": "未实现盈利"
+                              },
+                              "liquidationPx": {
+                                "type": "number",
+                                "description": "爆仓价格"
+                              },
+                              "marginUsed": {
+                                "type": "number",
+                                "description": "保证金"
+                              },
+                              "leverage": {
+                                "type": "integer",
+                                "description": "杠杆"
+                              },
+                              "cumFunding": {
+                                "type": "number",
+                                "description": "累计资金费率"
+                              },
+                              "type": {
+                                "type": "string",
+                                "description": "类型   cross 全仓 isolated 逐仓"
+                              },
+                              "entryPx": {
+                                "type": "number",
+                                "description": "开仓价格"
+                              },
+                              "ts": {
+                                "type": "integer",
+                                "description": "排序时间戳"
+                              },
+                              "maxPosition": {
+                                "type": "number",
+                                "description": "最大仓位"
+                              },
+                              "state": {
+                                "type": "integer",
+                                "description": "仓位状态 1 持有   2平仓"
+                              },
+                              "createdAt": {
+                                "type": "integer",
+                                "description": "创建时间"
+                              },
+                              "updateTs": {
+                                "type": "integer",
+                                "description": "修改时间"
+                              }
+                            },
+                            "required": [
+                              "address",
+                              "baseCoin",
+                              "price",
+                              "side",
+                              "positionValue",
+                              "size",
+                              "unrealizedPnl",
+                              "liquidationPx",
+                              "marginUsed",
+                              "leverage",
+                              "cumFunding",
+                              "type",
+                              "entryPx",
+                              "ts",
+                              "maxPosition",
+                              "state",
+                              "createdAt",
+                              "updateTs"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "list"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/hyper/topAction": {
+      "get": {
+        "summary": "鲸鱼最新动态（套餐2）",
+        "deprecated": false,
+        "description": "返回最近的20条 平仓或者开仓记录，按时间排序",
+        "tags": [
+          "hyperLiquid鲸鱼"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

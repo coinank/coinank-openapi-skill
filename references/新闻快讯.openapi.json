@@ -1,0 +1,325 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "新闻快讯"
+    }
+  ],
+  "paths": {
+    "/api/news/getNewsList": {
+      "get": {
+        "summary": "新闻列表（套餐2）",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "新闻快讯"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "1快讯  2新闻",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "语言",
+            "required": true,
+            "example": "zh",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页大小",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isPopular",
+            "in": "query",
+            "description": "是否推荐",
+            "required": true,
+            "example": "false",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "搜索",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "id"
+                              },
+                              "sourceWeb": {
+                                "type": "string",
+                                "description": "平台"
+                              },
+                              "title": {
+                                "type": "string",
+                                "description": "标题"
+                              },
+                              "content": {
+                                "type": "string",
+                                "description": "内容"
+                              },
+                              "readNum": {
+                                "type": "integer"
+                              },
+                              "ts": {
+                                "type": "integer",
+                                "description": "发布时间"
+                              },
+                              "recommend": {
+                                "type": "boolean",
+                                "description": "是否推荐"
+                              },
+                              "hot": {
+                                "type": "boolean"
+                              },
+                              "top": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "sourceWeb",
+                              "title",
+                              "content",
+                              "readNum",
+                              "ts",
+                              "recommend",
+                              "hot",
+                              "top"
+                            ]
+                          }
+                        },
+                        "pagination": {
+                          "type": "object",
+                          "properties": {
+                            "current": {
+                              "type": "integer"
+                            },
+                            "total": {
+                              "type": "integer"
+                            },
+                            "pageSize": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "current",
+                            "total",
+                            "pageSize"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "list",
+                        "pagination"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/news/getNewsDetail": {
+      "get": {
+        "summary": "新闻详情（套餐2）",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "新闻快讯"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "id"
+                        },
+                        "sourceWeb": {
+                          "type": "string",
+                          "description": "平台"
+                        },
+                        "title": {
+                          "type": "string",
+                          "description": "标题"
+                        },
+                        "content": {
+                          "type": "string",
+                          "description": "内容"
+                        },
+                        "readNum": {
+                          "type": "integer"
+                        },
+                        "ts": {
+                          "type": "integer",
+                          "description": "发布时间"
+                        },
+                        "recommend": {
+                          "type": "boolean",
+                          "description": "是否推荐"
+                        },
+                        "hot": {
+                          "type": "boolean"
+                        },
+                        "top": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "sourceWeb",
+                        "title",
+                        "content",
+                        "readNum",
+                        "ts",
+                        "recommend",
+                        "hot",
+                        "top"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

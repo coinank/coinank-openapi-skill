@@ -1,0 +1,1768 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "市价单统计指标"
+    }
+  ],
+  "paths": {
+    "/api/marketOrder/getCvd": {
+      "get": {
+        "summary": "CVD Kline （套餐3)",
+        "deprecated": false,
+        "description": "返回时间周期内的cvd的变化值，需要从一个起始点不断累积</br></br>\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "市价单统计指标"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance OKX Bybit Bitget",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "毫秒时间戳",
+            "required": true,
+            "example": "1725972522356",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "max 500",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP   SPOT",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "number",
+                                  "description": "Time"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "High"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "Low"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "Close"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "code",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "success": true,
+                    "code": "1",
+                    "data": [
+                      [
+                        1725937200000,
+                        12.07,
+                        -634.53,
+                        -634.53
+                      ],
+                      [
+                        1725940800000,
+                        507.17,
+                        0,
+                        429.79
+                      ],
+                      [
+                        1725944400000,
+                        935.97,
+                        0,
+                        730.5
+                      ],
+                      [
+                        1725948000000,
+                        0,
+                        -360.14,
+                        -263.06
+                      ],
+                      [
+                        1725951600000,
+                        856.85,
+                        -10.83,
+                        856.85
+                      ],
+                      [
+                        1725955200000,
+                        580.23,
+                        -813.21,
+                        -813.21
+                      ],
+                      [
+                        1725958800000,
+                        521.13,
+                        -59.72,
+                        521.13
+                      ],
+                      [
+                        1725962400000,
+                        99.94,
+                        -306.19,
+                        -151.71
+                      ],
+                      [
+                        1725966000000,
+                        173.87,
+                        -462.83,
+                        -462.83
+                      ],
+                      [
+                        1725969600000,
+                        134.88,
+                        -241.14,
+                        -11.03
+                      ]
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/marketOrder/getBuySellCount": {
+      "get": {
+        "summary": "主动买卖笔数 （套餐3)",
+        "deprecated": false,
+        "description": "返回时间周期内的主动买和主动卖的订单数量\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "市价单统计指标"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance OKX Bybit Bitget",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "毫秒时间戳",
+            "required": true,
+            "example": "1725972522356",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "max 500",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP   SPOT",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "number",
+                                  "description": "time"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "买数量"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "卖数量"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "code",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "success": true,
+                    "code": "1",
+                    "data": [
+                      [
+                        1725937200000,
+                        12.07,
+                        -634.53,
+                        -634.53
+                      ],
+                      [
+                        1725940800000,
+                        507.17,
+                        0,
+                        429.79
+                      ],
+                      [
+                        1725944400000,
+                        935.97,
+                        0,
+                        730.5
+                      ],
+                      [
+                        1725948000000,
+                        0,
+                        -360.14,
+                        -263.06
+                      ],
+                      [
+                        1725951600000,
+                        856.85,
+                        -10.83,
+                        856.85
+                      ],
+                      [
+                        1725955200000,
+                        580.23,
+                        -813.21,
+                        -813.21
+                      ],
+                      [
+                        1725958800000,
+                        521.13,
+                        -59.72,
+                        521.13
+                      ],
+                      [
+                        1725962400000,
+                        99.94,
+                        -306.19,
+                        -151.71
+                      ],
+                      [
+                        1725966000000,
+                        173.87,
+                        -462.83,
+                        -462.83
+                      ],
+                      [
+                        1725969600000,
+                        134.88,
+                        -241.14,
+                        -11.03
+                      ]
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/marketOrder/getBuySellValue": {
+      "get": {
+        "summary": "主动买卖额（套餐3)",
+        "deprecated": false,
+        "description": "返回时间周期内的主动买金额和主动卖金额\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "市价单统计指标"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance OKX Bybit Bitget",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "毫秒时间戳",
+            "required": true,
+            "example": "1725972522356",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "max 500",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP   SPOT",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "number",
+                                  "description": "time"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "买金额"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "卖金额"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "code",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "success": true,
+                    "code": "1",
+                    "data": [
+                      [
+                        1725937200000,
+                        12.07,
+                        -634.53,
+                        -634.53
+                      ],
+                      [
+                        1725940800000,
+                        507.17,
+                        0,
+                        429.79
+                      ],
+                      [
+                        1725944400000,
+                        935.97,
+                        0,
+                        730.5
+                      ],
+                      [
+                        1725948000000,
+                        0,
+                        -360.14,
+                        -263.06
+                      ],
+                      [
+                        1725951600000,
+                        856.85,
+                        -10.83,
+                        856.85
+                      ],
+                      [
+                        1725955200000,
+                        580.23,
+                        -813.21,
+                        -813.21
+                      ],
+                      [
+                        1725958800000,
+                        521.13,
+                        -59.72,
+                        521.13
+                      ],
+                      [
+                        1725962400000,
+                        99.94,
+                        -306.19,
+                        -151.71
+                      ],
+                      [
+                        1725966000000,
+                        173.87,
+                        -462.83,
+                        -462.83
+                      ],
+                      [
+                        1725969600000,
+                        134.88,
+                        -241.14,
+                        -11.03
+                      ]
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/marketOrder/getBuySellVolume": {
+      "get": {
+        "summary": "主动买卖量 （套餐3)",
+        "deprecated": false,
+        "description": "返回时间周期内的主动买和主动卖的交易量\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "市价单统计指标"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance OKX Bybit Bitget",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "毫秒时间戳",
+            "required": true,
+            "example": "1725972522356",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "max 500",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP   SPOT",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "number",
+                                  "description": "time"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "主动买量"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "主动卖量"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "code",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "success": true,
+                    "code": "1",
+                    "data": [
+                      [
+                        1725937200000,
+                        12.07,
+                        -634.53,
+                        -634.53
+                      ],
+                      [
+                        1725940800000,
+                        507.17,
+                        0,
+                        429.79
+                      ],
+                      [
+                        1725944400000,
+                        935.97,
+                        0,
+                        730.5
+                      ],
+                      [
+                        1725948000000,
+                        0,
+                        -360.14,
+                        -263.06
+                      ],
+                      [
+                        1725951600000,
+                        856.85,
+                        -10.83,
+                        856.85
+                      ],
+                      [
+                        1725955200000,
+                        580.23,
+                        -813.21,
+                        -813.21
+                      ],
+                      [
+                        1725958800000,
+                        521.13,
+                        -59.72,
+                        521.13
+                      ],
+                      [
+                        1725962400000,
+                        99.94,
+                        -306.19,
+                        -151.71
+                      ],
+                      [
+                        1725966000000,
+                        173.87,
+                        -462.83,
+                        -462.83
+                      ],
+                      [
+                        1725969600000,
+                        134.88,
+                        -241.14,
+                        -11.03
+                      ]
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/marketOrder/getAggCvd": {
+      "get": {
+        "summary": "聚合CVD数据  （套餐3)",
+        "deprecated": false,
+        "description": "返回时间周期内的聚合cvd的变化值，需要从一个起始点不断累积</br></br>\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "市价单统计指标"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "返回此时间戳之前的数据",
+            "required": true,
+            "example": "1725972522356",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "max 500",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP合约   SPOT  现货",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchanges",
+            "in": "query",
+            "description": "传空",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "number",
+                                  "description": "时间戳"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "高"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "低"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "收"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "code",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "success": true,
+                    "code": "1",
+                    "data": [
+                      [
+                        1725937200000,
+                        12.07,
+                        -634.53,
+                        -634.53
+                      ],
+                      [
+                        1725940800000,
+                        507.17,
+                        0,
+                        429.79
+                      ],
+                      [
+                        1725944400000,
+                        935.97,
+                        0,
+                        730.5
+                      ],
+                      [
+                        1725948000000,
+                        0,
+                        -360.14,
+                        -263.06
+                      ],
+                      [
+                        1725951600000,
+                        856.85,
+                        -10.83,
+                        856.85
+                      ],
+                      [
+                        1725955200000,
+                        580.23,
+                        -813.21,
+                        -813.21
+                      ],
+                      [
+                        1725958800000,
+                        521.13,
+                        -59.72,
+                        521.13
+                      ],
+                      [
+                        1725962400000,
+                        99.94,
+                        -306.19,
+                        -151.71
+                      ],
+                      [
+                        1725966000000,
+                        173.87,
+                        -462.83,
+                        -462.83
+                      ],
+                      [
+                        1725969600000,
+                        134.88,
+                        -241.14,
+                        -11.03
+                      ]
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/marketOrder/getAggBuySellCount": {
+      "get": {
+        "summary": "聚合主动买卖笔数 （套餐3)",
+        "deprecated": false,
+        "description": "返回时间周期内的主动买卖单笔数\n<font color = 'red'> # Required API Level: VIP3 and Above</font>\n",
+        "tags": [
+          "市价单统计指标"
+        ],
+        "parameters": [
+          {
+            "name": "exchanges",
+            "in": "query",
+            "description": "Binance,OKX,Bybit,Bitget,Huobi   多个交易所用，连接",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1725972522356",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "max 500",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP合约   SPOT 现货",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "number",
+                                  "description": "time"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "buy count"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "sell count"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "code",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "success": true,
+                    "code": "1",
+                    "data": [
+                      [
+                        1725937200000,
+                        12.07,
+                        -634.53,
+                        -634.53
+                      ],
+                      [
+                        1725940800000,
+                        507.17,
+                        0,
+                        429.79
+                      ],
+                      [
+                        1725944400000,
+                        935.97,
+                        0,
+                        730.5
+                      ],
+                      [
+                        1725948000000,
+                        0,
+                        -360.14,
+                        -263.06
+                      ],
+                      [
+                        1725951600000,
+                        856.85,
+                        -10.83,
+                        856.85
+                      ],
+                      [
+                        1725955200000,
+                        580.23,
+                        -813.21,
+                        -813.21
+                      ],
+                      [
+                        1725958800000,
+                        521.13,
+                        -59.72,
+                        521.13
+                      ],
+                      [
+                        1725962400000,
+                        99.94,
+                        -306.19,
+                        -151.71
+                      ],
+                      [
+                        1725966000000,
+                        173.87,
+                        -462.83,
+                        -462.83
+                      ],
+                      [
+                        1725969600000,
+                        134.88,
+                        -241.14,
+                        -11.03
+                      ]
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/marketOrder/getAggBuySellValue": {
+      "get": {
+        "summary": "聚合主动买卖额 （套餐3)",
+        "deprecated": false,
+        "description": "返回时间周期内的聚合主动买卖额\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "市价单统计指标"
+        ],
+        "parameters": [
+          {
+            "name": "exchanges",
+            "in": "query",
+            "description": "Binance,OKX,Bybit,Bitget,Huobi   多个交易所用，连接",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1725972522356",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "max 500",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP 合约   SPOT 现货",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "number",
+                                  "description": "time"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "buy value"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "sell value"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "code",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "success": true,
+                    "code": "1",
+                    "data": [
+                      [
+                        1725937200000,
+                        139630876.26849,
+                        177463134.96544
+                      ],
+                      [
+                        1725940800000,
+                        205142992.36694,
+                        179779561.25316
+                      ],
+                      [
+                        1725944400000,
+                        530440079.6204,
+                        372724907.51066
+                      ],
+                      [
+                        1725948000000,
+                        89070194.24968,
+                        104749312.47438
+                      ],
+                      [
+                        1725951600000,
+                        359623817.47623,
+                        302016755.95791
+                      ],
+                      [
+                        1725955200000,
+                        232547586.5694,
+                        280625611.35407
+                      ],
+                      [
+                        1725958800000,
+                        246175027.84907,
+                        216132340.75547
+                      ],
+                      [
+                        1725962400000,
+                        153659787.04068,
+                        156533075.36376
+                      ],
+                      [
+                        1725966000000,
+                        141010392.41822,
+                        161135569.74087
+                      ],
+                      [
+                        1725969600000,
+                        263405529.4119,
+                        265848217.383
+                      ]
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/marketOrder/getAggBuySellVolume": {
+      "get": {
+        "summary": "聚合主动买卖量 （套餐3)",
+        "deprecated": false,
+        "description": "返回时间周期内的主动买卖交易量\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "市价单统计指标"
+        ],
+        "parameters": [
+          {
+            "name": "exchanges",
+            "in": "query",
+            "description": "Binance,OKX,Bybit,Bitget,Huobi   多个交易所用，连接",
+            "required": true,
+            "example": "OKX",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "PNUT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1731983073186",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "max 500",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP 合约   SPOT  现货",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "number",
+                                  "description": "time"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "buy volume"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "sell volume"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "success",
+                        "code",
+                        "data"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "success": true,
+                    "code": "1",
+                    "data": [
+                      [
+                        1725937200000,
+                        12.07,
+                        -634.53,
+                        -634.53
+                      ],
+                      [
+                        1725940800000,
+                        507.17,
+                        0,
+                        429.79
+                      ],
+                      [
+                        1725944400000,
+                        935.97,
+                        0,
+                        730.5
+                      ],
+                      [
+                        1725948000000,
+                        0,
+                        -360.14,
+                        -263.06
+                      ],
+                      [
+                        1725951600000,
+                        856.85,
+                        -10.83,
+                        856.85
+                      ],
+                      [
+                        1725955200000,
+                        580.23,
+                        -813.21,
+                        -813.21
+                      ],
+                      [
+                        1725958800000,
+                        521.13,
+                        -59.72,
+                        521.13
+                      ],
+                      [
+                        1725962400000,
+                        99.94,
+                        -306.19,
+                        -151.71
+                      ],
+                      [
+                        1725966000000,
+                        173.87,
+                        -462.83,
+                        -462.83
+                      ],
+                      [
+                        1725969600000,
+                        134.88,
+                        -241.14,
+                        -11.03
+                      ]
+                    ]
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

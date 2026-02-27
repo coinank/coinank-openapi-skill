@@ -1,0 +1,191 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "K线"
+    }
+  ],
+  "paths": {
+    "/api/kline/lists": {
+      "get": {
+        "summary": "k线接口(套餐1)",
+        "deprecated": false,
+        "description": "返回各个交易所的历史K线\n</br><font color = 'red'> #需要api等级： VIP1及以上</font>",
+        "tags": [
+          "K线"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "交易对",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance OKX  Bybit Huobi Bitmex  Bitget Gate",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "返回此时间戳之前的数据",
+            "required": true,
+            "example": "1730084910500",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "最大500",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m 30m  1h 2h 4h 6h 8h 1d",
+            "required": true,
+            "example": "5m",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP 合约  SPOT 现货",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "oneOf": [
+                            {
+                              "type": "number",
+                              "description": "开始时间"
+                            },
+                            {
+                              "type": "number",
+                              "description": "结束时间",
+                              "nullable": true
+                            },
+                            {
+                              "type": "number",
+                              "description": "开盘"
+                            },
+                            {
+                              "type": "number",
+                              "description": "收盘"
+                            },
+                            {
+                              "type": "number",
+                              "description": "最高价"
+                            },
+                            {
+                              "type": "number",
+                              "description": "最低价"
+                            },
+                            {
+                              "type": "number",
+                              "description": "成交量（okx返回张）"
+                            },
+                            {
+                              "type": "number",
+                              "description": "成交额",
+                              "nullable": true
+                            },
+                            {
+                              "type": "number",
+                              "description": "成交笔数",
+                              "nullable": true
+                            },
+                            {
+                              "type": "number",
+                              "description": "成交量（币）针对okx返回",
+                              "nullable": true
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

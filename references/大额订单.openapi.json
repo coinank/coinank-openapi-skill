@@ -1,0 +1,525 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "大额订单"
+    }
+  ],
+  "paths": {
+    "/api/trades/largeTrades": {
+      "get": {
+        "summary": "大额市价订单 （套餐3) ",
+        "deprecated": false,
+        "description": "返回大额市价单列表，支持安装交易对和金额过滤\n</br><font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "大额订单"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "交易对",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP:合约SPOT：现货  ",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "查询的最小金额  ",
+            "required": true,
+            "example": "10000000",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "返回此时间戳之前的数据",
+            "required": true,
+            "example": "1726051101732",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "最大500",
+            "required": true,
+            "example": "10",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "exchangeName": {
+                            "type": "string",
+                            "description": "交易所"
+                          },
+                          "baseCoin": {
+                            "type": "string",
+                            "description": "币种"
+                          },
+                          "side": {
+                            "type": "string",
+                            "description": "buy  sell"
+                          },
+                          "price": {
+                            "type": "integer",
+                            "description": "订单价格"
+                          },
+                          "tradeTurnover": {
+                            "type": "number",
+                            "description": "订单金额"
+                          },
+                          "ts": {
+                            "type": "integer",
+                            "description": "订单交易时间"
+                          },
+                          "symbol": {
+                            "type": "string",
+                            "description": "交易对"
+                          }
+                        },
+                        "required": [
+                          "exchangeName",
+                          "baseCoin",
+                          "side",
+                          "price",
+                          "tradeTurnover",
+                          "ts",
+                          "symbol"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "examples": {
+                  "1": {
+                    "summary": "Success",
+                    "value": {
+                      "success": true,
+                      "code": "1",
+                      "data": [
+                        {
+                          "exchangeName": "Binance",
+                          "exchangeType": "SWAP",
+                          "baseCoin": "BTC",
+                          "side": "ask",
+                          "symbol": "BTCUSDT",
+                          "price": 57240,
+                          "entrustAmount": 175.443,
+                          "entrustTurnover": 10042357.32,
+                          "firstAmount": 174.785,
+                          "firstTurnover": 10004693.4,
+                          "count": 38,
+                          "turnoverAmount": 10242182.16,
+                          "turnoverNumber": 178.934,
+                          "openTime": 1725904939797,
+                          "closeTime": 1725916425657,
+                          "on": false
+                        }
+                      ]
+                    }
+                  },
+                  "2": {
+                    "summary": "Success",
+                    "value": {
+                      "success": true,
+                      "code": "1",
+                      "data": [
+                        {
+                          "exchangeName": "Binance",
+                          "baseCoin": "BTC",
+                          "side": "buy",
+                          "price": 55900,
+                          "tradeTurnover": 10591876.1,
+                          "ts": 1726062648164,
+                          "symbol": "BTCUSDT"
+                        },
+                        {
+                          "exchangeName": "Binance",
+                          "baseCoin": "BTC",
+                          "side": "sell",
+                          "price": 58710,
+                          "tradeTurnover": 24239891.25,
+                          "ts": 1726240974480,
+                          "symbol": "BTCUSDT"
+                        },
+                        {
+                          "exchangeName": "Binance",
+                          "baseCoin": "BTC",
+                          "side": "sell",
+                          "price": 59740,
+                          "tradeTurnover": 12047228.14,
+                          "ts": 1726249859307,
+                          "symbol": "BTCUSDT"
+                        },
+                        {
+                          "exchangeName": "Binance",
+                          "baseCoin": "BTC",
+                          "side": "sell",
+                          "price": 59530,
+                          "tradeTurnover": 10738021.4,
+                          "ts": 1726250432036,
+                          "symbol": "BTCUSDT"
+                        },
+                        {
+                          "exchangeName": "Binance",
+                          "baseCoin": "BTC",
+                          "side": "sell",
+                          "price": 58990,
+                          "tradeTurnover": 11428840.58,
+                          "ts": 1726478153849,
+                          "symbol": "BTCUSDT"
+                        },
+                        {
+                          "exchangeName": "Binance",
+                          "baseCoin": "BTC",
+                          "side": "buy",
+                          "price": 59200,
+                          "tradeTurnover": 11935844.8,
+                          "ts": 1726577039185,
+                          "symbol": "BTCUSDT"
+                        },
+                        {
+                          "exchangeName": "Binance",
+                          "baseCoin": "BTC",
+                          "side": "buy",
+                          "price": 60990,
+                          "tradeTurnover": 10423373.97,
+                          "ts": 1726585626896,
+                          "symbol": "BTCUSDT"
+                        },
+                        {
+                          "exchangeName": "Binance",
+                          "baseCoin": "BTC",
+                          "side": "buy",
+                          "price": 61000,
+                          "tradeTurnover": 10258370,
+                          "ts": 1726585626897,
+                          "symbol": "BTCUSDT"
+                        },
+                        {
+                          "exchangeName": "Binance",
+                          "baseCoin": "BTC",
+                          "side": "buy",
+                          "price": 60820,
+                          "tradeTurnover": 11129512.62,
+                          "ts": 1726585770594,
+                          "symbol": "BTCUSDT"
+                        },
+                        {
+                          "exchangeName": "Binance",
+                          "baseCoin": "BTC",
+                          "side": "sell",
+                          "price": 60750,
+                          "tradeTurnover": 11688907.5,
+                          "ts": 1726590882685,
+                          "symbol": "BTCUSDT"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/bigOrder/queryOrderList": {
+      "get": {
+        "summary": "大额限价订单 （套餐3)",
+        "deprecated": false,
+        "description": "返回大额限价单列表，支持查询历史单和实时单\n</br><font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "大额订单"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "交易对",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchangeType",
+            "in": "query",
+            "description": "SWAP:永续  SPOT：现货  FUTURES：交割  ",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "返回此时间戳之前的数据",
+            "required": false,
+            "example": 1726051101732,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "最大500",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "最低金额",
+            "required": true,
+            "example": 1000000,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "side",
+            "in": "query",
+            "description": "ask 卖  bid 买",
+            "required": true,
+            "example": "ask",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance OKX Coinbase",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isHistory",
+            "in": "query",
+            "description": "true  查询历史  false  查询实时",
+            "required": true,
+            "example": "true",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "exchangeName": {
+                            "type": "string",
+                            "description": "交易所"
+                          },
+                          "exchangeType": {
+                            "type": "string",
+                            "description": "SWAP:永续  SPOT：现货  FUTURES：交割  "
+                          },
+                          "baseCoin": {
+                            "type": "string"
+                          },
+                          "side": {
+                            "type": "string",
+                            "description": "ask卖  bid 买 "
+                          },
+                          "symbol": {
+                            "type": "string",
+                            "description": "交易对"
+                          },
+                          "price": {
+                            "type": "integer",
+                            "description": "挂单价格"
+                          },
+                          "entrustAmount": {
+                            "type": "number",
+                            "description": "实时委托数量"
+                          },
+                          "entrustTurnover": {
+                            "type": "number",
+                            "description": "实时委托金额"
+                          },
+                          "firstAmount": {
+                            "type": "number",
+                            "description": "初始委托数量"
+                          },
+                          "firstTurnover": {
+                            "type": "number",
+                            "description": "初始委托金额"
+                          },
+                          "count": {
+                            "type": "integer",
+                            "description": "订单成交笔数"
+                          },
+                          "turnoverAmount": {
+                            "type": "number",
+                            "description": "成交金额"
+                          },
+                          "turnoverNumber": {
+                            "type": "number",
+                            "description": "成交数量"
+                          },
+                          "openTime": {
+                            "type": "integer",
+                            "description": "初次发现时间"
+                          },
+                          "closeTime": {
+                            "type": "integer",
+                            "description": "关闭时间"
+                          },
+                          "on": {
+                            "type": "boolean",
+                            "description": "是否还在挂单中  true 是   false  否"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": [
+                    {
+                      "exchangeName": "Binance",
+                      "exchangeType": "SWAP",
+                      "baseCoin": "BTC",
+                      "side": "ask",
+                      "symbol": "BTCUSDT",
+                      "price": 57240,
+                      "entrustAmount": 175.443,
+                      "entrustTurnover": 10042357.32,
+                      "firstAmount": 174.785,
+                      "firstTurnover": 10004693.4,
+                      "count": 38,
+                      "turnoverAmount": 10242182.16,
+                      "turnoverNumber": 178.934,
+                      "openTime": 1725904939797,
+                      "closeTime": 1725916425657,
+                      "on": false
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

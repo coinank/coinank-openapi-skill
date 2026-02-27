@@ -1,0 +1,1234 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "爆仓数据"
+    }
+  ],
+  "paths": {
+    "/api/liquidation/allExchange/intervals": {
+      "get": {
+        "summary": "币种爆仓实时统计(套餐1)",
+        "deprecated": false,
+        "description": "返回市场24小时内实时统计的币种聚合爆仓数据以及最大的爆仓 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "tags": [
+          "爆仓数据"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "coin",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "topOrder": {
+                          "type": "object",
+                          "properties": {
+                            "symbol": {
+                              "type": "string",
+                              "description": "交易对"
+                            },
+                            "posSide": {
+                              "type": "string",
+                              "description": "仓位方向"
+                            },
+                            "exchangeName": {
+                              "type": "string",
+                              "description": "交易所"
+                            },
+                            "tradeTurnover": {
+                              "type": "number",
+                              "description": "成交额"
+                            },
+                            "baseCoin": {
+                              "type": "string",
+                              "description": "币种"
+                            },
+                            "ts": {
+                              "type": "integer",
+                              "description": "ts"
+                            }
+                          },
+                          "required": [
+                            "symbol",
+                            "posSide",
+                            "exchangeName",
+                            "tradeTurnover",
+                            "baseCoin",
+                            "ts"
+                          ]
+                        },
+                        "total": {
+                          "type": "integer",
+                          "description": "24h 爆仓人数"
+                        },
+                        "24h": {
+                          "type": "object",
+                          "properties": {
+                            "baseCoin": {
+                              "type": "string",
+                              "description": "币种"
+                            },
+                            "totalTurnover": {
+                              "type": "number",
+                              "description": "总交易额"
+                            },
+                            "longTurnover": {
+                              "type": "number",
+                              "description": "多仓交易额"
+                            },
+                            "shortTurnover": {
+                              "type": "number",
+                              "description": "空仓交易额"
+                            },
+                            "percentage": {
+                              "type": "integer"
+                            },
+                            "longRatio": {
+                              "type": "integer"
+                            },
+                            "shortRatio": {
+                              "type": "integer"
+                            },
+                            "interval": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "baseCoin",
+                            "totalTurnover",
+                            "longTurnover",
+                            "shortTurnover",
+                            "percentage",
+                            "longRatio",
+                            "shortRatio",
+                            "interval"
+                          ],
+                          "description": "24h爆仓数据"
+                        },
+                        "1h": {
+                          "type": "object",
+                          "properties": {
+                            "baseCoin": {
+                              "type": "string",
+                              "description": "币种"
+                            },
+                            "totalTurnover": {
+                              "type": "number",
+                              "description": "总交易额"
+                            },
+                            "longTurnover": {
+                              "type": "number",
+                              "description": "多仓交易额"
+                            },
+                            "shortTurnover": {
+                              "type": "number",
+                              "description": "空仓交易额"
+                            },
+                            "percentage": {
+                              "type": "integer"
+                            },
+                            "longRatio": {
+                              "type": "integer"
+                            },
+                            "shortRatio": {
+                              "type": "integer"
+                            },
+                            "interval": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "baseCoin",
+                            "totalTurnover",
+                            "longTurnover",
+                            "shortTurnover",
+                            "percentage",
+                            "longRatio",
+                            "shortRatio",
+                            "interval"
+                          ],
+                          "description": "1h爆仓数据"
+                        }
+                      },
+                      "required": [
+                        "topOrder",
+                        "total",
+                        "24h",
+                        "1h"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "topOrder": {
+                      "symbol": "ETHUSDC",
+                      "posSide": "long",
+                      "exchangeName": "Hyperliquid",
+                      "tradeTurnover": 4501749.45857,
+                      "baseCoin": "ETH",
+                      "ts": 1763576654551
+                    },
+                    "total": 15908,
+                    "24h": {
+                      "baseCoin": "ETH",
+                      "totalTurnover": 184611764.59643254,
+                      "longTurnover": 163020735.4680299,
+                      "shortTurnover": 21591029.128402635,
+                      "percentage": 0,
+                      "longRatio": 0,
+                      "shortRatio": 0,
+                      "interval": "1d"
+                    },
+                    "1h": {
+                      "baseCoin": "ETH",
+                      "totalTurnover": 556566.77763,
+                      "longTurnover": 3984.90832,
+                      "shortTurnover": 552581.86931,
+                      "percentage": 0,
+                      "longRatio": 0,
+                      "shortRatio": 0,
+                      "interval": "1h"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/liquidation/aggregated-history": {
+      "get": {
+        "summary": "币种爆仓聚合历史(套餐1)",
+        "deprecated": false,
+        "description": "币种爆仓聚合历史( <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "tags": [
+          "爆仓数据"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1m  3m  5m  15m  30m 1h 2h 4h 6h 8h 12h  1d ",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "返回此毫秒时间戳之前的数据",
+            "required": true,
+            "example": 1766393872087,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "all": {
+                            "type": "object",
+                            "properties": {
+                              "longTurnover": {
+                                "type": "number",
+                                "description": "多单爆仓金额"
+                              },
+                              "shortTurnover": {
+                                "type": "number",
+                                "description": "空单爆仓金额"
+                              }
+                            },
+                            "required": [
+                              "longTurnover",
+                              "shortTurnover"
+                            ]
+                          },
+                          "ts": {
+                            "type": "integer",
+                            "description": "时间戳  "
+                          }
+                        },
+                        "required": [
+                          "all",
+                          "ts"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": [
+                    {
+                      "all": {
+                        "longTurnover": 559535.9023
+                      },
+                      "ts": 1725937200000
+                    },
+                    {
+                      "all": {
+                        "longTurnover": 1132902.81104,
+                        "shortTurnover": 5951.8801
+                      },
+                      "ts": 1725940800000
+                    },
+                    {
+                      "all": {
+                        "longTurnover": 1250.3844,
+                        "shortTurnover": 632078.01471
+                      },
+                      "ts": 1725944400000
+                    },
+                    {
+                      "all": {
+                        "longTurnover": 15225.1715,
+                        "shortTurnover": 965.93218
+                      },
+                      "ts": 1725948000000
+                    },
+                    {
+                      "all": {
+                        "longTurnover": 26411.6859,
+                        "shortTurnover": 941153.61241
+                      },
+                      "ts": 1725951600000
+                    },
+                    {
+                      "all": {
+                        "longTurnover": 225171.80167,
+                        "shortTurnover": 931326.86245
+                      },
+                      "ts": 1725955200000
+                    },
+                    {
+                      "all": {
+                        "longTurnover": 230779.43228,
+                        "shortTurnover": 91609.5535
+                      },
+                      "ts": 1725958800000
+                    },
+                    {
+                      "all": {
+                        "longTurnover": 125775.0486,
+                        "shortTurnover": 91581.66299
+                      },
+                      "ts": 1725962400000
+                    },
+                    {
+                      "all": {
+                        "longTurnover": 6997.0023,
+                        "shortTurnover": 111343.65616
+                      },
+                      "ts": 1725966000000
+                    },
+                    {
+                      "all": {
+                        "longTurnover": 86970.9802,
+                        "shortTurnover": 567218.36067
+                      },
+                      "ts": 1725969600000
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/liquidation/history": {
+      "get": {
+        "summary": "交易对爆仓统计历史(套餐1)",
+        "deprecated": false,
+        "description": "返回交易对爆仓统计历史  <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "tags": [
+          "爆仓数据"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance,OKX,Bybit,Gate,Huobi,Bitfinex,Kraken,Deribit,Bitmex",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "1h",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "毫秒时间戳",
+            "required": true,
+            "example": 1725972522356,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": 10,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "symbol": {
+                            "type": "string",
+                            "description": "交易对"
+                          },
+                          "exchangeName": {
+                            "type": "string",
+                            "description": "交易所"
+                          },
+                          "ts": {
+                            "type": "integer",
+                            "description": "时间戳"
+                          },
+                          "longTurnover": {
+                            "type": "number",
+                            "description": "多单金额"
+                          },
+                          "shortTurnover": {
+                            "type": "integer",
+                            "description": "空单金额"
+                          }
+                        },
+                        "required": [
+                          "symbol",
+                          "exchangeName",
+                          "ts",
+                          "longTurnover",
+                          "shortTurnover"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": [
+                    {
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "ts": 1725937200000,
+                      "longTurnover": 123431.9085,
+                      "shortTurnover": 0
+                    },
+                    {
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "ts": 1725940800000,
+                      "longTurnover": 310609.81415,
+                      "shortTurnover": 5497.6822
+                    },
+                    {
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "ts": 1725944400000,
+                      "longTurnover": 1250.3844,
+                      "shortTurnover": 287941.44256
+                    },
+                    {
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "ts": 1725948000000,
+                      "longTurnover": 0,
+                      "shortTurnover": 965.93218
+                    },
+                    {
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "ts": 1725951600000,
+                      "longTurnover": 3406.65,
+                      "shortTurnover": 272832.81416
+                    },
+                    {
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "ts": 1725955200000,
+                      "longTurnover": 79017.4438,
+                      "shortTurnover": 17593.1393
+                    },
+                    {
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "ts": 1725958800000,
+                      "longTurnover": 89422.9012,
+                      "shortTurnover": 34312.2797
+                    },
+                    {
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "ts": 1725962400000,
+                      "longTurnover": 50963.8532,
+                      "shortTurnover": 50844.8098
+                    },
+                    {
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "ts": 1725966000000,
+                      "longTurnover": 969.8266,
+                      "shortTurnover": 85064.11506
+                    },
+                    {
+                      "symbol": "BTCUSDT",
+                      "exchangeName": "Binance",
+                      "ts": 1725969600000,
+                      "longTurnover": 67206.8307,
+                      "shortTurnover": 234223.3304
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/liquidation/orders": {
+      "get": {
+        "summary": "爆仓订单(套餐3)",
+        "deprecated": false,
+        "description": "Query historical liquidation orders based on the conditions you set  <font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "tags": [
+          "爆仓数据"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "币种",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "交易所",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "side",
+            "in": "query",
+            "description": "方向 long  多 short 空",
+            "required": true,
+            "example": "long",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "金额",
+            "required": true,
+            "example": "100",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "返回此时间戳之前的订单",
+            "required": true,
+            "example": 1772037506763,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "exchangeName": {
+                            "type": "string",
+                            "description": "exchange"
+                          },
+                          "baseCoin": {
+                            "type": "string",
+                            "description": "coin"
+                          },
+                          "contractCode": {
+                            "type": "string",
+                            "description": "symbol"
+                          },
+                          "posSide": {
+                            "type": "string",
+                            "description": "方向 long  多 short 空"
+                          },
+                          "amount": {
+                            "type": "number",
+                            "description": "币的数量"
+                          },
+                          "price": {
+                            "type": "number"
+                          },
+                          "avgPrice": {
+                            "type": "integer",
+                            "description": "liquidation price"
+                          },
+                          "tradeTurnover": {
+                            "type": "number",
+                            "description": "爆仓金额"
+                          },
+                          "ts": {
+                            "type": "integer",
+                            "description": "时间戳"
+                          }
+                        },
+                        "required": [
+                          "exchangeName",
+                          "baseCoin",
+                          "contractCode",
+                          "posSide",
+                          "amount",
+                          "price",
+                          "avgPrice",
+                          "tradeTurnover",
+                          "ts"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/liqMap/getLiqMap": {
+      "get": {
+        "summary": "清算地图 (套餐4)",
+        "deprecated": false,
+        "description": "根据实时市价订单计算的不同杠杆的清算强度  <font color = 'red'> # Required API Level: VIP4 and Above</font>",
+        "tags": [
+          "爆仓数据"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance  Okex  Bybit Aster Hyperliquid",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1d or 1w",
+            "required": true,
+            "example": "1d",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/liqMap/getAggLiqMap": {
+      "get": {
+        "summary": "聚合清算地图 (套餐4)",
+        "deprecated": false,
+        "description": "按币种聚合的清算地图  <font color = 'red'> # Required API Level: VIP4 and Above</font>",
+        "tags": [
+          "爆仓数据"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1d or 1w",
+            "required": true,
+            "example": "1d",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/liqMap/getLiqHeatMap": {
+      "get": {
+        "summary": "清算热力图 (套餐4)",
+        "deprecated": false,
+        "description": "根据实时市价订单和交易所提供的参数计算的强酸热力图  <font color = 'red'> # Required API Level: VIP4 and Above</font>",
+        "tags": [
+          "爆仓数据"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "12h  1d, 3d  1w  2w  1M  3M 6M 1Y",
+            "required": true,
+            "example": "1d",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "tickSize": {
+                          "type": "integer"
+                        },
+                        "chartInterval": {
+                          "type": "string"
+                        },
+                        "start": {
+                          "type": "integer"
+                        },
+                        "liqHeatMap": {
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "array",
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "chartTimeArray": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "priceArray": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "maxLiqValue": {
+                              "type": "integer"
+                            }
+                          },
+                          "required": [
+                            "data",
+                            "chartTimeArray",
+                            "priceArray",
+                            "maxLiqValue"
+                          ]
+                        },
+                        "end": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "tickSize",
+                        "chartInterval",
+                        "start",
+                        "liqHeatMap",
+                        "end"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": {
+                    "tickSize": 25,
+                    "chartInterval": "5m",
+                    "start": 1762677300000,
+                    "liqHeatMap": {
+                      "data": [
+                        [
+                          "0",
+                          "0",
+                          "0"
+                        ],
+                        [
+                          "0",
+                          "1",
+                          "0"
+                        ],
+                        [
+                          "0",
+                          "2",
+                          "0"
+                        ]
+                      ],
+                      "chartTimeArray": [
+                        1762677300000,
+                        1762677600000,
+                        1762677900000
+                      ],
+                      "priceArray": [
+                        97750,
+                        97800,
+                        97850
+                      ],
+                      "maxLiqValue": 102860717
+                    },
+                    "end": 1762763700000
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/liqMap/getLiqHeatMapSymbol": {
+      "get": {
+        "summary": "清算热图支持的交易对 (套餐1)",
+        "deprecated": false,
+        "description": "Trading pairs that support liquidation heatmaps <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "tags": [
+          "爆仓数据"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": [
+                    "BTCUSDT",
+                    "ETHUSDT",
+                    "XRPUSDT",
+                    "BNBUSDT",
+                    "SOLUSDT",
+                    "DOGEUSDT",
+                    "LTCUSDT",
+                    "BCHUSDT",
+                    "DOTUSDT",
+                    "LINKUSDT",
+                    "ARBUSDT",
+                    "WLDUSDT",
+                    "MATICUSDT",
+                    "ADAUSDT",
+                    "OPUSDT",
+                    "UNFIUSDT",
+                    "MKRUSDT",
+                    "PERPUSDT",
+                    "APTUSDT",
+                    "EOSUSDT",
+                    "SUIUSDT",
+                    "FILUSDT",
+                    "ETCUSDT",
+                    "AVAXUSDT",
+                    "CYBERUSDT",
+                    "ATOMUSDT",
+                    "APEUSDT",
+                    "DYDXUSDT",
+                    "TRBUSDT",
+                    "RUNEUSDT",
+                    "AGLDUSDT",
+                    "SUSHIUSDT",
+                    "GRTUSDT",
+                    "ANTUSDT",
+                    "1INCHUSDT",
+                    "JOEUSDT",
+                    "LINAUSDT",
+                    "GTCUSDT",
+                    "XTZUSDT",
+                    "NEOUSDT",
+                    "BELUSDT",
+                    "MAGICUSDT",
+                    "EGLDUSDT",
+                    "GMXUSDT",
+                    "IDUSDT",
+                    "THETAUSDT",
+                    "VETAUSDT",
+                    "KNCUSDT",
+                    "STORGUSDT",
+                    "AGIXUSDT",
+                    "OCEANUSDT",
+                    "STGUSDT",
+                    "C98USDT",
+                    "ZILUSDT",
+                    "FLOWUSIDT",
+                    "MDTUSDT",
+                    "KLAYUSDT",
+                    "MINAUSDT",
+                    "HIGHUSDT",
+                    "STMXUSDT"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

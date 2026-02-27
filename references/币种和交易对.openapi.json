@@ -1,0 +1,684 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "币种和交易对"
+    }
+  ],
+  "paths": {
+    "/api/instruments/getLastPrice": {
+      "get": {
+        "summary": "获取交易对实时价格(套餐1)",
+        "deprecated": false,
+        "description": "获取交易对的实时价格。<font color = 'red'> # 需要api等级:VIP1及以上</font>",
+        "tags": [
+          "币种和交易对"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "交易对",
+            "required": true,
+            "example": "ETHUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "交易所",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP  合约  SPOT  现货",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/instruments/getCoinMarketCap": {
+      "get": {
+        "summary": "获取币种市值(套餐1)",
+        "deprecated": false,
+        "description": "获取币种市值。<font color = 'red'> # 需要api等级:VIP1及以上</font>",
+        "tags": [
+          "币种和交易对"
+        ],
+        "parameters": [
+          {
+            "name": "baseCoin",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/baseCoin/list": {
+      "get": {
+        "summary": "支持的币种(套餐1)",
+        "deprecated": false,
+        "description": "返回所有支持的币种，支持现货和合约 <font color = 'red'> # 需要api等级:VIP1及以上</font>",
+        "tags": [
+          "币种和交易对"
+        ],
+        "parameters": [
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP     or     SPOT",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "example": {
+                  "success": true,
+                  "code": "1",
+                  "data": [
+                    "BTC",
+                    "ETH",
+                    "SOL",
+                    "XRP",
+                    "DOGE",
+                    "BNB",
+                    "TON",
+                    "LTC",
+                    "1000PEPE",
+                    "AVAX",
+                    "WIF",
+                    "SUI",
+                    "BCH",
+                    "DOT",
+                    "1000BONK",
+                    "ADA",
+                    "FTM",
+                    "AAVE",
+                    "LINK",
+                    "FIL",
+                    "ORDI",
+                    "NEAR",
+                    "DOGS",
+                    "WLD",
+                    "OP",
+                    "TRX",
+                    "TIA",
+                    "ARB",
+                    "NOT",
+                    "PEPE",
+                    "ATOM",
+                    "MKR",
+                    "APT",
+                    "PEOPLE",
+                    "NEIROETH",
+                    "INJ",
+                    "UNI",
+                    "ETC",
+                    "ONDO",
+                    "CRV",
+                    "SEI",
+                    "REEF",
+                    "EOS",
+                    "STRK",
+                    "TRB",
+                    "ENA",
+                    "KAS",
+                    "FET",
+                    "BOME",
+                    "TAO",
+                    "POPCAT",
+                    "1000SATS",
+                    "DYDX",
+                    "APE",
+                    "AR",
+                    "JUP",
+                    "ENS",
+                    "LDO",
+                    "GALA",
+                    "STX",
+                    "RUNE",
+                    "ZRO",
+                    "BNX",
+                    "CFX",
+                    "1000FLOKI",
+                    "MEW",
+                    "RENDER",
+                    "GMT",
+                    "ICP",
+                    "SUN",
+                    "IO",
+                    "ETHFI",
+                    "ZK",
+                    "VIDT",
+                    "1000RATS",
+                    "JTO",
+                    "SAGA",
+                    "BIGTIME",
+                    "HBAR",
+                    "BLUR",
+                    "SAND",
+                    "RARE",
+                    "IMX",
+                    "JASMY",
+                    "PYTH",
+                    "AXS",
+                    "SATS",
+                    "PENDLE",
+                    "DAR",
+                    "1000SHIB",
+                    "SHIB",
+                    "VET",
+                    "BSV",
+                    "XLM",
+                    "RDNT",
+                    "MANA",
+                    "ALGO",
+                    "ARKM",
+                    "BRETT",
+                    "BAKE",
+                    "W",
+                    "1INCH",
+                    "GRT",
+                    "AEVO",
+                    "MASK",
+                    "LPT",
+                    "CHZ",
+                    "BB",
+                    "SUNDOG",
+                    "TONCOIN",
+                    "LISTA",
+                    "FLOKI",
+                    "MANTA",
+                    "SUSHI",
+                    "COMP",
+                    "SHIB1000",
+                    "TURBO",
+                    "OM",
+                    "ZEC",
+                    "BOND",
+                    "BANANA",
+                    "ZETA",
+                    "MEME",
+                    "SSV",
+                    "YGG",
+                    "THETA",
+                    "KSM",
+                    "EGLD",
+                    "NEO",
+                    "XAI",
+                    "XMR",
+                    "ATH",
+                    "TRU",
+                    "STORJ",
+                    "SNX",
+                    "MYRO",
+                    "CAKE",
+                    "LQTY",
+                    "STMX",
+                    "TNSR",
+                    "DYM",
+                    "AUCTION",
+                    "ROSE",
+                    "GMX",
+                    "1000LUNC",
+                    "CHR",
+                    "MINA",
+                    "UXLINK",
+                    "RSR",
+                    "QNT",
+                    "REZ",
+                    "SUPER",
+                    "ZEN",
+                    "ALT",
+                    "CELO",
+                    "CORE",
+                    "10000SATS",
+                    "SFP",
+                    "XTZ",
+                    "YFI",
+                    "HIGH",
+                    "MNT",
+                    "COTI",
+                    "FLOW",
+                    "USDC",
+                    "MAX",
+                    "ASTR",
+                    "WOO",
+                    "CKB",
+                    "TOKEN",
+                    "FLUX",
+                    "UNFI",
+                    "GTC",
+                    "IOTA",
+                    "BLZ",
+                    "PIXEL",
+                    "HNT",
+                    "CYBER",
+                    "LUNA2",
+                    "UMA",
+                    "LEVER",
+                    "MERL",
+                    "ACE",
+                    "ANKR",
+                    "ALPACA",
+                    "ENJ",
+                    "RVN",
+                    "RPL",
+                    "ZIL",
+                    "FLM",
+                    "BAL",
+                    "KLAY",
+                    "VELO",
+                    "MAGIC",
+                    "QTUM",
+                    "FXS",
+                    "OMNI",
+                    "ORDER",
+                    "ACH",
+                    "POL",
+                    "KEY",
+                    "LRC",
+                    "API3",
+                    "KNC",
+                    "ALICE",
+                    "HOOK",
+                    "ZRX",
+                    "DASH",
+                    "KAVA",
+                    "TWT",
+                    "BGB",
+                    "LINA",
+                    "STG",
+                    "BENDOG",
+                    "AI",
+                    "IOTX",
+                    "ID",
+                    "PORTAL",
+                    "POLYX",
+                    "ONE",
+                    "VOXEL",
+                    "AXL",
+                    "USTC",
+                    "ORBS",
+                    "BEL",
+                    "LUNC",
+                    "LUNA",
+                    "GLM",
+                    "DOG",
+                    "AGI",
+                    "1000000MOG",
+                    "MOVR",
+                    "BONK",
+                    "GAS",
+                    "C98",
+                    "ARPA",
+                    "ONT",
+                    "BTCDOM",
+                    "TLM",
+                    "MAVIA",
+                    "ULTI",
+                    "1000BEER",
+                    "BAND",
+                    "PERP",
+                    "NMR",
+                    "VANRY",
+                    "DUSK",
+                    "HIFI",
+                    "EDU",
+                    "NFP",
+                    "NULS",
+                    "LOOM",
+                    "METIS",
+                    "JOE",
+                    "IOST",
+                    "L3",
+                    "XEM",
+                    "HOT",
+                    "MAV",
+                    "GFT",
+                    "BAT",
+                    "BSW",
+                    "BEAM",
+                    "SXP",
+                    "AMB",
+                    "LIT",
+                    "AGLD",
+                    "ICX",
+                    "VGX",
+                    "BLAST",
+                    "PAXG",
+                    "CRO",
+                    "BICO",
+                    "ZKJ",
+                    "TOMI",
+                    "T",
+                    "PONKE",
+                    "10000LADYS",
+                    "ALPHA",
+                    "SKL",
+                    "SYN",
+                    "LSK",
+                    "CELR",
+                    "CTSI",
+                    "ETHW",
+                    "MIR",
+                    "ILV",
+                    "MTL",
+                    "BADGER",
+                    "DENT",
+                    "MBOX",
+                    "PHB",
+                    "CVC",
+                    "WAVES",
+                    "NKN",
+                    "XVS",
+                    "NTRN",
+                    "DOP1",
+                    "REN",
+                    "SYS",
+                    "CVX",
+                    "TAIKO",
+                    "BEAMX",
+                    "G",
+                    "PRCL",
+                    "RON",
+                    "CAT",
+                    "SPELL",
+                    "DRIFT",
+                    "ATA",
+                    "POWR",
+                    "SLP",
+                    "BNT",
+                    "AVAIL",
+                    "XVG",
+                    "GME",
+                    "SLERF",
+                    "RLC",
+                    "OGN",
+                    "ETHBTC",
+                    "QUICK",
+                    "CHESS",
+                    "XCH",
+                    "HFT",
+                    "RIF",
+                    "CLOUD",
+                    "WAXP",
+                    "ARK",
+                    "CTC",
+                    "OMG",
+                    "PIXFI",
+                    "LOOKS",
+                    "RONIN",
+                    "1000TURBO",
+                    "OXT",
+                    "1000XEC",
+                    "DEGEN",
+                    "10000WEN",
+                    "ONG",
+                    "MOCA",
+                    "VRA",
+                    "1000BTT",
+                    "AERGO",
+                    "AIDOGE",
+                    "ZEUS",
+                    "AKT",
+                    "COMBO",
+                    "DGB",
+                    "FLR",
+                    "STEEM",
+                    "FOXY",
+                    "RATS",
+                    "JST",
+                    "CSPR",
+                    "PENG",
+                    "CTK",
+                    "AUDIO",
+                    "FTN",
+                    "USDE",
+                    "DODOX",
+                    "ZKSYNC",
+                    "SWEAT",
+                    "SC",
+                    "SILLY",
+                    "1000APU",
+                    "CETUS",
+                    "AIOZ",
+                    "DODO",
+                    "MOTHER",
+                    "RAY",
+                    "SPEC",
+                    "AERO",
+                    "ZKF",
+                    "1000000PEIPEI",
+                    "KDA",
+                    "SLF",
+                    "A8",
+                    "GODS",
+                    "MASA",
+                    "FIRE",
+                    "$ALT",
+                    "GLMR",
+                    "ZBCN",
+                    "SNT",
+                    "1000BTTC",
+                    "MAXNEW",
+                    "ANC",
+                    "WSB",
+                    "MON",
+                    "RSS3",
+                    "XNO",
+                    "IDEX",
+                    "AKRO",
+                    "LAI",
+                    "SCA"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/baseCoin/symbols": {
+      "get": {
+        "summary": " 支持的交易对(套餐1)",
+        "deprecated": false,
+        "description": "返回所有支持的交易对，支持合约和交易所，支持按交易所过滤 <font color = 'red'> # 需要api等级:VIP1及以上</font>\n",
+        "tags": [
+          "币种和交易对"
+        ],
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "productType",
+            "in": "query",
+            "description": "SWAP   or  SPOT ",
+            "required": true,
+            "example": "SWAP",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "symbol": {
+                            "type": "string"
+                          },
+                          "baseCoin": {
+                            "type": "string"
+                          },
+                          "exchangeName": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "symbol",
+                          "baseCoin",
+                          "exchangeName"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

@@ -1,0 +1,166 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "RSI选币器"
+    }
+  ],
+  "paths": {
+    "/api/rsiMap/list": {
+      "get": {
+        "summary": "RSI （套餐2)",
+        "deprecated": false,
+        "description": "Returns rsi data for all Binance trading pairs by time level\n</br><font color = 'red'> # Required API Level: VIP2 and Above</font>",
+        "tags": [
+          "RSI选币器"
+        ],
+        "parameters": [
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "1H，4H，8H,24H",
+            "required": true,
+            "example": "1H",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "Binance",
+            "required": true,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "symbol": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "交易对列表"
+                        },
+                        "length": {
+                          "type": "integer"
+                        },
+                        "lookback": {
+                          "type": "integer"
+                        },
+                        "rsiMap": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "string",
+                                  "description": "交易对"
+                                },
+                                {
+                                  "type": "number",
+                                  "description": "rsi最新值"
+                                },
+                                {
+                                  "type": "string",
+                                  "description": "rsi最新第二个值"
+                                },
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "description": "rsi值列表"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "ts": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "symbol",
+                        "length",
+                        "lookback",
+                        "rsiMap",
+                        "ts"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}

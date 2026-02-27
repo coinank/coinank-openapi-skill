@@ -1,0 +1,1196 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "默认模块",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "指标数据"
+    }
+  ],
+  "paths": {
+    "/api/indicator/getBtcMultiplier": {
+      "get": {
+        "summary": "两年MA乘数(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "timeList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "时间列表"
+                        },
+                        "mA730Mu5List": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "2年ma x5 列表"
+                        },
+                        "mA730List": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "2年ma 列表"
+                        },
+                        "priceList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "价格列表"
+                        }
+                      },
+                      "required": [
+                        "timeList",
+                        "mA730Mu5List",
+                        "mA730List",
+                        "priceList"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/indicator/getCnnEntity": {
+      "get": {
+        "summary": "贪婪恐惧指数(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "timeList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "时间列表"
+                        },
+                        "cnnValueList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "贪婪恐惧值列表"
+                        },
+                        "priceList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "价格列表"
+                        }
+                      },
+                      "required": [
+                        "timeList",
+                        "cnnValueList",
+                        "priceList"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/indicator/getAhr999": {
+      "get": {
+        "summary": "ahr999指标(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "timeList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "时间列表"
+                        },
+                        "avg": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "定投成本列表"
+                        },
+                        "valueList": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "价格列表"
+                        },
+                        "ahr999": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "ahr999列表"
+                        }
+                      },
+                      "required": [
+                        "timeList",
+                        "avg",
+                        "valueList",
+                        "ahr999"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/indicator/getMarketCapRank": {
+      "get": {
+        "summary": "BTC市值占比(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "timeList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          }
+                        },
+                        "marketCapList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ]
+                          },
+                          "description": "市值列表"
+                        },
+                        "marketCapRateList": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "市值占比列表"
+                        },
+                        "priceList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "description": "价格列表"
+                        }
+                      },
+                      "required": [
+                        "timeList",
+                        "marketCapList",
+                        "marketCapRateList",
+                        "priceList"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/indicator/getPuellMultiple": {
+      "get": {
+        "summary": "普尔系数(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "timeList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "时间列表"
+                        },
+                        "puellMultiplList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ]
+                          },
+                          "description": "普尔系数列表"
+                        },
+                        "priceList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "价格列表"
+                        }
+                      },
+                      "required": [
+                        "timeList",
+                        "puellMultiplList",
+                        "priceList"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/indicator/getBtcPi": {
+      "get": {
+        "summary": "pi循环(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "ma110": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "ma110列表"
+                        },
+                        "timeList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "时间列表"
+                        },
+                        "ma350Mu2": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "ma350*2列表"
+                        },
+                        "priceList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "价格列表"
+                        }
+                      },
+                      "required": [
+                        "ma110",
+                        "timeList",
+                        "ma350Mu2",
+                        "priceList"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/indicator/getMovingAvgHeatmap": {
+      "get": {
+        "summary": "200周移动热力图(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "ma1440IpList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "null"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ]
+                          },
+                          "description": "200周malp列表"
+                        },
+                        "timeList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "时间列表"
+                        },
+                        "ma1440List": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "200周ma列表"
+                        },
+                        "priceList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "价格列表"
+                        }
+                      },
+                      "required": [
+                        "ma1440IpList",
+                        "timeList",
+                        "ma1440List",
+                        "priceList"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/indicator/getGrayscaleOpenInterest": {
+      "get": {
+        "summary": "灰度持仓(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "example": "BTC",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "timeList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "时间列表"
+                        },
+                        "opValueList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ]
+                          },
+                          "description": "持有列表"
+                        },
+                        "priceList": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ]
+                          },
+                          "description": "价格列表"
+                        }
+                      },
+                      "required": [
+                        "timeList",
+                        "opValueList",
+                        "priceList"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/indicator/getAltcoinSeason": {
+      "get": {
+        "summary": "山寨指数(套餐1)",
+        "deprecated": false,
+        "description": "",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "value": {
+                            "type": "string",
+                            "description": "值"
+                          },
+                          "createTime": {
+                            "type": "number",
+                            "description": "时间"
+                          }
+                        },
+                        "required": [
+                          "value",
+                          "createTime"
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/api/indicator/index/charts": {
+      "get": {
+        "summary": "特色指标数据(套餐1)",
+        "deprecated": false,
+        "description": "# 特色数据指标\n1. 彩虹图V2：bitcoin-rainbow-v2\n2. 一年+Hold波：/charts/1-year-hodl-wave/\n3. hold波：/charts/hodl-waves/\n4. MVRV Z-Score ：/charts/mvrv-zscore/\n5. 未实现净损益 (NUPL)：/charts/relative-unrealized-prof/\n6. 比特币价格预测：/charts/bitcoin-price-prediction/\n7. 准备金风险：/charts/reserve-risk/\n8. RHODL 比率：/charts/rhodl-ratio/\n9. 鲸影：/charts/whale-shadows/\n\n\n",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "见接口描述",
+            "required": true,
+            "example": "bitcoin-rainbow-v2",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "btcPrice": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "description": "价格列表"
+                        },
+                        "timeList": {
+                          "type": "array",
+                          "items": {
+                            "type": "integer"
+                          },
+                          "description": "时间列表"
+                        },
+                        "value1": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ]
+                          },
+                          "description": "model price 列表"
+                        },
+                        "value2": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ]
+                          },
+                          "description": "底部买入区间"
+                        },
+                        "value3": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "坚定买入区间"
+                        },
+                        "value4": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "继续增持区间"
+                        },
+                        "value5": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "价格便宜区间"
+                        },
+                        "value6": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "坚定持有区间"
+                        },
+                        "value7": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "存在泡沫区间"
+                        },
+                        "value8": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "integer"
+                              },
+                              {
+                                "type": "number"
+                              }
+                            ]
+                          },
+                          "description": "贪婪加剧区间"
+                        },
+                        "value9": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          },
+                          "description": "强烈卖出区间"
+                        },
+                        "value10": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "type": "number"
+                              },
+                              {
+                                "type": "integer"
+                              }
+                            ]
+                          },
+                          "description": "严重泡沫区间"
+                        },
+                        "value11": {
+                          "type": "array",
+                          "items": {
+                            "type": "null"
+                          }
+                        },
+                        "value12": {
+                          "type": "array",
+                          "items": {
+                            "type": "null"
+                          }
+                        },
+                        "value13": {
+                          "type": "array",
+                          "items": {
+                            "type": "null"
+                          }
+                        },
+                        "weekList": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "value1": {
+                                "type": "number"
+                              },
+                              "value2": {
+                                "type": "number"
+                              },
+                              "value3": {
+                                "type": "number"
+                              },
+                              "value4": {
+                                "type": "number"
+                              },
+                              "value5": {
+                                "type": "number"
+                              },
+                              "value6": {
+                                "type": "number"
+                              },
+                              "value7": {
+                                "type": "number"
+                              },
+                              "value8": {
+                                "type": "number"
+                              },
+                              "value9": {
+                                "type": "number"
+                              },
+                              "value10": {
+                                "type": "number"
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "createTime": {
+                                "type": "string"
+                              },
+                              "btcPrice": {
+                                "type": "integer"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "value1",
+                              "value2",
+                              "value3",
+                              "value4",
+                              "value5",
+                              "value6",
+                              "value7",
+                              "value8",
+                              "value9",
+                              "value10",
+                              "type",
+                              "createTime",
+                              "btcPrice"
+                            ]
+                          }
+                        }
+                      },
+                      "required": [
+                        "value6",
+                        "timeList",
+                        "value5",
+                        "value8",
+                        "value7",
+                        "value2",
+                        "value1",
+                        "value4",
+                        "value3",
+                        "btcPrice",
+                        "value9",
+                        "weekList",
+                        "value11",
+                        "value10",
+                        "value13",
+                        "value12"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "code",
+                    "data"
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "responses": {},
+    "securitySchemes": {}
+  },
+  "servers": [
+    {
+      "url": "https://open-api.coinank.com",
+      "description": "Prod Env"
+    }
+  ],
+  "security": []
+}
