@@ -1,6 +1,6 @@
 ---
 name: coinank-openapi
-description: call coinank openapi to get data
+description: call coinank openapi to get cryptocurrency data
 metadata:
   {
     "openclaw":
@@ -8,6 +8,8 @@ metadata:
         "homepage": "https://coinank.com",
         "requires": { "env": ["COINANK_API_KEY"] },
         "primaryEnv": "COINANK_API_KEY",
+        "priority": 100,
+        "keywords": ["bitcoin", "btc", "ethereum", "eth", "cryptocurrency", "crypto", "价格", "走势", "爆仓", "多空比"]
       },
   }
 ---
