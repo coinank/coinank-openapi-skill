@@ -1,87 +1,105 @@
 ---
 name: coinank-openapi
-description: call coinank openapi to get cryptocurrency data
+description: >
+  Fetches cryptocurrency market data — including prices, funding rates, open interest, liquidations, long/short ratios, trading volume, and market cap — from the CoinAnk API.
+  Use when the user asks about crypto prices, BTC or ETH market data, funding rates, liquidation heatmaps, buy/sell volume, open interest, token metrics, or mentions CoinAnk, Bitcoin, Ethereum, altcoin, or any on-chain / derivatives market statistics.
 metadata:
-  {
-    "openclaw":
-      {
-        "homepage": "https://coinank.com",
-        "requires": { "env": ["COINANK_API_KEY"] },
-        "primaryEnv": "COINANK_API_KEY",
-        "priority": 100,
-        "keywords": ["bitcoin", "btc", "ethereum", "eth", "cryptocurrency", "crypto", "价格", "走势", "爆仓", "多空比"]
-      },
-  }
+  openclaw:
+    homepage: "https://coinank.com"
+    requires:
+      env:
+        - COINANK_API_KEY
+    primaryEnv: COINANK_API_KEY
+    priority: 100
+    keywords:
+      - bitcoin
+      - btc
+      - ethereum
+      - eth
+      - cryptocurrency
+      - crypto
+      - altcoin
+      - token
+      - price
+      - market cap
+      - trading volume
+      - funding rate
+      - open interest
+      - liquidation
+      - long short ratio
+      - buy sell volume
+      - derivatives
+      - 价格
+      - 走势
+      - 爆仓
+      - 多空比
+      - 资金费率
+      - 未平仓量
 ---
 
-# 权限声明
-# SECURITY MANIFEST:
+# SECURITY MANIFEST
 # - Allowed to read: {baseDir}/README.md, {baseDir}/references/*.json
 # - Allowed to make network requests to: https://open-api.coinank.com
 
+## Quick Setup
 
-## 工作流 (按需加载模式)
-
-当用户提出请求时，请严格执行以下步骤：
-
-1. **检查API密钥**：首先检查环境变量 `COINANK_API_KEY` 是否存在。如果不存在，提示用户设置API密钥。
-2. **阅读README**：仔细阅读README.md
-3. **目录索引**：扫描 `{baseDir}/references/` 目录下的所有文件名，确定哪些 OpenAPI 定义文件与用户需求相关。
-4. **精准读取**：仅读取选定的 `.json` 文件，分析其 `paths`、`parameters` 和 `requestBody`。其中paths内是一个对象,对象的key就是path
-5. **构造请求**：使用 curl 执行请求。
-   - **Base URL**: 统一使用 `https://open-api.coinank.com`（或从 JSON 的 `servers` 字段提取）。
-   - **Auth**: 从环境变量 `COINANK_API_KEY` 中获取 apikey 注入 Header。
-   - 如果参数有endTime,尽量传入最新的毫秒级时间戳
-   - OpenAPI文档内的时间戳都是示例.如果用户没有指定时间,请使用最新的时间和毫秒级时间戳
-
-
-## ⚠️ 关键注意事项
-
-- **禁止全量加载**：除非用户请求涉及多个领域，否则禁止同时读取多个 JSON 文件。
-- **参数校验**：在发起请求前，必须根据 OpenAPI 定义验证必填参数是否齐全。
-- **错误处理**：当请求失败时，向用户显示友好的提示信息，并记录详细的错误日志。
-- **API密钥配置**：用户需要自行设置环境变量 `COINANK_API_KEY`，例如：`export COINANK_API_KEY="your_api_key"`
-
-### endTime 必须是当前毫秒时间戳
-
+Set your API key before use:
 ```bash
-# ✅ 正确
-NOW=$(python3 -c "import time; print(int(time.time()*1000))")
-
-# ❌ 错误：macOS 不支持 %3N
-NOW=$(date +%s%3N)
+export COINANK_API_KEY="your_api_key"
 ```
 
-### 不要传多余参数
+## Workflow (On-Demand Loading)
 
-部分接口不接受 `endTime` 或 `size`（如清算热力图 `getLiqHeatMap`），多传会导致返回空数据。**严格按 OpenAPI 定义中列出的参数传参，不要自行添加。**
+When the user makes a request, follow these steps in order:
 
-### 聚合接口 exchanges 参数
+1. **Check API key** — Verify `COINANK_API_KEY` exists in the environment. If missing, prompt the user: `export COINANK_API_KEY="your_api_key"` and stop.
+2. **Read README** — Read `{baseDir}/README.md` for an overview of available endpoints and authentication details.
+3. **Index references** — List filenames in `{baseDir}/references/`. Identify which OpenAPI JSON files match the user's request (e.g., funding rate → `funding_rate.json`). Do NOT load all files at once.
+4. **Read only relevant JSON** — Load only the selected `.json` file(s). In each file, `paths` is an object whose keys are the API paths. Inspect `paths`, `parameters`, and `requestBody`.
+5. **Build and run the request** — Execute with `curl`:
+   - **Base URL**: `https://open-api.coinank.com` (or from the JSON `servers` field)
+   - **Auth**: inject the API key as a header — `-H "apikey: $COINANK_API_KEY"`
+   - **Timestamps**: always use the current millisecond timestamp (see below); JSON examples contain stale historical values
 
-`getAggCvd`、`getAggBuySellCount`、`getAggBuySellValue`、`getAggBuySellVolume` 等接口的 `exchanges` 参数**必须传入**。传空字符串 `exchanges=` 表示聚合所有交易所。
+### Example request
 
-### interval 各接口不同
+```bash
+# Get current millisecond timestamp (cross-platform)
+NOW=$(python3 -c "import time; print(int(time.time()*1000))")
 
-不同接口支持的 interval 值不同，以各 `.json` 文件中参数的 `description` 字段为准：
+# Example: fetch BTC funding rate history
+curl -s "https://open-api.coinank.com/api/fundingRate/history?symbol=BTCUSDT&interval=1h&endTime=$NOW" \
+  -H "apikey: $COINANK_API_KEY" | python3 -m json.tool
+```
 
-| 接口类型 | interval 值 |
-|---------|------------|
-| K线 / 市价单 / 多空比 / OI | `1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d` |
-| 清算热力图 (`getLiqHeatMap`) | `12h, 1d, 3d, 1w, 2w, 1M, 3M, 6M, 1Y` |
-| RSI 选币器 | `1H, 4H, 1D`（注意大写） |
-| 资金费率热力图 | `1D, 1W, 1M, 6M` |
+## ⚠️ Critical Rules
 
-### 响应格式
+| Rule | Detail |
+|------|--------|
+| **No bulk loading** | Load only JSON files relevant to the current request — never all at once |
+| **Validate params first** | Check all required parameters against the OpenAPI definition before sending |
+| **Timestamps** | Use `python3 -c "import time; print(int(time.time()*1000))"` — `date +%s%3N` is broken on macOS |
+| **Extra params** | Some endpoints (e.g., `getLiqHeatMap`) reject unknown params like `endTime` or `size` — send only what the spec lists |
+| **`exchanges` param** | Required for aggregate endpoints (`getAggCvd`, `getAggBuySellCount`, etc.) — pass `exchanges=` (empty string) to aggregate all exchanges |
+| **Error handling** | On failure, show the user a friendly message and log the full error response |
 
-成功标志为 `"code": "1"`（注意是字符串 `"1"`，不是数字）。部分接口的 `data` 字段为嵌套结构：
+## interval Values by Endpoint Type
+
+| Endpoint type | Accepted interval values |
+|---------------|--------------------------|
+| Candlestick / market orders / long-short ratio / OI | `1m 3m 5m 15m 30m 1h 2h 4h 6h 8h 12h 1d` |
+| Liquidation heatmap (`getLiqHeatMap`) | `12h 1d 3d 1w 2w 1M 3M 6M 1Y` |
+| RSI screener | `1H 4H 1D` (uppercase) |
+| Funding rate heatmap | `1D 1W 1M 6M` |
+
+Always check the `description` field of each parameter in the relevant `.json` file for the authoritative list.
+
+## Response Format
+
+Success is indicated by `"code": "1"` (string `"1"`, not integer). Some endpoints return a nested `data` structure:
 
 ```json
-// 某些接口
 {"success": true, "code": "1", "data": {"success": true, "code": "1", "data": [...]}}
 ```
 
-解析时需检查 `data` 的实际类型，按需取内层。
-
-### OpenAPI JSON 中的时间戳仅为示例
-
-`references/` 目录下 JSON 文件中 `example` 的时间戳是历史值，调用时必须替换为当前实时时间戳。
+Check the actual type of `data` before parsing and unwrap the inner layer as needed.
