@@ -13,9 +13,9 @@
   "paths": {
     "/api/openInterest/all": {
       "get": {
-        "summary": "持仓列表（按交易所排序）(套餐1)",
+        "summary": "持仓列表（按交易所排序）(API等级1)",
         "deprecated": false,
-        "description": "币种聚合持仓实时列表，按交易所统计并排序 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "币种聚合持仓实时列表，按交易所统计并排序 <font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "未平仓合约"
         ],
@@ -150,9 +150,9 @@
     },
     "/api/openInterest/v2/chart": {
       "get": {
-        "summary": "币种聚合持仓历史(套餐1)",
+        "summary": "币种聚合持仓历史(API等级1)",
         "deprecated": false,
-        "description": "按照级别返回币种聚合持仓的历史数据，不传exchange查所有，传查单个。 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "按照级别返回币种聚合持仓的历史数据，不传exchange查所有，传查单个。 <font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "未平仓合约"
         ],
@@ -562,9 +562,9 @@
     },
     "/api/openInterest/symbol/Chart": {
       "get": {
-        "summary": "交易对持仓历史(套餐1)",
+        "summary": "交易对持仓历史(API等级1)",
         "deprecated": false,
-        "description": "返回交易对持仓历史<font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回交易对持仓历史<font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "未平仓合约"
         ],
@@ -753,9 +753,9 @@
     },
     "/api/openInterest/kline": {
       "get": {
-        "summary": "交易对持仓K线(套餐1)",
+        "summary": "交易对持仓K线(API等级1)",
         "deprecated": false,
-        "description": "返回交易对持仓（数量）k线的开高收低 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回交易对持仓（数量）k线的开高收低 <font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "未平仓合约"
         ],
@@ -974,9 +974,9 @@
     },
     "/api/openInterest/aggKline": {
       "get": {
-        "summary": "聚合持仓k线(套餐1)",
+        "summary": "聚合持仓k线(API等级1)",
         "deprecated": false,
-        "description": "返回按币种聚合的持仓k线 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回按币种聚合的持仓k线 <font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "未平仓合约"
         ],
@@ -1175,9 +1175,9 @@
     },
     "/api/tickers/topOIByEx": {
       "get": {
-        "summary": "实时持仓（币种）(套餐1)",
+        "summary": "实时持仓（币种）(API等级1)",
         "deprecated": false,
-        "description": "返回币种实时持仓，按交易所统计 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回币种实时持仓，按交易所统计 <font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "未平仓合约"
         ],
@@ -1258,7 +1258,7 @@
     },
     "/api/instruments/oiVsMc": {
       "get": {
-        "summary": "历史持仓市值比（套餐 2）",
+        "summary": "历史持仓市值比（API等级 2）",
         "deprecated": false,
         "description": "",
         "tags": [

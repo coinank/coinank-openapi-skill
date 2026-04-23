@@ -13,9 +13,9 @@
   "paths": {
     "/api/rsiMap/list": {
       "get": {
-        "summary": "RSI （套餐2)",
+        "summary": "RSI （API等级2)",
         "deprecated": false,
-        "description": "Returns rsi data for all Binance trading pairs by time level\n</br><font color = 'red'> # Required API Level: VIP2 and Above</font>",
+        "description": "Returns rsi data for all Binance trading pairs by time level\n</br><font color = 'red'> # Required API Level: API2 and Above</font>",
         "tags": [
           "RSI选币器"
         ],

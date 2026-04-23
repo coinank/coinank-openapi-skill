@@ -13,9 +13,9 @@
   "paths": {
     "/api/trades/largeTrades": {
       "get": {
-        "summary": "大额市价订单 （套餐3) ",
+        "summary": "大额市价订单 （API等级3) ",
         "deprecated": false,
-        "description": "返回大额市价单列表，支持安装交易对和金额过滤\n</br><font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回大额市价单列表，支持安装交易对和金额过滤\n</br><font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "大额订单"
         ],
@@ -286,9 +286,9 @@
     },
     "/api/bigOrder/queryOrderList": {
       "get": {
-        "summary": "大额限价订单 （套餐3)",
+        "summary": "大额限价订单 （API等级3)",
         "deprecated": false,
-        "description": "返回大额限价单列表，支持查询历史单和实时单\n</br><font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回大额限价单列表，支持查询历史单和实时单\n</br><font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "大额订单"
         ],

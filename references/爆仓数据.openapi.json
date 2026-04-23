@@ -13,9 +13,9 @@
   "paths": {
     "/api/liquidation/allExchange/intervals": {
       "get": {
-        "summary": "币种爆仓实时统计(套餐1)",
+        "summary": "币种爆仓实时统计(API等级1)",
         "deprecated": false,
-        "description": "返回市场24小时内实时统计的币种聚合爆仓数据以及最大的爆仓 <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回市场24小时内实时统计的币种聚合爆仓数据以及最大的爆仓 <font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "爆仓数据"
         ],
@@ -248,9 +248,9 @@
     },
     "/api/liquidation/aggregated-history": {
       "get": {
-        "summary": "币种爆仓聚合历史(套餐1)",
+        "summary": "币种爆仓聚合历史(API等级1)",
         "deprecated": false,
-        "description": "币种爆仓聚合历史( <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "币种爆仓聚合历史( <font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "爆仓数据"
         ],
@@ -446,9 +446,9 @@
     },
     "/api/liquidation/history": {
       "get": {
-        "summary": "交易对爆仓统计历史(套餐1)",
+        "summary": "交易对爆仓统计历史(API等级1)",
         "deprecated": false,
-        "description": "返回交易对爆仓统计历史  <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回交易对爆仓统计历史  <font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "爆仓数据"
         ],
@@ -657,9 +657,9 @@
     },
     "/api/liquidation/orders": {
       "get": {
-        "summary": "爆仓订单(套餐3)",
+        "summary": "爆仓订单(API等级3)",
         "deprecated": false,
-        "description": "Query historical liquidation orders based on the conditions you set  <font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "Query historical liquidation orders based on the conditions you set  <font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "爆仓数据"
         ],
@@ -811,9 +811,9 @@
     },
     "/api/liqMap/getLiqMap": {
       "get": {
-        "summary": "清算地图 (套餐4)",
+        "summary": "清算地图 (API等级4)",
         "deprecated": false,
-        "description": "根据实时市价订单计算的不同杠杆的清算强度  <font color = 'red'> # Required API Level: VIP4 and Above</font>",
+        "description": "根据实时市价订单计算的不同杠杆的清算强度  <font color = 'red'> # Required API Level: API4 and Above</font>",
         "tags": [
           "爆仓数据"
         ],
@@ -879,9 +879,9 @@
     },
     "/api/liqMap/getAggLiqMap": {
       "get": {
-        "summary": "聚合清算地图 (套餐4)",
+        "summary": "聚合清算地图 (API等级4)",
         "deprecated": false,
-        "description": "按币种聚合的清算地图  <font color = 'red'> # Required API Level: VIP4 and Above</font>",
+        "description": "按币种聚合的清算地图  <font color = 'red'> # Required API Level: API4 and Above</font>",
         "tags": [
           "爆仓数据"
         ],
@@ -937,9 +937,9 @@
     },
     "/api/liqMap/getLiqHeatMap": {
       "get": {
-        "summary": "清算热力图 (套餐4)",
+        "summary": "清算热力图 (API等级4)",
         "deprecated": false,
-        "description": "根据实时市价订单和交易所提供的参数计算的强酸热力图  <font color = 'red'> # Required API Level: VIP4 and Above</font>",
+        "description": "根据实时市价订单和交易所提供的参数计算的强酸热力图  <font color = 'red'> # Required API Level: API4 and Above</font>",
         "tags": [
           "爆仓数据"
         ],
@@ -1116,9 +1116,9 @@
     },
     "/api/liqMap/getLiqHeatMapSymbol": {
       "get": {
-        "summary": "清算热图支持的交易对 (套餐1)",
+        "summary": "清算热图支持的交易对 (API等级1)",
         "deprecated": false,
-        "description": "Trading pairs that support liquidation heatmaps <font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "Trading pairs that support liquidation heatmaps <font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "爆仓数据"
         ],

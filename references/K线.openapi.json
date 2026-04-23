@@ -13,9 +13,9 @@
   "paths": {
     "/api/kline/lists": {
       "get": {
-        "summary": "k线接口(套餐1)",
+        "summary": "k线接口(API等级1)",
         "deprecated": false,
-        "description": "返回各个交易所的历史K线\n</br><font color = 'red'> #需要api等级： VIP1及以上</font>",
+        "description": "返回各个交易所的历史K线\n</br><font color = 'red'> #需要API等级： API1及以上</font>",
         "tags": [
           "K线"
         ],

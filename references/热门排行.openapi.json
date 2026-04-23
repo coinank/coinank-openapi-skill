@@ -13,7 +13,7 @@
   "paths": {
     "/api/instruments/oiVsMarketCap": {
       "get": {
-        "summary": "持仓/市值（套餐2）",
+        "summary": "持仓/市值（API等级2）",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -129,7 +129,7 @@
     },
     "/api/instruments/visualScreener": {
       "get": {
-        "summary": "视觉筛选器(套餐2)",
+        "summary": "视觉筛选器(API等级2)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -214,9 +214,9 @@
     },
     "/api/instruments/longShortRank": {
       "get": {
-        "summary": "多空持仓人数比排行榜 （套餐2) ",
+        "summary": "多空持仓人数比排行榜 （API等级2) ",
         "deprecated": false,
-        "description": "返回全市场交易量变化排行榜\n</br><font color = 'red'> # Required API Level: VIP2 and Above</font>",
+        "description": "返回全市场交易量变化排行榜\n</br><font color = 'red'> # Required API Level: API2 and Above</font>",
         "tags": [
           "热门排行"
         ],
@@ -387,9 +387,9 @@
     },
     "/api/instruments/oiRank": {
       "get": {
-        "summary": "持仓排行榜 （套餐2)",
+        "summary": "持仓排行榜 （API等级2)",
         "deprecated": false,
-        "description": "返回全市场的持仓排行\n</br><font color = 'red'> # Required API Level: VIP2 and Above</font>",
+        "description": "返回全市场的持仓排行\n</br><font color = 'red'> # Required API Level: API2 and Above</font>",
         "tags": [
           "热门排行"
         ],
@@ -1562,9 +1562,9 @@
     },
     "/api/trades/count": {
       "get": {
-        "summary": "交易笔数排行榜 （套餐2)",
+        "summary": "交易笔数排行榜 （API等级2)",
         "deprecated": false,
-        "description": "返回实时的币种交易笔数排行\n</br><font color = 'red'> # Required API Level: VIP2 and Above</font>",
+        "description": "返回实时的币种交易笔数排行\n</br><font color = 'red'> # Required API Level: API2 and Above</font>",
         "tags": [
           "热门排行"
         ],
@@ -1733,9 +1733,9 @@
     },
     "/api/instruments/liquidationRank": {
       "get": {
-        "summary": "爆仓排行榜（套餐2)",
+        "summary": "爆仓排行榜（API等级2)",
         "deprecated": false,
-        "description": "返回全合约市场爆仓排行\n</br><font color = 'red'> # Required API Level: VIP2 and Above</font>",
+        "description": "返回全合约市场爆仓排行\n</br><font color = 'red'> # Required API Level: API2 and Above</font>",
         "tags": [
           "热门排行"
         ],
@@ -2768,9 +2768,9 @@
     },
     "/api/instruments/priceRank": {
       "get": {
-        "summary": "价格变化排行榜（套餐2)",
+        "summary": "价格变化排行榜（API等级2)",
         "deprecated": false,
-        "description": "返回全市场的价格变化排行\n</br><font color = 'red'> # Required API Level: VIP2 and Above</font>",
+        "description": "返回全市场的价格变化排行\n</br><font color = 'red'> # Required API Level: API2 and Above</font>",
         "tags": [
           "热门排行"
         ],
@@ -2949,9 +2949,9 @@
     },
     "/api/instruments/volumeRank": {
       "get": {
-        "summary": "交易量变化排行榜 （套餐2)",
+        "summary": "交易量变化排行榜 （API等级2)",
         "deprecated": false,
-        "description": "返回全市场交易量变化排行榜\n</br><font color = 'red'> # Required API Level: VIP2 and Above</font>",
+        "description": "返回全市场交易量变化排行榜\n</br><font color = 'red'> # Required API Level: API2 and Above</font>",
         "tags": [
           "热门排行"
         ],

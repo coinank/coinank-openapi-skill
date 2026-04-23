@@ -13,9 +13,9 @@
   "paths": {
     "/api/instruments/getLastPrice": {
       "get": {
-        "summary": "获取交易对实时价格(套餐1)",
+        "summary": "获取交易对实时价格(API等级1)",
         "deprecated": false,
-        "description": "获取交易对的实时价格。<font color = 'red'> # 需要api等级:VIP1及以上</font>",
+        "description": "获取交易对的实时价格。<font color = 'red'> # 需要API等级:API1及以上</font>",
         "tags": [
           "币种和交易对"
         ],
@@ -81,9 +81,9 @@
     },
     "/api/instruments/getCoinMarketCap": {
       "get": {
-        "summary": "获取币种市值(套餐1)",
+        "summary": "获取币种市值(API等级1)",
         "deprecated": false,
-        "description": "获取币种市值。<font color = 'red'> # 需要api等级:VIP1及以上</font>",
+        "description": "获取币种市值。<font color = 'red'> # 需要API等级:API1及以上</font>",
         "tags": [
           "币种和交易对"
         ],
@@ -129,9 +129,9 @@
     },
     "/api/baseCoin/list": {
       "get": {
-        "summary": "支持的币种(套餐1)",
+        "summary": "支持的币种(API等级1)",
         "deprecated": false,
-        "description": "返回所有支持的币种，支持现货和合约 <font color = 'red'> # 需要api等级:VIP1及以上</font>",
+        "description": "返回所有支持的币种，支持现货和合约 <font color = 'red'> # 需要API等级:API1及以上</font>",
         "tags": [
           "币种和交易对"
         ],
@@ -578,9 +578,9 @@
     },
     "/api/baseCoin/symbols": {
       "get": {
-        "summary": " 支持的交易对(套餐1)",
+        "summary": " 支持的交易对(API等级1)",
         "deprecated": false,
-        "description": "返回所有支持的交易对，支持合约和交易所，支持按交易所过滤 <font color = 'red'> # 需要api等级:VIP1及以上</font>\n",
+        "description": "返回所有支持的交易对，支持合约和交易所，支持按交易所过滤 <font color = 'red'> # 需要API等级:API1及以上</font>\n",
         "tags": [
           "币种和交易对"
         ],

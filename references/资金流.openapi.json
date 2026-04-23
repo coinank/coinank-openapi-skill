@@ -13,9 +13,9 @@
   "paths": {
     "/api/fund/fundReal": {
       "get": {
-        "summary": "实时资金流入流出（套餐3)",
+        "summary": "实时资金流入流出（API等级3)",
         "deprecated": false,
-        "description": "返回币种实时资金流入流出\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回币种实时资金流入流出\n<font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "资金流"
         ],
@@ -226,9 +226,9 @@
     },
     "/api/fund/getFundHisList": {
       "get": {
-        "summary": "历史资金流入流出 （套餐3)",
+        "summary": "历史资金流入流出 （API等级3)",
         "deprecated": false,
-        "description": "返回币种历史资金流入流出\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回币种历史资金流入流出\n<font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "资金流"
         ],

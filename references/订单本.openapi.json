@@ -13,9 +13,9 @@
   "paths": {
     "/api/orderBook/v2/bySymbol": {
       "get": {
-        "summary": "交易对差值列表  (套餐3)",
+        "summary": "交易对差值列表  (API等级3)",
         "deprecated": false,
-        "description": "返回订单簿上距离价格固定范围的买单卖单的差值.</br>\n支持的范围: 0.0025  0.005   0.0075   0.01  0.03  0.05  0.1</br>\nproductType:SWAP  SPOT</br>\next为当前时刻的实时数据</br>\n</br><font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回订单簿上距离价格固定范围的买单卖单的差值.</br>\n支持的范围: 0.0025  0.005   0.0075   0.01  0.03  0.05  0.1</br>\nproductType:SWAP  SPOT</br>\next为当前时刻的实时数据</br>\n</br><font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "订单本"
         ],
@@ -163,7 +163,7 @@
     },
     "/api/orderBook/v2/byExchange": {
       "get": {
-        "summary": "交易所聚合差值列表  (套餐3)",
+        "summary": "交易所聚合差值列表  (API等级3)",
         "deprecated": false,
         "description": "返回按交易所聚合的订单簿买单卖单差值</br>\ntype: 0.0025  0.005   0.0075   0.01  0.03  0.05  0.1</br>\nproductType:SWAP  SPOT</br>\next为当前时刻的实时数据</br>",
         "tags": [
@@ -313,9 +313,9 @@
     },
     "/api/orderBook/getHeatMap": {
       "get": {
-        "summary": "挂单流动性热力图  (套餐4)",
+        "summary": "挂单流动性热力图  (API等级4)",
         "deprecated": false,
-        "description": "根据时间定时取快照而算出的流动性热图 \n</br><font color = 'red'> # Required API Level: VIP4 and Above</font>",
+        "description": "根据时间定时取快照而算出的流动性热图 \n</br><font color = 'red'> # Required API Level: API4 and Above</font>",
         "tags": [
           "订单本"
         ],

@@ -13,9 +13,9 @@
   "paths": {
     "/api/netPositions/getNetPositions": {
       "get": {
-        "summary": "净多头和净空头 (套餐3)",
+        "summary": "净多头和净空头 (API等级3)",
         "deprecated": false,
-        "description": "返回固定周期内的多头和空头持仓变化，需要从一个时间点开始累计\n</br><font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回固定周期内的多头和空头持仓变化，需要从一个时间点开始累计\n</br><font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "净多头和净空头"
         ],

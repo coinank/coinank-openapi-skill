@@ -13,7 +13,7 @@
   "paths": {
     "/api/hyper/topPosition": {
       "get": {
-        "summary": "鲸鱼持仓列表（套餐2）",
+        "summary": "鲸鱼持仓列表（API等级2）",
         "deprecated": false,
         "description": "返回大于100万持仓的仓位列表",
         "tags": [
@@ -260,7 +260,7 @@
     },
     "/api/hyper/topAction": {
       "get": {
-        "summary": "鲸鱼最新动态（套餐2）",
+        "summary": "鲸鱼最新动态（API等级2）",
         "deprecated": false,
         "description": "返回最近的20条 平仓或者开仓记录，按时间排序",
         "tags": [

@@ -13,9 +13,9 @@
   "paths": {
     "/api/longshort/buySell": {
       "get": {
-        "summary": "币种主动买卖多空比 （套餐3)",
+        "summary": "币种主动买卖多空比 （API等级3)",
         "deprecated": false,
-        "description": "返回一段时间内的币种聚合的主动买卖比值\n</br><font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回一段时间内的币种聚合的主动买卖比值\n</br><font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "多空比"
         ],
@@ -1654,9 +1654,9 @@
     },
     "/api/longshort/realtimeAll": {
       "get": {
-        "summary": "交易所实时多空比(套餐1)",
+        "summary": "交易所实时多空比(API等级1)",
         "deprecated": false,
-        "description": "返回根据交易所聚合统计的多空比.\n</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回根据交易所聚合统计的多空比.\n</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "多空比"
         ],
@@ -1754,9 +1754,9 @@
     },
     "/api/longshort/person": {
       "get": {
-        "summary": "多空持仓人数比(套餐1)",
+        "summary": "多空持仓人数比(API等级1)",
         "deprecated": false,
-        "description": "返回交易对的多空持仓人数比  ，支持的交易所有Binance  OKX  Bybit\n</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回交易对的多空持仓人数比  ，支持的交易所有Binance  OKX  Bybit\n</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "多空比"
         ],
@@ -1907,9 +1907,9 @@
     },
     "/api/longshort/position": {
       "get": {
-        "summary": "大户多空比(持仓量) (套餐1)",
+        "summary": "大户多空比(持仓量) (API等级1)",
         "deprecated": false,
-        "description": "大户多空持仓比（持仓量）\n</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "大户多空持仓比（持仓量）\n</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "多空比"
         ],
@@ -2030,9 +2030,9 @@
     },
     "/api/longshort/account": {
       "get": {
-        "summary": "大户多空比 (账户数)  (套餐1)",
+        "summary": "大户多空比 (账户数)  (API等级1)",
         "deprecated": false,
-        "description": "Top Trader Long/Short Ratio (Accounts)\n</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "Top Trader Long/Short Ratio (Accounts)\n</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "多空比"
         ],
@@ -2153,9 +2153,9 @@
     },
     "/api/longshort/kline": {
       "get": {
-        "summary": "多空比K线  (套餐1)",
+        "summary": "多空比K线  (API等级1)",
         "deprecated": false,
-        "description": "</br>\ntype:\n  longShortPerson ：多空持仓人数比\n  longShortPosition：大户持仓多空比\n  longShortAccount ：大户账户数多空比\n</br>\n</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "</br>\ntype:\n  longShortPerson ：多空持仓人数比\n  longShortPosition：大户持仓多空比\n  longShortAccount ：大户账户数多空比\n</br>\n</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "多空比"
         ],
