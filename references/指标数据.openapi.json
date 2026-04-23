@@ -13,7 +13,7 @@
   "paths": {
     "/api/indicator/getBtcMultiplier": {
       "get": {
-        "summary": "两年MA乘数(套餐1)",
+        "summary": "两年MA乘数(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -109,7 +109,7 @@
     },
     "/api/indicator/getCnnEntity": {
       "get": {
-        "summary": "贪婪恐惧指数(套餐1)",
+        "summary": "贪婪恐惧指数(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -197,7 +197,7 @@
     },
     "/api/indicator/getAhr999": {
       "get": {
-        "summary": "ahr999指标(套餐1)",
+        "summary": "ahr999指标(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -293,7 +293,7 @@
     },
     "/api/indicator/getMarketCapRank": {
       "get": {
-        "summary": "BTC市值占比(套餐1)",
+        "summary": "BTC市值占比(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -408,7 +408,7 @@
     },
     "/api/indicator/getPuellMultiple": {
       "get": {
-        "summary": "普尔系数(套餐1)",
+        "summary": "普尔系数(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -503,7 +503,7 @@
     },
     "/api/indicator/getBtcPi": {
       "get": {
-        "summary": "pi循环(套餐1)",
+        "summary": "pi循环(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -599,7 +599,7 @@
     },
     "/api/indicator/getMovingAvgHeatmap": {
       "get": {
-        "summary": "200周移动热力图(套餐1)",
+        "summary": "200周移动热力图(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -705,7 +705,7 @@
     },
     "/api/indicator/getGrayscaleOpenInterest": {
       "get": {
-        "summary": "灰度持仓(套餐1)",
+        "summary": "灰度持仓(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -810,7 +810,7 @@
     },
     "/api/indicator/getAltcoinSeason": {
       "get": {
-        "summary": "山寨指数(套餐1)",
+        "summary": "山寨指数(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -872,7 +872,7 @@
     },
     "/api/indicator/index/charts": {
       "get": {
-        "summary": "特色指标数据(套餐1)",
+        "summary": "特色指标数据(API等级1)",
         "deprecated": false,
         "description": "# 特色数据指标\n1. 彩虹图V2：bitcoin-rainbow-v2\n2. 一年+Hold波：/charts/1-year-hodl-wave/\n3. hold波：/charts/hodl-waves/\n4. MVRV Z-Score ：/charts/mvrv-zscore/\n5. 未实现净损益 (NUPL)：/charts/relative-unrealized-prof/\n6. 比特币价格预测：/charts/bitcoin-price-prediction/\n7. 准备金风险：/charts/reserve-risk/\n8. RHODL 比率：/charts/rhodl-ratio/\n9. 鲸影：/charts/whale-shadows/\n\n\n",
         "tags": [

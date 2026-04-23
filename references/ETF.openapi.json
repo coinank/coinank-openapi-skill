@@ -13,7 +13,7 @@
   "paths": {
     "/api/etf/getUsBtcEtf": {
       "get": {
-        "summary": "美股BTCETF(套餐1)",
+        "summary": "美股BTCETF(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -204,7 +204,7 @@
     },
     "/api/etf/getUsEthEtf": {
       "get": {
-        "summary": "美股ETHETF(套餐1)",
+        "summary": "美股ETHETF(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -395,7 +395,7 @@
     },
     "/api/etf/usBtcInflow": {
       "get": {
-        "summary": "美股BTC ETF净流入流出(套餐1)",
+        "summary": "美股BTC ETF净流入流出(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -493,7 +493,7 @@
     },
     "/api/etf/usEthInflow": {
       "get": {
-        "summary": "美股ETH ETF净流入流出(套餐1)",
+        "summary": "美股ETH ETF净流入流出(API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -591,7 +591,7 @@
     },
     "/api/etf/hkEtfInflow": {
       "get": {
-        "summary": "港股ETH ETF净流入流出 (套餐1)",
+        "summary": "港股ETH ETF净流入流出 (API等级1)",
         "deprecated": false,
         "description": "",
         "tags": [

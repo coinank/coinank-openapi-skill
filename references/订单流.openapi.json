@@ -13,9 +13,9 @@
   "paths": {
     "/api/orderFlow/lists": {
       "get": {
-        "summary": "订单流列表 (套餐3)",
+        "summary": "订单流列表 (API等级3)",
         "deprecated": false,
-        "description": "返回时间周期内的订单流列表\n</br><font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回时间周期内的订单流列表\n</br><font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "订单流"
         ],

@@ -42,7 +42,7 @@ CoinAnk OpenAPI Skill is an [OpenClaw](https://github.com/openclaw/openclaw) Ski
 
 - All **59 endpoints** tested and verified
 - All requests are **GET** — simple and efficient
-- Supports **VIP1 ~ VIP4** tiered access levels
+- Supports **API1 ~ API4** access levels
 
 </td></tr>
 </table>
@@ -61,26 +61,26 @@ CoinAnk OpenAPI Skill is an [OpenClaw](https://github.com/openclaw/openclaw) Ski
 
 **Market & Price**
 
-| Category | Endpoints | Tier |
+| Category | Endpoints | API Level |
 |:--|:--:|:--:|
-| K-Lines | 1 | VIP1 |
-| ETF | 5 | VIP1 |
-| Coins & Pairs | 4 | VIP1 |
-| Indicators | 10 | VIP1 |
-| News & Flash | 2 | VIP2 |
+| K-Lines | 1 | API1 |
+| ETF | 5 | API1 |
+| Coins & Pairs | 4 | API1 |
+| Indicators | 10 | API1 |
+| News & Flash | 2 | API2 |
 
 </td>
 <td width="50%">
 
 **Derivatives Depth**
 
-| Category | Endpoints | Tier |
+| Category | Endpoints | API Level |
 |:--|:--:|:--:|
-| Open Interest | 7 | VIP1 |
-| Funding Rates | 7 | VIP1 |
-| Long/Short Ratio | 6 | VIP1 |
-| Liquidation | 8 | VIP1 |
-| RSI Screener | 1 | VIP2 |
+| Open Interest | 7 | API1 |
+| Funding Rates | 7 | API1 |
+| Long/Short Ratio | 6 | API1 |
+| Liquidation | 8 | API1 |
+| RSI Screener | 1 | API2 |
 
 </td>
 </tr>
@@ -89,24 +89,24 @@ CoinAnk OpenAPI Skill is an [OpenClaw](https://github.com/openclaw/openclaw) Ski
 
 **Institutional-Grade**
 
-| Category | Endpoints | Tier |
+| Category | Endpoints | API Level |
 |:--|:--:|:--:|
-| Large Orders | 2 | VIP3 |
-| Market Order Stats | 8 | VIP3 |
-| Order Book | 3 | VIP3 |
-| Fund Flow | 2 | VIP3 |
-| Order Flow | 1 | VIP3 |
-| Net Long/Short | 1 | VIP3 |
+| Large Orders | 2 | API3 |
+| Market Order Stats | 8 | API3 |
+| Order Book | 3 | API3 |
+| Fund Flow | 2 | API3 |
+| Order Flow | 1 | API3 |
+| Net Long/Short | 1 | API3 |
 
 </td>
 <td width="50%">
 
 **On-Chain & Whales**
 
-| Category | Endpoints | Tier |
+| Category | Endpoints | API Level |
 |:--|:--:|:--:|
-| HyperLiquid Whales | 2 | VIP2 |
-| Trending Rankings | 8 | VIP2 |
+| HyperLiquid Whales | 2 | API2 |
+| Trending Rankings | 8 | API2 |
 
 </td>
 </tr>
@@ -199,9 +199,9 @@ NOW=$(python3 -c "import time; print(int(time.time()*1000))")
 NOW=$(date +%s%3N)  # Don't use this!
 ```
 
-### 2. VIP Tier System
+### 2. API Level System
 
-Endpoints are divided into VIP1–VIP4 tiers. Higher tiers unlock more endpoints. Each endpoint indicates its minimum required tier.
+Endpoints are divided into API1–API4 levels. Higher levels unlock more endpoints. Each endpoint indicates its minimum required API level.
 
 ### 3. `exchanges` Parameter Must Be Passed
 
@@ -222,7 +222,7 @@ Timestamps in the `references/` directory JSON files are historical examples onl
 ---
 
 <details>
-<summary><strong>1. K-Lines</strong> — 1 endpoint · VIP1</summary>
+<summary><strong>1. K-Lines</strong> — 1 endpoint · API1</summary>
 
 <br />
 
@@ -247,7 +247,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>2. ETF</strong> — 5 endpoints · VIP1</summary>
+<summary><strong>2. ETF</strong> — 5 endpoints · API1</summary>
 
 <br />
 
@@ -279,7 +279,7 @@ curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/etf/hkEtfInflow"
 ---
 
 <details>
-<summary><strong>3. HyperLiquid Whales</strong> — 2 endpoints · VIP2</summary>
+<summary><strong>3. HyperLiquid Whales</strong> — 2 endpoints · API2</summary>
 
 <br />
 
@@ -307,7 +307,7 @@ curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/hyper/topAction"
 ---
 
 <details>
-<summary><strong>4. Net Long & Short</strong> — 1 endpoint · VIP3</summary>
+<summary><strong>4. Net Long & Short</strong> — 1 endpoint · API3</summary>
 
 <br />
 
@@ -331,7 +331,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>5. Large Orders</strong> — 2 endpoints · VIP3</summary>
+<summary><strong>5. Large Orders</strong> — 2 endpoints · API3</summary>
 
 <br />
 
@@ -371,7 +371,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>6. Coins & Trading Pairs</strong> — 4 endpoints · VIP1</summary>
+<summary><strong>6. Coins & Trading Pairs</strong> — 4 endpoints · API1</summary>
 
 <br />
 
@@ -421,12 +421,12 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>7. Long/Short Ratio</strong> — 6 endpoints · VIP1</summary>
+<summary><strong>7. Long/Short Ratio</strong> — 6 endpoints · API1</summary>
 
 <br />
 
 #### `GET /api/longshort/buySell` — Global Long/Short Buy/Sell Ratio
-**Tier: VIP3**
+**API Level: API3**
 
 | Param | Required | Type | Description | Example |
 |-------|----------|------|-------------|---------|
@@ -487,7 +487,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>8. Market Order Stats</strong> — 8 endpoints · VIP3</summary>
+<summary><strong>8. Market Order Stats</strong> — 8 endpoints · API3</summary>
 
 <br />
 
@@ -547,7 +547,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>9. News & Flash</strong> — 2 endpoints · VIP2</summary>
+<summary><strong>9. News & Flash</strong> — 2 endpoints · API2</summary>
 
 <br />
 
@@ -581,7 +581,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>10. Indicators</strong> — 10 endpoints · VIP1</summary>
+<summary><strong>10. Indicators</strong> — 10 endpoints · API1</summary>
 
 <br />
 
@@ -626,7 +626,7 @@ curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/index/char
 ---
 
 <details>
-<summary><strong>11. Open Interest</strong> — 7 endpoints · VIP1</summary>
+<summary><strong>11. Open Interest</strong> — 7 endpoints · API1</summary>
 
 <br />
 
@@ -684,7 +684,7 @@ curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/index/char
 | `baseCoin` | Yes | string | Coin | `BTC` |
 
 #### `GET /api/instruments/oiVsMc` — Historical OI/Market Cap Ratio
-**Tier: VIP2**
+**API Level: API2**
 
 | Param | Required | Type | Description | Example |
 |-------|----------|------|-------------|---------|
@@ -709,7 +709,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>12. Trending Rankings</strong> — 8 endpoints · VIP2</summary>
+<summary><strong>12. Trending Rankings</strong> — 8 endpoints · API2</summary>
 
 <br />
 
@@ -787,7 +787,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>13. Liquidation</strong> — 8 endpoints · VIP1</summary>
+<summary><strong>13. Liquidation</strong> — 8 endpoints · API1</summary>
 
 <br />
 
@@ -817,7 +817,7 @@ curl -H "apikey: $APIKEY" \
 | `size` | Yes | integer | Count | `10` |
 
 #### `GET /api/liquidation/orders` — Liquidation Orders
-**Tier: VIP3**
+**API Level: API3**
 
 | Param | Required | Type | Description | Example |
 |-------|----------|------|-------------|---------|
@@ -828,7 +828,7 @@ curl -H "apikey: $APIKEY" \
 | `endTime` | Yes | number | Millisecond timestamp | `current timestamp` |
 
 #### `GET /api/liqMap/getLiqMap` — Liquidation Map
-**Tier: VIP4**
+**API Level: API4**
 
 | Param | Required | Type | Description | Example |
 |-------|----------|------|-------------|---------|
@@ -837,7 +837,7 @@ curl -H "apikey: $APIKEY" \
 | `interval` | Yes | string | Period | `1d` |
 
 #### `GET /api/liqMap/getAggLiqMap` — Aggregated Liquidation Map
-**Tier: VIP4**
+**API Level: API4**
 
 | Param | Required | Type | Description | Example |
 |-------|----------|------|-------------|---------|
@@ -845,7 +845,7 @@ curl -H "apikey: $APIKEY" \
 | `interval` | Yes | string | Period | `1d` |
 
 #### `GET /api/liqMap/getLiqHeatMap` — Liquidation Heatmap
-**Tier: VIP4**
+**API Level: API4**
 
 | Param | Required | Type | Description | Example |
 |-------|----------|------|-------------|---------|
@@ -854,7 +854,7 @@ curl -H "apikey: $APIKEY" \
 | `interval` | Yes | string | Period | `1d` |
 
 #### `GET /api/liqMap/getLiqHeatMapSymbol` — Supported Heatmap Symbols
-**Tier: VIP1 | No parameters required**
+**API Level: API1 | No parameters required**
 
 ```bash
 curl -H "apikey: $APIKEY" \
@@ -872,7 +872,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>14. Order Book</strong> — 3 endpoints · VIP3</summary>
+<summary><strong>14. Order Book</strong> — 3 endpoints · API3</summary>
 
 <br />
 
@@ -901,7 +901,7 @@ curl -H "apikey: $APIKEY" \
 | `type` | Yes | string | Price precision ratio | `0.01` |
 
 #### `GET /api/orderBook/getHeatMap` — Order Book Liquidity Heatmap
-**Tier: VIP4**
+**API Level: API4**
 
 > The `endTime` parameter is validated by the CDN cache layer and must be a current millisecond timestamp.
 
@@ -926,7 +926,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>15. Fund Flow</strong> — 2 endpoints · VIP3</summary>
+<summary><strong>15. Fund Flow</strong> — 2 endpoints · API3</summary>
 
 <br />
 
@@ -964,7 +964,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>16. Order Flow</strong> — 1 endpoint · VIP3</summary>
+<summary><strong>16. Order Flow</strong> — 1 endpoint · API3</summary>
 
 <br />
 
@@ -990,7 +990,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>17. Funding Rates</strong> — 7 endpoints · VIP1</summary>
+<summary><strong>17. Funding Rates</strong> — 7 endpoints · API1</summary>
 
 <br />
 
@@ -1063,7 +1063,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>18. RSI Screener</strong> — 1 endpoint · VIP2</summary>
+<summary><strong>18. RSI Screener</strong> — 1 endpoint · API2</summary>
 
 <br />
 

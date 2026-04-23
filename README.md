@@ -42,7 +42,7 @@ CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw)
 
 - 全部 **59 个接口**经过实测验证
 - 所有请求均为 **GET**，简洁高效
-- 支持 **VIP1 ~ VIP4** 分级权限体系
+- 支持 **API1 ~ API4** 分级权限体系
 
 </td></tr>
 </table>
@@ -61,26 +61,26 @@ CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw)
 
 **行情与价格**
 
-| 分类 | 接口数 | 套餐 |
+| 分类 | 接口数 | API等级 |
 |:--|:--:|:--:|
-| K 线 | 1 | VIP1 |
-| ETF | 5 | VIP1 |
-| 币种和交易对 | 4 | VIP1 |
-| 指标数据 | 10 | VIP1 |
-| 新闻快讯 | 2 | VIP2 |
+| K 线 | 1 | API1 |
+| ETF | 5 | API1 |
+| 币种和交易对 | 4 | API1 |
+| 指标数据 | 10 | API1 |
+| 新闻快讯 | 2 | API2 |
 
 </td>
 <td width="50%">
 
 **衍生品深度**
 
-| 分类 | 接口数 | 套餐 |
+| 分类 | 接口数 | API等级 |
 |:--|:--:|:--:|
-| 未平仓合约 | 7 | VIP1 |
-| 资金费率 | 7 | VIP1 |
-| 多空比 | 6 | VIP1 |
-| 爆仓数据 | 8 | VIP1 |
-| RSI 选币器 | 1 | VIP2 |
+| 未平仓合约 | 7 | API1 |
+| 资金费率 | 7 | API1 |
+| 多空比 | 6 | API1 |
+| 爆仓数据 | 8 | API1 |
+| RSI 选币器 | 1 | API2 |
 
 </td>
 </tr>
@@ -89,24 +89,24 @@ CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw)
 
 **机构级数据**
 
-| 分类 | 接口数 | 套餐 |
+| 分类 | 接口数 | API等级 |
 |:--|:--:|:--:|
-| 大额订单 | 2 | VIP3 |
-| 市价单统计 | 8 | VIP3 |
-| 订单本 | 3 | VIP3 |
-| 资金流 | 2 | VIP3 |
-| 订单流 | 1 | VIP3 |
-| 净多头/净空头 | 1 | VIP3 |
+| 大额订单 | 2 | API3 |
+| 市价单统计 | 8 | API3 |
+| 订单本 | 3 | API3 |
+| 资金流 | 2 | API3 |
+| 订单流 | 1 | API3 |
+| 净多头/净空头 | 1 | API3 |
 
 </td>
 <td width="50%">
 
 **链上与鲸鱼**
 
-| 分类 | 接口数 | 套餐 |
+| 分类 | 接口数 | API等级 |
 |:--|:--:|:--:|
-| HyperLiquid 鲸鱼 | 2 | VIP2 |
-| 热门排行 | 8 | VIP2 |
+| HyperLiquid 鲸鱼 | 2 | API2 |
+| 热门排行 | 8 | API2 |
 
 </td>
 </tr>
@@ -199,9 +199,9 @@ NOW=$(python3 -c "import time; print(int(time.time()*1000))")
 NOW=$(date +%s%3N)  # 不要用这个！
 ```
 
-### 2. 套餐权限等级
+### 2. API 权限等级
 
-接口分为 VIP1～VIP4 四个级别，级别越高可访问的接口越多。每个接口标注了所需最低套餐。
+接口分为 API1～API4 四个级别，级别越高可访问的接口越多。每个接口标注了所需最低 API 等级。
 
 ### 3. `exchanges` 参数传空字符串
 
@@ -222,7 +222,7 @@ NOW=$(date +%s%3N)  # 不要用这个！
 ---
 
 <details>
-<summary><strong>1. K 线</strong> — 1 个接口 · VIP1</summary>
+<summary><strong>1. K 线</strong> — 1 个接口 · API1</summary>
 
 <br />
 
@@ -247,7 +247,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>2. ETF</strong> — 5 个接口 · VIP1</summary>
+<summary><strong>2. ETF</strong> — 5 个接口 · API1</summary>
 
 <br />
 
@@ -279,7 +279,7 @@ curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/etf/hkEtfInflow"
 ---
 
 <details>
-<summary><strong>3. HyperLiquid 鲸鱼</strong> — 2 个接口 · VIP2</summary>
+<summary><strong>3. HyperLiquid 鲸鱼</strong> — 2 个接口 · API2</summary>
 
 <br />
 
@@ -307,7 +307,7 @@ curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/hyper/topAction"
 ---
 
 <details>
-<summary><strong>4. 净多头和净空头</strong> — 1 个接口 · VIP3</summary>
+<summary><strong>4. 净多头和净空头</strong> — 1 个接口 · API3</summary>
 
 <br />
 
@@ -331,7 +331,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>5. 大额订单</strong> — 2 个接口 · VIP3</summary>
+<summary><strong>5. 大额订单</strong> — 2 个接口 · API3</summary>
 
 <br />
 
@@ -371,7 +371,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>6. 币种和交易对</strong> — 4 个接口 · VIP1</summary>
+<summary><strong>6. 币种和交易对</strong> — 4 个接口 · API1</summary>
 
 <br />
 
@@ -421,12 +421,12 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>7. 多空比</strong> — 6 个接口 · VIP1</summary>
+<summary><strong>7. 多空比</strong> — 6 个接口 · API1</summary>
 
 <br />
 
 #### `GET /api/longshort/buySell` — 全市场多空买卖比
-**套餐：VIP3**
+**API等级：API3**
 
 | 参数 | 必填 | 类型 | 说明 | 示例 |
 |------|------|------|------|------|
@@ -487,7 +487,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>8. 市价单统计指标</strong> — 8 个接口 · VIP3</summary>
+<summary><strong>8. 市价单统计指标</strong> — 8 个接口 · API3</summary>
 
 <br />
 
@@ -547,7 +547,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>9. 新闻快讯</strong> — 2 个接口 · VIP2</summary>
+<summary><strong>9. 新闻快讯</strong> — 2 个接口 · API2</summary>
 
 <br />
 
@@ -581,7 +581,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>10. 指标数据</strong> — 10 个接口 · VIP1</summary>
+<summary><strong>10. 指标数据</strong> — 10 个接口 · API1</summary>
 
 <br />
 
@@ -626,7 +626,7 @@ curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/index/char
 ---
 
 <details>
-<summary><strong>11. 未平仓合约</strong> — 7 个接口 · VIP1</summary>
+<summary><strong>11. 未平仓合约</strong> — 7 个接口 · API1</summary>
 
 <br />
 
@@ -684,7 +684,7 @@ curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/index/char
 | `baseCoin` | Yes | string | 币种 | `BTC` |
 
 #### `GET /api/instruments/oiVsMc` — 历史持仓市值比
-**套餐：VIP2**
+**API等级：API2**
 
 | 参数 | 必填 | 类型 | 说明 | 示例 |
 |------|------|------|------|------|
@@ -709,7 +709,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>12. 热门排行</strong> — 8 个接口 · VIP2</summary>
+<summary><strong>12. 热门排行</strong> — 8 个接口 · API2</summary>
 
 <br />
 
@@ -787,7 +787,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>13. 爆仓数据</strong> — 8 个接口 · VIP1</summary>
+<summary><strong>13. 爆仓数据</strong> — 8 个接口 · API1</summary>
 
 <br />
 
@@ -817,7 +817,7 @@ curl -H "apikey: $APIKEY" \
 | `size` | Yes | integer | 数量 | `10` |
 
 #### `GET /api/liquidation/orders` — 爆仓订单列表
-**套餐：VIP3**
+**API等级：API3**
 
 | 参数 | 必填 | 类型 | 说明 | 示例 |
 |------|------|------|------|------|
@@ -828,7 +828,7 @@ curl -H "apikey: $APIKEY" \
 | `endTime` | Yes | number | 毫秒时间戳 | `当前时间戳` |
 
 #### `GET /api/liqMap/getLiqMap` — 清算地图
-**套餐：VIP4**
+**API等级：API4**
 
 | 参数 | 必填 | 类型 | 说明 | 示例 |
 |------|------|------|------|------|
@@ -837,7 +837,7 @@ curl -H "apikey: $APIKEY" \
 | `interval` | Yes | string | 周期 | `1d` |
 
 #### `GET /api/liqMap/getAggLiqMap` — 聚合清算地图
-**套餐：VIP4**
+**API等级：API4**
 
 | 参数 | 必填 | 类型 | 说明 | 示例 |
 |------|------|------|------|------|
@@ -845,7 +845,7 @@ curl -H "apikey: $APIKEY" \
 | `interval` | Yes | string | 周期 | `1d` |
 
 #### `GET /api/liqMap/getLiqHeatMap` — 清算热力图
-**套餐：VIP4**
+**API等级：API4**
 
 | 参数 | 必填 | 类型 | 说明 | 示例 |
 |------|------|------|------|------|
@@ -854,7 +854,7 @@ curl -H "apikey: $APIKEY" \
 | `interval` | Yes | string | 周期 | `1d` |
 
 #### `GET /api/liqMap/getLiqHeatMapSymbol` — 清算热图支持的交易对列表
-**套餐：VIP1 | 无需参数**
+**API等级：API1 | 无需参数**
 
 ```bash
 curl -H "apikey: $APIKEY" \
@@ -872,7 +872,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>14. 订单本</strong> — 3 个接口 · VIP3</summary>
+<summary><strong>14. 订单本</strong> — 3 个接口 · API3</summary>
 
 <br />
 
@@ -901,7 +901,7 @@ curl -H "apikey: $APIKEY" \
 | `type` | Yes | string | 价格精度比例 | `0.01` |
 
 #### `GET /api/orderBook/getHeatMap` — 挂单流动性热力图
-**套餐：VIP4**
+**API等级：API4**
 
 > 此接口 `endTime` 参数会被 CDN 缓存层校验，必须传入当前毫秒时间戳。
 
@@ -926,7 +926,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>15. 资金流</strong> — 2 个接口 · VIP3</summary>
+<summary><strong>15. 资金流</strong> — 2 个接口 · API3</summary>
 
 <br />
 
@@ -964,7 +964,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>16. 订单流</strong> — 1 个接口 · VIP3</summary>
+<summary><strong>16. 订单流</strong> — 1 个接口 · API3</summary>
 
 <br />
 
@@ -990,7 +990,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>17. 资金费率</strong> — 7 个接口 · VIP1</summary>
+<summary><strong>17. 资金费率</strong> — 7 个接口 · API1</summary>
 
 <br />
 
@@ -1063,7 +1063,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>18. RSI 选币器</strong> — 1 个接口 · VIP2</summary>
+<summary><strong>18. RSI 选币器</strong> — 1 个接口 · API2</summary>
 
 <br />
 

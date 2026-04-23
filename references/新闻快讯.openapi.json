@@ -13,7 +13,7 @@
   "paths": {
     "/api/news/getNewsList": {
       "get": {
-        "summary": "新闻列表（套餐2）",
+        "summary": "新闻列表（API等级2）",
         "deprecated": false,
         "description": "",
         "tags": [
@@ -202,7 +202,7 @@
     },
     "/api/news/getNewsDetail": {
       "get": {
-        "summary": "新闻详情（套餐2）",
+        "summary": "新闻详情（API等级2）",
         "deprecated": false,
         "description": "",
         "tags": [

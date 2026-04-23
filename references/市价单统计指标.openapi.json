@@ -13,9 +13,9 @@
   "paths": {
     "/api/marketOrder/getCvd": {
       "get": {
-        "summary": "CVD Kline （套餐3)",
+        "summary": "CVD Kline （API等级3)",
         "deprecated": false,
-        "description": "返回时间周期内的cvd的变化值，需要从一个起始点不断累积</br></br>\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回时间周期内的cvd的变化值，需要从一个起始点不断累积</br></br>\n<font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "市价单统计指标"
         ],
@@ -235,9 +235,9 @@
     },
     "/api/marketOrder/getBuySellCount": {
       "get": {
-        "summary": "主动买卖笔数 （套餐3)",
+        "summary": "主动买卖笔数 （API等级3)",
         "deprecated": false,
-        "description": "返回时间周期内的主动买和主动卖的订单数量\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回时间周期内的主动买和主动卖的订单数量\n<font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "市价单统计指标"
         ],
@@ -453,9 +453,9 @@
     },
     "/api/marketOrder/getBuySellValue": {
       "get": {
-        "summary": "主动买卖额（套餐3)",
+        "summary": "主动买卖额（API等级3)",
         "deprecated": false,
-        "description": "返回时间周期内的主动买金额和主动卖金额\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回时间周期内的主动买金额和主动卖金额\n<font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "市价单统计指标"
         ],
@@ -671,9 +671,9 @@
     },
     "/api/marketOrder/getBuySellVolume": {
       "get": {
-        "summary": "主动买卖量 （套餐3)",
+        "summary": "主动买卖量 （API等级3)",
         "deprecated": false,
-        "description": "返回时间周期内的主动买和主动卖的交易量\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回时间周期内的主动买和主动卖的交易量\n<font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "市价单统计指标"
         ],
@@ -889,9 +889,9 @@
     },
     "/api/marketOrder/getAggCvd": {
       "get": {
-        "summary": "聚合CVD数据  （套餐3)",
+        "summary": "聚合CVD数据  （API等级3)",
         "deprecated": false,
-        "description": "返回时间周期内的聚合cvd的变化值，需要从一个起始点不断累积</br></br>\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回时间周期内的聚合cvd的变化值，需要从一个起始点不断累积</br></br>\n<font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "市价单统计指标"
         ],
@@ -1110,9 +1110,9 @@
     },
     "/api/marketOrder/getAggBuySellCount": {
       "get": {
-        "summary": "聚合主动买卖笔数 （套餐3)",
+        "summary": "聚合主动买卖笔数 （API等级3)",
         "deprecated": false,
-        "description": "返回时间周期内的主动买卖单笔数\n<font color = 'red'> # Required API Level: VIP3 and Above</font>\n",
+        "description": "返回时间周期内的主动买卖单笔数\n<font color = 'red'> # Required API Level: API3 and Above</font>\n",
         "tags": [
           "市价单统计指标"
         ],
@@ -1328,9 +1328,9 @@
     },
     "/api/marketOrder/getAggBuySellValue": {
       "get": {
-        "summary": "聚合主动买卖额 （套餐3)",
+        "summary": "聚合主动买卖额 （API等级3)",
         "deprecated": false,
-        "description": "返回时间周期内的聚合主动买卖额\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回时间周期内的聚合主动买卖额\n<font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "市价单统计指标"
         ],
@@ -1536,9 +1536,9 @@
     },
     "/api/marketOrder/getAggBuySellVolume": {
       "get": {
-        "summary": "聚合主动买卖量 （套餐3)",
+        "summary": "聚合主动买卖量 （API等级3)",
         "deprecated": false,
-        "description": "返回时间周期内的主动买卖交易量\n<font color = 'red'> # Required API Level: VIP3 and Above</font>",
+        "description": "返回时间周期内的主动买卖交易量\n<font color = 'red'> # Required API Level: API3 and Above</font>",
         "tags": [
           "市价单统计指标"
         ],

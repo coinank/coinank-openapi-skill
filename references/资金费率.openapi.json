@@ -13,9 +13,9 @@
   "paths": {
     "/api/fundingRate/hist": {
       "get": {
-        "summary": "历史结算资金费率 （套餐1)",
+        "summary": "历史结算资金费率 （API等级1)",
         "deprecated": false,
-        "description": "返回历史结算资金费率时间，8小时结算一次，\n</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回历史结算资金费率时间，8小时结算一次，\n</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "资金费率"
         ],
@@ -810,9 +810,9 @@
     },
     "/api/fundingRate/current": {
       "get": {
-        "summary": "实时资金费率（套餐1)",
+        "summary": "实时资金费率（API等级1)",
         "deprecated": false,
-        "description": "返回实时资金费率</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回实时资金费率</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "资金费率"
         ],
@@ -26770,9 +26770,9 @@
     },
     "/api/fundingRate/accumulated": {
       "get": {
-        "summary": "累计资金费率（套餐1)",
+        "summary": "累计资金费率（API等级1)",
         "deprecated": false,
-        "description": "返回累计的资金费率，由每次的结算资金费率求和而来, 有日，周，月，年等级别</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回累计的资金费率，由每次的结算资金费率求和而来, 有日，周，月，年等级别</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "资金费率"
         ],
@@ -27307,9 +27307,9 @@
     },
     "/api/fundingRate/indicator": {
       "get": {
-        "summary": "交易对资金费率历史（套餐1)",
+        "summary": "交易对资金费率历史（API等级1)",
         "deprecated": false,
-        "description": "根绝不同时间周期返回交易对历史资金费率数据\n</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "根绝不同时间周期返回交易对历史资金费率数据\n</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "资金费率"
         ],
@@ -27427,9 +27427,9 @@
     },
     "/api/fundingRate/kline": {
       "get": {
-        "summary": "交易对资金费率k线（套餐1)",
+        "summary": "交易对资金费率k线（API等级1)",
         "deprecated": false,
-        "description": "返回指定周期内的交易对的资金费率k线\n</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回指定周期内的交易对的资金费率k线\n</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "资金费率"
         ],
@@ -27638,9 +27638,9 @@
     },
     "/api/fundingRate/getWeiFr": {
       "get": {
-        "summary": "加权资金费率（套餐1)",
+        "summary": "加权资金费率（API等级1)",
         "deprecated": false,
-        "description": "返回时间周期内的加权资金费率.\n</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "返回时间周期内的加权资金费率.\n</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "资金费率"
         ],
@@ -27753,9 +27753,9 @@
     },
     "/api/fundingRate/frHeatmap": {
       "get": {
-        "summary": "资金费率热力图  （套餐3)",
+        "summary": "资金费率热力图  （API等级3)",
         "deprecated": false,
-        "description": "根据持仓和市值返回资金费率热力图\n</br><font color = 'red'> # Required API Level: VIP1 and Above</font>",
+        "description": "根据持仓和市值返回资金费率热力图\n</br><font color = 'red'> # Required API Level: API1 and Above</font>",
         "tags": [
           "资金费率"
         ],
