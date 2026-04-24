@@ -127,7 +127,7 @@ CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw)
 首次使用时，请直接按下面两种方式选择：
 
 - 如果你有 CoinAnk API 会员，请提供 `COINANK_API_KEY`
-- 如果你没有 CoinAnk API 会员，也可以在**已开启 x402 的接口**上使用按次调用与支付
+- 如果你没有 CoinAnk API 会员，也可以直接使用 x402 进行单次调用与支付
 
 
 ```bash
@@ -143,7 +143,7 @@ export COINANK_API_KEY="your_api_key_here"
 
 ### 模式二：x402 按次支付
 
-如果你没有 CoinAnk API 会员，但 CoinAnk 卖家侧已为某个接口开启 x402 支付，可以通过 OKX Onchain OS 完成单次调用支付：
+如果你没有 CoinAnk API 会员，也可以通过 OKX Onchain OS 完成单次调用支付：
 
 ```bash
 # 安装 OKX Onchain OS skills
@@ -189,7 +189,7 @@ OKX Buyer 侧接入参考：
 | 模式 | 适用场景 | 要求 |
 |------|------|------|
 | **API Key 直连** | 你已有 CoinAnk API 会员 | 设置 `COINANK_API_KEY` |
-| **x402 按次支付** | 你没有 CoinAnk API 会员，但希望为单次请求付费 | 安装 `okx/onchainos-skills`，并让 CoinAnk 卖家侧为该接口开启 x402 |
+| **x402 按次支付** | 你没有 CoinAnk API 会员，但希望为单次请求付费 | 安装 `okx/onchainos-skills` |
 
 ### 标准响应结构
 
@@ -212,7 +212,7 @@ OKX Buyer 侧接入参考：
 
 ### x402 响应说明
 
-如果某个接口已开启按次支付，服务端会先返回 `HTTP 402 Payment Required`，而不是直接返回业务成功数据。Agent 应先完成支付，再重放同一个请求。
+当 CoinAnk 对某个请求返回 `HTTP 402 Payment Required` 时，Agent 应先完成支付，再重放同一个请求，而不是把 402 当成最终业务结果。
 
 ### 示例请求说明
 
