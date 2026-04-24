@@ -23,7 +23,7 @@ metadata:
 This skill supports two access paths:
 
 1. **Direct mode** — use `COINANK_API_KEY` in the `apikey` request header.
-2. **Pay-per-call mode** — for seller-enabled x402 endpoints, send the original request first, wait for an HTTP `402 Payment Required` challenge, then complete a one-time payment and replay the same request.
+2. **Pay-per-call mode** — when CoinAnk returns an HTTP `402 Payment Required` challenge, complete a one-time payment and replay the same request.
 
 `COINANK_API_KEY` is optional. If it is not present, the skill must still attempt access discovery and use x402 when available.
 
@@ -32,7 +32,7 @@ This skill supports two access paths:
 When a new user starts using this skill, make the access options explicit:
 
 - If the user already has a CoinAnk API membership, tell them to provide `COINANK_API_KEY`.
-- If the user does not have a CoinAnk API membership, tell them they can still try x402 pay-per-call access for supported endpoints.
+- If the user does not have a CoinAnk API membership, tell them they can still try x402 pay-per-call access when CoinAnk returns a payment challenge.
 - Do not present API membership as the only way to use the skill.
 
 
@@ -69,7 +69,7 @@ When handling a user request, follow this sequence strictly:
 
 5. **Choose the access strategy**
    - If `COINANK_API_KEY` is present, prefer **direct mode** first.
-   - If `COINANK_API_KEY` is absent, use **discovery mode**: send the original request without an API key and let the server tell you whether the route is public, x402-enabled, or still membership-only.
+   - If `COINANK_API_KEY` is absent, use **discovery mode**: send the original request without an API key and let the server tell you whether the route is public, payable via x402, or still unavailable without membership.
 
 6. **Construct the original request**
    Build the exact request the user asked for.
@@ -88,7 +88,7 @@ When handling a user request, follow this sequence strictly:
    - **HTTP 402**: this route is payment-gated. Switch into the x402 payment flow.
    - **HTTP 2xx + business code `"-3"`**:
      - If an API key was supplied, treat it as invalid or insufficient and tell the user to fix their CoinAnk access.
-     - If no API key was supplied and no HTTP 402 challenge was returned, explain that this route is not currently exposed through x402 and still requires CoinAnk membership.
+     - If no API key was supplied and no HTTP 402 challenge was returned, explain that the request did not enter the x402 payment path and still cannot be completed without valid access.
    - **Other failures**: explain the failure clearly and include the key technical reason.
 
 9. **Run the x402 payment flow only after a real HTTP 402**
@@ -118,7 +118,7 @@ If the user asks for a wide analysis that would likely require multiple paid API
   Pass only the parameters defined by the selected schema. Some endpoints return empty results when extra parameters are added.
 
 - **Do not invent payment support**
-  An endpoint supports pay-per-call access only if the seller actually returns an HTTP `402 Payment Required` challenge.
+  Treat a request as x402-payable only when CoinAnk actually returns an HTTP `402 Payment Required` challenge.
 
 - **Do not bypass the challenge**
   Never attempt x402 signing unless you have already received a real 402 response for the exact request being made.
@@ -197,7 +197,7 @@ Inspect the actual response shape and unwrap nested `data` fields when necessary
 
 ## Notes on x402 Availability
 
-This skill can only use pay-per-call access for routes that are actually enabled by the CoinAnk seller integration. If the server does not return an HTTP 402 challenge, the skill must not pretend that x402 is available for that route.
+CoinAnk supports x402 pay-per-call access. In practice, the skill must still rely on the server's real HTTP behavior for each request. If a request does not return an HTTP 402 challenge, the skill must not fabricate a payment flow.
 
 
 ## Notes on OpenAPI Examples
