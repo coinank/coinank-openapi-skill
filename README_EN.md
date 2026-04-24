@@ -127,7 +127,7 @@ CoinAnk OpenAPI Skill is an [OpenClaw](https://github.com/openclaw/openclaw) Ski
 For first-time users, the access choice should be explicit:
 
 - If you have CoinAnk API membership, provide `COINANK_API_KEY`
-- If you do not have CoinAnk API membership, you can still use x402 for supported one-off paid calls
+- If you do not have CoinAnk API membership, you can still use x402 for one-off paid calls when CoinAnk returns a payment challenge
 
 
 ```bash
@@ -143,7 +143,7 @@ export COINANK_API_KEY="your_api_key_here"
 
 ### Mode 2: x402 Pay-per-call Access
 
-If you do not have a CoinAnk API membership, but the seller has enabled x402 for a given endpoint, you can pay for a single request through OKX Onchain OS:
+If you do not have a CoinAnk API membership, you can still pay for a single request through OKX Onchain OS:
 
 ```bash
 # Install OKX Onchain OS skills
@@ -189,7 +189,7 @@ Then query directly with natural language in your OpenClaw agent:
 | Mode | Use Case | Requirement |
 |------|----------|-------------|
 | **Direct API-key access** | You already have CoinAnk API membership | Set `COINANK_API_KEY` |
-| **x402 pay-per-call** | You do not have CoinAnk API membership but want to pay for a single call | Install `okx/onchainos-skills`, and the target CoinAnk endpoint must be x402-enabled on the seller side |
+| **x402 pay-per-call** | You do not have CoinAnk API membership but want to pay for a single call | Install `okx/onchainos-skills` |
 
 ### Standard Response
 
@@ -212,7 +212,7 @@ Then query directly with natural language in your OpenClaw agent:
 
 ### x402 Response Behavior
 
-If an endpoint is pay-per-call enabled, the server returns `HTTP 402 Payment Required` before any successful business response. The agent must complete payment first, then replay the same request.
+When CoinAnk returns `HTTP 402 Payment Required` for a request, the agent must complete payment first, then replay the same request instead of treating the 402 as the final business response.
 
 ### Example Request Notes
 
@@ -250,9 +250,9 @@ For aggregate market order endpoints (`getAggCvd`, `getAggBuySellCount`, etc.), 
 
 Timestamps in the `references/` directory JSON files are historical examples only. Always use real-time generated timestamps when making calls.
 
-### 5. x402 only works when the seller returns HTTP 402
+### 5. x402 starts when CoinAnk returns HTTP 402
 
-This skill must not assume that a route supports x402. The pay-per-call flow is available only when the CoinAnk server actually returns an `HTTP 402 Payment Required` challenge for the exact request.
+CoinAnk supports x402 pay-per-call access. The skill still starts the payment flow only when the server actually returns an `HTTP 402 Payment Required` challenge for the exact request.
 
 If there is no `COINANK_API_KEY` and the route returns only a business error such as `code: "-3"` without an `HTTP 402`, then that route is still membership-only and has not been exposed through x402.
 
