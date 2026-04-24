@@ -268,6 +268,15 @@ NOW=$(date +%s%3N)  # 不要用这个！
 
 这意味着 x402 是**按请求计费**，更适合单次查询、临时取数和低频调用，不适合在没有 API Key 的情况下直接做大规模多接口扇出分析。
 
+### 7. x402 签名 scheme 约束
+
+接入 x402 时，签名 scheme 必须和签名主体保持一致：
+
+- 如果使用 **EOA 钱包私钥** 签名，必须使用 **`exact`** scheme
+- 如果使用 **OKX 合约钱包 / OKX 钱包会话签名**，必须使用 **`aggr_deferred`** scheme
+
+不要混用这两条路径，否则会导致支付流程和签名语义不匹配。
+
 <div align="center">
 <br />
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="-----" />

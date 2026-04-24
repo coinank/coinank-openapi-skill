@@ -268,6 +268,15 @@ For a payment-gated request, the recommended flow is:
 
 x402 is therefore best suited for one-off queries, ad hoc lookups, and low-frequency access. It is not a good default for wide fan-out workflows when the user has no API key.
 
+### 7. x402 Signing Scheme Constraint
+
+The signing scheme must match the signer type:
+
+- If you sign with an **EOA private key**, you must use the **`exact`** scheme
+- If you sign with an **OKX contract wallet / OKX wallet session**, you must use the **`aggr_deferred`** scheme
+
+Do not mix these two paths, or the payment flow and signing semantics will be inconsistent.
+
 <div align="center">
 <br />
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="-----" />
