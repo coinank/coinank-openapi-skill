@@ -46,6 +46,19 @@ Pay-per-call mode depends on the OKX Onchain OS payment stack:
 If an x402 flow is needed but those skills are unavailable, instruct the user to install `okx/onchainos-skills` first.
 
 
+## x402 Signing Scheme Constraint
+
+When a payment challenge is signed, the signing scheme must match the signer type:
+
+- **EOA private key** → use the **`exact`** scheme.
+- **OKX contract wallet / OKX wallet session signing** → use the **`aggr_deferred`** scheme.
+
+Do not mix these paths:
+
+- Do not use `aggr_deferred` for EOA private-key signing.
+- Do not use `exact` for OKX contract-wallet signing.
+
+
 ## Operating Mode
 
 This skill must operate in an on-demand loading mode. Do not read every OpenAPI file by default. Load only the schema needed for the user's request.
@@ -96,6 +109,8 @@ When handling a user request, follow this sequence strictly:
    - Do not check wallet status before receiving HTTP 402.
    - Do not log in preemptively.
    - Do not charge speculatively.
+   - If signing with an **EOA private key**, use the **`exact`** scheme.
+   - If signing with an **OKX contract wallet / wallet session**, use the **`aggr_deferred`** scheme.
 
 10. **Replay the exact same request**
    After payment proof is generated, replay the same method, URL, query parameters, and request body. Only add the payment header required by the x402 flow.
@@ -119,6 +134,9 @@ If the user asks for a wide analysis that would likely require multiple paid API
 
 - **Do not invent payment support**
   Treat a request as x402-payable only when CoinAnk actually returns an HTTP `402 Payment Required` challenge.
+
+- **Do not mix signing schemes**
+  Use `exact` for EOA private-key signing, and use `aggr_deferred` for OKX contract-wallet or OKX wallet-session signing.
 
 - **Do not bypass the challenge**
   Never attempt x402 signing unless you have already received a real 402 response for the exact request being made.
