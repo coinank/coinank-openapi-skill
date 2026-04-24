@@ -124,6 +124,12 @@ CoinAnk OpenAPI Skill is an [OpenClaw](https://github.com/openclaw/openclaw) Ski
 
 </div>
 
+For first-time users, the entry choice should be explicit:
+
+- If you have CoinAnk API membership, provide `COINANK_API_KEY`
+- If you do not have CoinAnk API membership, you can still use x402 for supported one-off paid calls
+
+
 ```bash
 # 1. Clone into your OpenClaw skills directory
 git clone https://github.com/coinank/coinank-openapi-skill.git ~/.openclaw/skills/coinank-openapi-skill

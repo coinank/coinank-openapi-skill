@@ -124,6 +124,12 @@ CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw)
 
 </div>
 
+首次使用时，请直接按下面两种方式二选一：
+
+- 如果你有 CoinAnk API 会员，请提供 `COINANK_API_KEY`
+- 如果你没有 CoinAnk API 会员，也可以直接使用 x402 支持单次调用与支付
+
+
 ```bash
 # 1. 克隆到 OpenClaw Skills 目录
 git clone https://github.com/coinank/coinank-openapi-skill.git ~/.openclaw/skills/coinank-openapi-skill

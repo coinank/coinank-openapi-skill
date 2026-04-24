@@ -27,6 +27,14 @@ This skill supports two access paths:
 
 `COINANK_API_KEY` is optional. If it is not present, the skill must still attempt access discovery and use x402 when available.
 
+## First-Time User Guidance
+
+When a new user starts using this skill, make the access options explicit:
+
+- If the user already has a CoinAnk API membership, tell them to provide `COINANK_API_KEY`.
+- If the user does not have a CoinAnk API membership, tell them they can still try x402 pay-per-call access for supported endpoints.
+- Do not present API membership as the only way to use the skill.
+
 
 ## Dependencies for x402
 
