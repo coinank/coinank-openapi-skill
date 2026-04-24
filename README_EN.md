@@ -31,7 +31,7 @@
 
 <div align="center">
 
-CoinAnk OpenAPI Skill is an [OpenClaw](https://github.com/openclaw/openclaw) Skill (AI agent plugin) that provides LLMs with comprehensive crypto derivatives market data capabilities. It covers **K-lines, ETF, open interest, long/short ratios, funding rates, liquidations, order flow, whale movements** and more — 18 categories, 59 real-time data endpoints, all battle-tested and verified.
+CoinAnk OpenAPI Skill is an [OpenClaw](https://github.com/openclaw/openclaw) Skill (AI agent plugin) that provides LLMs with comprehensive crypto derivatives market data capabilities. It covers **K-lines, ETF, open interest, long/short ratios, funding rates, liquidations, order flow, whale movements** and more — 18 categories, 59 real-time data endpoints, all battle-tested and verified, with support for both **direct CoinAnk API-key access** and **x402 pay-per-call access**.
 
 </div>
 
@@ -42,7 +42,7 @@ CoinAnk OpenAPI Skill is an [OpenClaw](https://github.com/openclaw/openclaw) Ski
 
 - All **59 endpoints** tested and verified
 - All requests are **GET** — simple and efficient
-- Supports **API1 ~ API4** access levels
+- Supports **direct API-key access** and **x402 pay-per-call access**
 
 </td></tr>
 </table>
@@ -127,10 +127,28 @@ CoinAnk OpenAPI Skill is an [OpenClaw](https://github.com/openclaw/openclaw) Ski
 ```bash
 # 1. Clone into your OpenClaw skills directory
 git clone https://github.com/coinank/coinank-openapi-skill.git ~/.openclaw/skills/coinank-openapi-skill
+```
 
-# 2. Set your API key as an environment variable
+### Mode 1: Direct CoinAnk API-key Access
+
+```bash
 export COINANK_API_KEY="your_api_key_here"
 ```
+
+### Mode 2: x402 Pay-per-call Access
+
+If you do not have a CoinAnk API membership, but the seller has enabled x402 for a given endpoint, you can pay for a single request through OKX Onchain OS:
+
+```bash
+# Install OKX Onchain OS skills
+npx skills add okx/onchainos-skills
+
+# Log in to the wallet for x402 signing
+onchainos wallet login
+```
+
+Buyer-side integration reference:
+`https://web3.okx.com/zh-hans/onchainos/dev-docs/payments/payment-use-buyer-ai`
 
 <div align="center">
 
@@ -159,6 +177,13 @@ Then query directly with natural language in your OpenClaw agent:
 | **Method** | All `GET` |
 | **Response** | `application/json` |
 | **Success** | `{"success": true, "code": "1", "data": ...}` |
+
+### Access Modes
+
+| Mode | Use Case | Requirement |
+|------|----------|-------------|
+| **Direct API-key access** | You already have CoinAnk API membership | Set `COINANK_API_KEY` |
+| **x402 pay-per-call** | You do not have CoinAnk API membership but want to pay for a single call | Install `okx/onchainos-skills`, and the target CoinAnk endpoint must be x402-enabled on the seller side |
 
 ### Standard Response
 
@@ -210,6 +235,24 @@ For aggregate market order endpoints (`getAggCvd`, `getAggBuySellCount`, etc.), 
 ### 4. Example Timestamps Are Historical
 
 Timestamps in the `references/` directory JSON files are historical examples only. Always use real-time generated timestamps when making calls.
+
+### 5. x402 only works when the seller returns HTTP 402
+
+This skill must not assume that a route supports x402. The pay-per-call flow is available only when the CoinAnk server actually returns an `HTTP 402 Payment Required` challenge for the exact request.
+
+If there is no `COINANK_API_KEY` and the route returns only a business error such as `code: "-3"` without an `HTTP 402`, then that route is still membership-only and has not been exposed through x402.
+
+### 6. Recommended x402 Flow
+
+For a payment-gated request, the recommended flow is:
+
+1. Send the original request first, without pre-login and without speculative payment.
+2. If the server returns `HTTP 402 Payment Required`, decode the payment challenge.
+3. Show the user the payment network, token, amount, and recipient, then wait for confirmation.
+4. Use `okx-x402-payment` to generate the payment proof.
+5. Replay the exact same request with the required payment header added.
+
+x402 is therefore best suited for one-off queries, ad hoc lookups, and low-frequency access. It is not a good default for wide fan-out workflows when the user has no API key.
 
 <div align="center">
 <br />

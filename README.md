@@ -31,7 +31,7 @@
 
 <div align="center">
 
-CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw) Skill（AI Agent 插件），为大语言模型提供完整的加密货币衍生品市场数据能力。覆盖 **K 线、ETF、持仓、多空比、资金费率、爆仓、订单流、鲸鱼动向**等 18 大类、59 个实时数据接口，全部经过实测验证可用。
+CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw) Skill（AI Agent 插件），为大语言模型提供完整的加密货币衍生品市场数据能力。覆盖 **K 线、ETF、持仓、多空比、资金费率、爆仓、订单流、鲸鱼动向**等 18 大类、59 个实时数据接口，全部经过实测验证可用，并支持 **CoinAnk API Key 直连** 与 **x402 按次支付** 两种访问模式。
 
 </div>
 
@@ -42,7 +42,7 @@ CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw)
 
 - 全部 **59 个接口**经过实测验证
 - 所有请求均为 **GET**，简洁高效
-- 支持 **API1 ~ API4** 分级权限体系
+- 支持 **API Key 直连** 与 **x402 按次付费**
 
 </td></tr>
 </table>
@@ -127,10 +127,28 @@ CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw)
 ```bash
 # 1. 克隆到 OpenClaw Skills 目录
 git clone https://github.com/coinank/coinank-openapi-skill.git ~/.openclaw/skills/coinank-openapi-skill
+```
 
-# 2. 在环境变量中设置 API Key
+### 模式一：CoinAnk API Key 直连
+
+```bash
 export COINANK_API_KEY="your_api_key_here"
 ```
+
+### 模式二：x402 按次支付
+
+如果你没有 CoinAnk API 会员，但 CoinAnk 卖家侧已为某个接口开启 x402 支付，可以通过 OKX Onchain OS 完成单次调用支付：
+
+```bash
+# 安装 OKX Onchain OS skills
+npx skills add okx/onchainos-skills
+
+# 登录钱包（用于后续 x402 支付签名）
+onchainos wallet login
+```
+
+OKX Buyer 侧接入参考：
+`https://web3.okx.com/zh-hans/onchainos/dev-docs/payments/payment-use-buyer-ai`
 
 <div align="center">
 
@@ -159,6 +177,13 @@ export COINANK_API_KEY="your_api_key_here"
 | **请求方法** | 全部为 `GET` |
 | **响应格式** | `application/json` |
 | **成功标志** | `{"success": true, "code": "1", "data": ...}` |
+
+### 访问模式
+
+| 模式 | 适用场景 | 要求 |
+|------|------|------|
+| **API Key 直连** | 你已有 CoinAnk API 会员 | 设置 `COINANK_API_KEY` |
+| **x402 按次支付** | 你没有 CoinAnk API 会员，但希望为单次请求付费 | 安装 `okx/onchainos-skills`，并让 CoinAnk 卖家侧为该接口开启 x402 |
 
 ### 标准响应结构
 
@@ -210,6 +235,24 @@ NOW=$(date +%s%3N)  # 不要用这个！
 ### 4. OpenAPI 文件中的时间戳仅为示例
 
 `references/` 目录下 JSON 文件中的 `example` 时间戳均为历史示例，调用时应使用实时生成的时间戳。
+
+### 5. x402 只在卖家返回 HTTP 402 时生效
+
+这个 skill 不会“假设”某个接口支持 x402。只有当 CoinAnk 服务端对该请求真实返回 `HTTP 402 Payment Required` 挑战时，Agent 才会进入按次支付流程。
+
+如果你没有 `COINANK_API_KEY`，而接口返回的是业务错误（例如 `code: "-3"`）但没有 `HTTP 402`，说明该路由当前仍然只支持会员访问，尚未开启 x402。
+
+### 6. x402 单次调用流程
+
+当某个请求命中 x402 时，推荐流程是：
+
+1. 先按原请求发送一次，不预先登录、不预先扣费。
+2. 如果服务端返回 `HTTP 402 Payment Required`，解析支付挑战。
+3. 向用户展示本次支付的网络、币种、金额、收款地址，并等待确认。
+4. 使用 `okx-x402-payment` 生成支付证明。
+5. 仅在原请求基础上追加支付 Header，重放同一个请求。
+
+这意味着 x402 是**按请求计费**，更适合单次查询、临时取数和低频调用，不适合在没有 API Key 的情况下直接做大规模多接口扇出分析。
 
 <div align="center">
 <br />
