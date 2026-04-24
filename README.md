@@ -124,10 +124,10 @@ CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw)
 
 </div>
 
-首次使用时，请直接按下面两种方式二选一：
+首次使用时，请直接按下面两种方式选择：
 
 - 如果你有 CoinAnk API 会员，请提供 `COINANK_API_KEY`
-- 如果你没有 CoinAnk API 会员，也可以直接使用 x402 支持单次调用与支付
+- 如果你没有 CoinAnk API 会员，也可以在**已开启 x402 的接口**上使用按次调用与支付
 
 
 ```bash
@@ -179,7 +179,7 @@ OKX Buyer 侧接入参考：
 | 项目 | 说明 |
 |------|------|
 | **Base URL** | `https://open-api.coinank.com` |
-| **认证方式** | HTTP Header：`apikey: <your_api_key>` |
+| **认证方式** | API Key 直连：`apikey: <your_api_key>`；x402：由支付流生成对应支付 Header |
 | **请求方法** | 全部为 `GET` |
 | **响应格式** | `application/json` |
 | **成功标志** | `{"success": true, "code": "1", "data": ...}` |
@@ -209,6 +209,14 @@ OKX Buyer 侧接入参考：
 | `-3` | API Key 无效或认证失败 |
 | `-7` | 超出允许访问的时间范围（endTime 参数错误） |
 | `0` | 系统错误（参数缺失或服务端异常） |
+
+### x402 响应说明
+
+如果某个接口已开启按次支付，服务端会先返回 `HTTP 402 Payment Required`，而不是直接返回业务成功数据。Agent 应先完成支付，再重放同一个请求。
+
+### 示例请求说明
+
+下文接口示例默认展示 **API Key 直连模式**。如果使用 x402，实际请求参数和 URL 不变，只是在支付成功后由 Agent 为原请求补充支付 Header 再重放。
 
 <div align="center">
 <br />
