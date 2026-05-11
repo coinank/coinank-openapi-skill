@@ -1,13 +1,13 @@
 ---
 name: coinank-openapi
-description: Access CoinAnk OpenAPI through direct API-key auth or x402 pay-per-call payment
+description: Access CoinAnk OpenAPI through direct API-key auth or pay via Agent Payments Protocol or x402
 metadata:
   {
     "openclaw":
       {
         "homepage": "https://coinank.com",
         "priority": 100,
-        "keywords": ["bitcoin", "btc", "ethereum", "eth", "cryptocurrency", "crypto", "price", "trend", "liquidation", "long-short ratio", "x402", "pay-per-call", "payment"]
+        "keywords": ["bitcoin", "btc", "ethereum", "eth", "cryptocurrency", "crypto", "price", "trend", "liquidation", "long-short ratio", "agent payments protocol", "x402", "pay-per-call", "payment"]
       },
   }
 ---
@@ -23,30 +23,30 @@ metadata:
 This skill supports two access paths:
 
 1. **Direct mode** — use `COINANK_API_KEY` in the `apikey` request header.
-2. **Pay-per-call mode** — when CoinAnk returns an HTTP `402 Payment Required` challenge, complete a one-time payment and replay the same request.
+2. **Pay-per-call mode** — pay via Agent Payments Protocol or x402 when CoinAnk returns an HTTP `402 Payment Required` challenge, then replay the same request.
 
-`COINANK_API_KEY` is optional. If it is not present, the skill must still attempt access discovery and use x402 when available.
+`COINANK_API_KEY` is optional. If it is not present, the skill must still attempt access discovery and use Agent Payments Protocol or x402 when available.
 
 ## First-Time User Guidance
 
 When a new user starts using this skill, make the access options explicit:
 
 - If the user already has a CoinAnk API membership, tell them to provide `COINANK_API_KEY`.
-- If the user does not have a CoinAnk API membership, tell them they can still try x402 pay-per-call access when CoinAnk returns a payment challenge.
+- If the user does not have a CoinAnk API membership, tell them they can still try Agent Payments Protocol or x402 pay-per-call access when CoinAnk returns a payment challenge.
 - Do not present API membership as the only way to use the skill.
 
 
-## Dependencies for x402
+## Dependencies for Agent Payments Protocol / x402
 
-Pay-per-call mode depends on the OKX Onchain OS payment stack:
+Agent Payments Protocol / x402 pay-per-call mode depends on the OKX Onchain OS payment stack:
 
 - `okx-x402-payment`
 - `okx-agentic-wallet`
 
-If an x402 flow is needed but those skills are unavailable, instruct the user to install `okx/onchainos-skills` first.
+If an Agent Payments Protocol or x402 flow is needed but those skills are unavailable, instruct the user to install `okx/onchainos-skills` first.
 
 
-## x402 Signing Scheme Constraint
+## Agent Payments Protocol / x402 Signing Scheme Constraint
 
 When a payment challenge is signed, the signing scheme must match the signer type:
 
@@ -82,7 +82,7 @@ When handling a user request, follow this sequence strictly:
 
 5. **Choose the access strategy**
    - If `COINANK_API_KEY` is present, prefer **direct mode** first.
-   - If `COINANK_API_KEY` is absent, use **discovery mode**: send the original request without an API key and let the server tell you whether the route is public, payable via x402, or still unavailable without membership.
+   - If `COINANK_API_KEY` is absent, use **discovery mode**: send the original request without an API key and let the server tell you whether the route is public, payable via Agent Payments Protocol or x402, or still unavailable without membership.
 
 6. **Construct the original request**
    Build the exact request the user asked for.
@@ -98,13 +98,13 @@ When handling a user request, follow this sequence strictly:
 
 8. **Interpret the response**
    - **HTTP 2xx + business code `"1"`**: return the result.
-   - **HTTP 402**: this route is payment-gated. Switch into the x402 payment flow.
+   - **HTTP 402**: this route is payment-gated. Switch into the Agent Payments Protocol / x402 payment flow.
    - **HTTP 2xx + business code `"-3"`**:
      - If an API key was supplied, treat it as invalid or insufficient and tell the user to fix their CoinAnk access.
-     - If no API key was supplied and no HTTP 402 challenge was returned, explain that the request did not enter the x402 payment path and still cannot be completed without valid access.
+     - If no API key was supplied and no HTTP 402 challenge was returned, explain that the request did not enter the Agent Payments Protocol / x402 payment path and still cannot be completed without valid access.
    - **Other failures**: explain the failure clearly and include the key technical reason.
 
-9. **Run the x402 payment flow only after a real HTTP 402**
+9. **Run the Agent Payments Protocol / x402 payment flow only after a real HTTP 402**
    Use `okx-x402-payment` and follow its confirmation, login, signing, and replay flow.
    - Do not check wallet status before receiving HTTP 402.
    - Do not log in preemptively.
@@ -113,7 +113,7 @@ When handling a user request, follow this sequence strictly:
    - If signing with an **OKX contract wallet / wallet session**, use the **`aggr_deferred`** scheme.
 
 10. **Replay the exact same request**
-   After payment proof is generated, replay the same method, URL, query parameters, and request body. Only add the payment header required by the x402 flow.
+   After payment proof is generated, replay the same method, URL, query parameters, and request body. Only add the payment header required by the Agent Payments Protocol / x402 flow.
 
 11. **Return the final paid response**
    Return the successful result from the replayed request, not the intermediate 402 payload.
@@ -121,7 +121,7 @@ When handling a user request, follow this sequence strictly:
 
 ## Multi-Call Guard
 
-If the user asks for a wide analysis that would likely require multiple paid API calls and there is no valid `COINANK_API_KEY`, stop and warn that the task may incur multiple x402 payments. Ask for confirmation before triggering a multi-call paid workflow.
+If the user asks for a wide analysis that would likely require multiple paid API calls and there is no valid `COINANK_API_KEY`, stop and warn that the task may incur multiple Agent Payments Protocol / x402 payments. Ask for confirmation before triggering a multi-call paid workflow.
 
 
 ## Critical Rules
@@ -133,13 +133,13 @@ If the user asks for a wide analysis that would likely require multiple paid API
   Pass only the parameters defined by the selected schema. Some endpoints return empty results when extra parameters are added.
 
 - **Do not invent payment support**
-  Treat a request as x402-payable only when CoinAnk actually returns an HTTP `402 Payment Required` challenge.
+  Treat a request as Agent Payments Protocol / x402 payable only when CoinAnk actually returns an HTTP `402 Payment Required` challenge.
 
 - **Do not mix signing schemes**
   Use `exact` for EOA private-key signing, and use `aggr_deferred` for OKX contract-wallet or OKX wallet-session signing.
 
 - **Do not bypass the challenge**
-  Never attempt x402 signing unless you have already received a real 402 response for the exact request being made.
+  Never attempt Agent Payments Protocol / x402 signing unless you have already received a real 402 response for the exact request being made.
 
 - **Do not mutate the paid request**
   The replayed request must match the original request exactly except for the payment header.
@@ -162,7 +162,7 @@ Users with CoinAnk membership can configure direct access:
 export COINANK_API_KEY="your_api_key"
 ```
 
-Use direct mode whenever a valid API key is available, unless the user explicitly asks to use pay-per-call payment instead.
+Use direct mode whenever a valid API key is available, unless the user explicitly asks to use Agent Payments Protocol or x402 pay-per-call payment instead.
 
 
 ## Timestamp Rules
@@ -213,9 +213,9 @@ Successful CoinAnk responses use `"code": "1"`. Some endpoints return nested pay
 Inspect the actual response shape and unwrap nested `data` fields when necessary.
 
 
-## Notes on x402 Availability
+## Notes on Agent Payments Protocol / x402 Availability
 
-CoinAnk supports x402 pay-per-call access. In practice, the skill must still rely on the server's real HTTP behavior for each request. If a request does not return an HTTP 402 challenge, the skill must not fabricate a payment flow.
+CoinAnk supports Agent Payments Protocol or x402 pay-per-call access. In practice, the skill must still rely on the server's real HTTP behavior for each request. If a request does not return an HTTP 402 challenge, the skill must not fabricate a payment flow.
 
 
 ## Notes on OpenAPI Examples
