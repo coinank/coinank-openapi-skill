@@ -40,7 +40,7 @@ When a new user starts using this skill, make the access options explicit:
 
 Agent Payments Protocol / x402 pay-per-call mode depends on the OKX Onchain OS payment stack:
 
-- `okx-x402-payment`
+- `okx-agent-payments-protocol`
 - `okx-agentic-wallet`
 
 If an Agent Payments Protocol or x402 flow is needed but those skills are unavailable, instruct the user to install `okx/onchainos-skills` first.
@@ -105,7 +105,7 @@ When handling a user request, follow this sequence strictly:
    - **Other failures**: explain the failure clearly and include the key technical reason.
 
 9. **Run the Agent Payments Protocol / x402 payment flow only after a real HTTP 402**
-   Use `okx-x402-payment` and follow its confirmation, login, signing, and replay flow.
+   Use `okx-agent-payments-protocol` and follow its confirmation, login, signing, and replay flow.
    - Do not check wallet status before receiving HTTP 402.
    - Do not log in preemptively.
    - Do not charge speculatively.

@@ -263,7 +263,7 @@ For a payment-gated request, the recommended Agent Payments Protocol / x402 flow
 1. Send the original request first, without pre-login and without speculative payment.
 2. If the server returns `HTTP 402 Payment Required`, decode the payment challenge.
 3. Show the user the payment network, token, amount, and recipient, then wait for confirmation.
-4. Use `okx-x402-payment` to generate the payment proof.
+4. Use `okx-agent-payments-protocol` to generate the payment proof.
 5. Replay the exact same request with the required payment header added.
 
 Agent Payments Protocol / x402 is therefore best suited for one-off queries, ad hoc lookups, and low-frequency access. It is not a good default for wide fan-out workflows when the user has no API key.
