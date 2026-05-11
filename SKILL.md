@@ -46,6 +46,18 @@ Agent Payments Protocol / x402 pay-per-call mode depends on the OKX Onchain OS p
 If an Agent Payments Protocol or x402 flow is needed but those skills are unavailable, instruct the user to install `okx/onchainos-skills` first.
 
 
+## Zero-Amount Payment Challenges
+
+Agent Payments Protocol / x402 challenges with an amount of `0` are valid and must be supported. Do not treat a zero-amount challenge as malformed, unpaid, or unsupported.
+
+When the challenge amount is `0`:
+
+- Clearly tell the user that the request requires a payment proof but the charge amount is zero.
+- Continue through `okx-agent-payments-protocol` to generate the required proof or authorization.
+- Replay the exact same request with the generated payment header.
+- Do not require paid-call confirmation solely because the amount is zero, but still respect any wallet or protocol confirmation required to sign/authorize the proof.
+
+
 ## Agent Payments Protocol / x402 Signing Scheme Constraint
 
 When a payment challenge is signed, the signing scheme must match the signer type:
@@ -109,6 +121,7 @@ When handling a user request, follow this sequence strictly:
    - Do not check wallet status before receiving HTTP 402.
    - Do not log in preemptively.
    - Do not charge speculatively.
+   - If the challenge amount is `0`, treat it as a valid zero-amount payment challenge and still generate the required proof.
    - If signing with an **EOA private key**, use the **`exact`** scheme.
    - If signing with an **OKX contract wallet / wallet session**, use the **`aggr_deferred`** scheme.
 
@@ -133,7 +146,7 @@ If the user asks for a wide analysis that would likely require multiple paid API
   Pass only the parameters defined by the selected schema. Some endpoints return empty results when extra parameters are added.
 
 - **Do not invent payment support**
-  Treat a request as Agent Payments Protocol / x402 payable only when CoinAnk actually returns an HTTP `402 Payment Required` challenge.
+  Treat a request as Agent Payments Protocol / x402 payable only when CoinAnk actually returns an HTTP `402 Payment Required` challenge. A challenge amount of `0` is still a valid payment challenge.
 
 - **Do not mix signing schemes**
   Use `exact` for EOA private-key signing, and use `aggr_deferred` for OKX contract-wallet or OKX wallet-session signing.
