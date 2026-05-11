@@ -266,7 +266,7 @@ For a payment-gated request, the recommended Agent Payments Protocol / x402 flow
 4. Use `okx-agent-payments-protocol` to generate the payment proof.
 5. Replay the exact same request with the required payment header added.
 
-If the payment challenge amount is `0`, it is still a valid Agent Payments Protocol / x402 challenge. The agent must not treat a zero amount as an error or unsupported case; it should tell the user that the request requires a payment proof but will not charge funds, then continue to generate the proof and replay the request.
+If the payment challenge amount is `0`, it is still a valid Agent Payments Protocol / x402 challenge. The agent must not treat a zero amount as an error or unsupported case, and must not fall back, round up, or coerce `0` to a minimum non-zero amount such as `0.000001` USDC/USDT; it should tell the user that the request requires a payment proof but will not charge funds, then continue to generate the proof with the original `0` amount and replay the request.
 
 Agent Payments Protocol / x402 is therefore best suited for one-off queries, ad hoc lookups, and low-frequency access. It is not a good default for wide fan-out workflows when the user has no API key.
 
