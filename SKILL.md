@@ -133,6 +133,18 @@ When handling a user request, follow this sequence strictly:
    Return the successful result from the replayed request, not the intermediate 402 payload.
 
 
+## Payment Replay URL Binding
+
+Agent Payments Protocol / x402 proofs are bound to the seller challenge and its `resource.url`. When CoinAnk returns a payment challenge, generate the proof for the upstream resource URL from the challenge, and replay the exact upstream CoinAnk request.
+
+Critical requirements:
+
+- Use the CoinAnk upstream base URL `https://open-api.coinank.com` for paid replay, not a local gateway/proxy route such as `/api/v1/coinank/...`.
+- Do not rewrite endpoint paths when replaying a paid request. For example, liquidation-map requests must remain `/api/liqMap/getLiqMap`, `/api/liqMap/getAggLiqMap`, or `/api/liqMap/getLiqHeatMap`; do not convert them to `/api/v1/coinank/liquidation/.../map`.
+- The replayed method, path, and query parameters must match the original upstream request. Only append the payment header generated from the challenge.
+- If the paid replay returns `HTTP 401` with business `code: "-2"`, treat it as a payment proof verification failure or resource/path mismatch. Do not retry by changing parameters or inventing a new route; regenerate the proof against the exact upstream challenge resource and replay that same upstream URL.
+
+
 ## Multi-Call Guard
 
 If the user asks for a wide analysis that would likely require multiple paid API calls and there is no valid `COINANK_API_KEY`, stop and warn that the task may incur multiple Agent Payments Protocol / x402 payments. Ask for confirmation before triggering a multi-call paid workflow.

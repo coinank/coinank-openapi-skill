@@ -266,6 +266,8 @@ NOW=$(date +%s%3N)  # 不要用这个！
 4. 使用 `okx-agent-payments-protocol` 生成支付证明。
 5. 仅在原请求基础上追加支付 Header，重放同一个请求。
 
+支付证明会绑定到服务端挑战中的 `resource.url`。重放付费请求时必须使用 CoinAnk 上游地址 `https://open-api.coinank.com` 和原始接口路径，例如清算地图必须保持 `/api/liqMap/getLiqMap`、`/api/liqMap/getAggLiqMap` 或 `/api/liqMap/getLiqHeatMap`，不要改写成 `/api/v1/coinank/liquidation/.../map` 等代理路径。如果重放后返回 `HTTP 401` 且业务 `code: "-2"`，通常表示支付证明校验失败或 proof 绑定的资源路径与实际请求不一致，应使用原始上游 challenge 重新生成 proof 并按原 URL 重放。
+
 如果支付挑战中的金额为 `0`，它仍然是有效的 Agent Payments Protocol / x402 挑战。Agent 不应将 0 金额视为错误或不支持，也不能把 `0` 兜底、抬高或转换成 `0.000001` USDC/USDT 等最小非零金额；应提示用户本次请求需要支付证明但不会扣费，然后使用原始 `0` 金额继续生成证明并重放请求。
 
 这意味着 Agent Payments Protocol / x402 是**按请求计费**，更适合单次查询、临时取数和低频调用，不适合在没有 API Key 的情况下直接做大规模多接口扇出分析。
