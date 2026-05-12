@@ -145,6 +145,8 @@ export COINANK_API_KEY="your_api_key_here"
 
 如果你没有 CoinAnk API 会员，也可以通过 OKX Onchain OS 使用 Agent Payments Protocol 或 x402 完成单次调用支付：
 
+请使用最新版 `okx-agent-payments-protocol`。新版 OKX 支付 skill 支持 Agent Payments Protocol / x402 proof 方式，也支持新的 `charge` 支付方式；实际支付方式以 OKX skill 返回或要求的流程为准。
+
 ```bash
 # 安装 OKX Onchain OS skills
 npx skills add okx/onchainos-skills
@@ -263,12 +265,12 @@ NOW=$(date +%s%3N)  # 不要用这个！
 1. 先按原请求发送一次，不预先登录、不预先扣费。
 2. 如果服务端返回 `HTTP 402 Payment Required`，解析支付挑战。
 3. 向用户展示本次支付的网络、币种、金额、收款地址；如果金额大于 0，则等待用户确认。
-4. 使用 `okx-agent-payments-protocol` 生成支付证明。
-5. 仅在原请求基础上追加支付 Header，重放同一个请求。
+4. 使用最新版 `okx-agent-payments-protocol` 处理支付；它同时支持 Agent Payments Protocol / x402 支付证明和新的 `charge` 支付方式。
+5. 如果 OKX 支付 skill 返回或要求 `charge` 方式，则走 `charge` 流程，不要强制套用旧的 x402-only proof 流程。
+6. 仅在原请求基础上追加支付 Header 或所选支付方式要求的授权数据，重放同一个请求。
 
-支付证明会绑定到服务端挑战中的 `resource.url`。重放付费请求时必须使用 CoinAnk 上游地址 `https://open-api.coinank.com` 和原始接口路径，例如清算地图必须保持 `/api/liqMap/getLiqMap`、`/api/liqMap/getAggLiqMap` 或 `/api/liqMap/getLiqHeatMap`，不要改写成 `/api/v1/coinank/liquidation/.../map` 等代理路径。如果重放后返回 `HTTP 401` 且业务 `code: "-2"`，通常表示支付证明校验失败或 proof 绑定的资源路径与实际请求不一致，应使用原始上游 challenge 重新生成 proof 并按原 URL 重放。
 
-如果支付挑战中的金额为 `0`，它仍然是有效的 Agent Payments Protocol / x402 挑战。Agent 不应将 0 金额视为错误或不支持，也不能把 `0` 兜底、抬高或转换成 `0.000001` USDC/USDT 等最小非零金额；应提示用户本次请求需要支付证明但不会扣费，然后使用原始 `0` 金额继续生成证明并重放请求。
+如果支付挑战中的金额为 `0`，它仍然是有效的 Agent Payments Protocol / x402 挑战。Agent 不应将 0 金额视为错误或不支持，也不能把 `0` 兜底、抬高或转换成 `0.000001` USDC/USDT 等最小非零金额；应提示用户本次请求需要支付证明或授权但不会扣费，然后使用原始 `0` 金额继续通过 OKX 支付 skill 生成证明、授权或 `charge` 请求并重放请求。
 
 这意味着 Agent Payments Protocol / x402 是**按请求计费**，更适合单次查询、临时取数和低频调用，不适合在没有 API Key 的情况下直接做大规模多接口扇出分析。
 

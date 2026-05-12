@@ -145,6 +145,8 @@ export COINANK_API_KEY="your_api_key_here"
 
 If you do not have a CoinAnk API membership, you can still pay for a single request through Agent Payments Protocol or x402 via OKX Onchain OS:
 
+Use the latest `okx-agent-payments-protocol` skill. The newer OKX payment skill supports both Agent Payments Protocol / x402 proof-based payment and the new `charge` payment method; follow the payment method returned or required by the OKX skill.
+
 ```bash
 # Install OKX Onchain OS skills
 npx skills add okx/onchainos-skills
@@ -263,12 +265,11 @@ For a payment-gated request, the recommended Agent Payments Protocol / x402 flow
 1. Send the original request first, without pre-login and without speculative payment.
 2. If the server returns `HTTP 402 Payment Required`, decode the payment challenge.
 3. Show the user the payment network, token, amount, and recipient; if the amount is greater than `0`, wait for user confirmation.
-4. Use `okx-agent-payments-protocol` to generate the payment proof.
-5. Replay the exact same request with the required payment header added.
+4. Use the latest `okx-agent-payments-protocol` skill to handle payment. It supports both Agent Payments Protocol / x402 payment proofs and the newer `charge` payment method.
+5. If the OKX payment skill returns or requires the `charge` method, use the `charge` flow instead of forcing the older x402-only proof flow.
+6. Replay the exact same request with only the required payment header or authorization data for the selected payment method added.
 
-Payment proofs are bound to the `resource.url` in the server challenge. For paid replay, use the upstream CoinAnk URL `https://open-api.coinank.com` and the original endpoint path. For example, liquidation-map requests must remain `/api/liqMap/getLiqMap`, `/api/liqMap/getAggLiqMap`, or `/api/liqMap/getLiqHeatMap`; do not rewrite them to proxy paths such as `/api/v1/coinank/liquidation/.../map`. If the replay returns `HTTP 401` with business `code: "-2"`, it usually means payment proof verification failed or the proof was bound to a different resource/path. Regenerate the proof from the original upstream challenge and replay the same upstream URL.
-
-If the payment challenge amount is `0`, it is still a valid Agent Payments Protocol / x402 challenge. The agent must not treat a zero amount as an error or unsupported case, and must not fall back, round up, or coerce `0` to a minimum non-zero amount such as `0.000001` USDC/USDT; it should tell the user that the request requires a payment proof but will not charge funds, then continue to generate the proof with the original `0` amount and replay the request.
+If the payment challenge amount is `0`, it is still a valid Agent Payments Protocol / x402 challenge. The agent must not treat a zero amount as an error or unsupported case, and must not fall back, round up, or coerce `0` to a minimum non-zero amount such as `0.000001` USDC/USDT; it should tell the user that the request requires a payment proof or authorization but will not charge funds, then continue through the OKX payment skill to generate the proof, authorization, or `charge` request with the original `0` amount and replay the request.
 
 Agent Payments Protocol / x402 is therefore best suited for one-off queries, ad hoc lookups, and low-frequency access. It is not a good default for wide fan-out workflows when the user has no API key.
 

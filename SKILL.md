@@ -43,7 +43,9 @@ Agent Payments Protocol / x402 pay-per-call mode depends on the OKX Onchain OS p
 - `okx-agent-payments-protocol`
 - `okx-agentic-wallet`
 
-If an Agent Payments Protocol or x402 flow is needed but those skills are unavailable, instruct the user to install `okx/onchainos-skills` first.
+Use the latest `okx-agent-payments-protocol` skill. It supports both payment-proof generation for Agent Payments Protocol / x402 challenges and the newer `charge` payment method. Do not hard-code an older x402-only flow; delegate payment execution to `okx-agent-payments-protocol` and follow the payment method returned or required by that skill.
+
+If an Agent Payments Protocol, x402, or `charge` payment flow is needed but those skills are unavailable, instruct the user to install or update `okx/onchainos-skills` first.
 
 
 ## Zero-Amount Payment Challenges
@@ -117,32 +119,22 @@ When handling a user request, follow this sequence strictly:
      - If no API key was supplied and no HTTP 402 challenge was returned, explain that the request did not enter the Agent Payments Protocol / x402 payment path and still cannot be completed without valid access.
    - **Other failures**: explain the failure clearly and include the key technical reason.
 
-9. **Run the Agent Payments Protocol / x402 payment flow only after a real HTTP 402**
-   Use `okx-agent-payments-protocol` and follow its confirmation, login, signing, and replay flow.
-   - Do not check wallet status before receiving HTTP 402.
+9. **Run the Agent Payments Protocol / x402 payment flow only after a real payment requirement**
+   Use `okx-agent-payments-protocol` and follow its confirmation, login, signing, charge, and replay flow.
+   - For HTTP `402 Payment Required` challenges, generate the required Agent Payments Protocol / x402 payment proof and replay the same request.
+   - If the latest OKX payment skill indicates or requires the newer `charge` payment method, use that `charge` flow instead of forcing the legacy x402-only proof path.
+   - Do not check wallet status before a real payment requirement is known.
    - Do not log in preemptively.
    - Do not charge speculatively.
-   - If the challenge amount is `0`, treat it as a valid zero-amount payment challenge and still generate the required proof using exactly `0`; never coerce it to `0.000001` or any other minimum non-zero amount.
-   - If signing with an **EOA private key**, use the **`exact`** scheme.
-   - If signing with an **OKX contract wallet / wallet session**, use the **`aggr_deferred`** scheme.
+   - If the challenge amount is `0`, treat it as a valid zero-amount payment challenge and still generate the required proof or authorization using exactly `0`; never coerce it to `0.000001` or any other minimum non-zero amount.
+   - If signing with an **EOA private key**, use the **`exact`** scheme when the OKX payment flow uses x402 proof signing.
+   - If signing with an **OKX contract wallet / wallet session**, use the **`aggr_deferred`** scheme when the OKX payment flow uses x402 proof signing.
 
 10. **Replay the exact same request**
-   After payment proof is generated, replay the same method, URL, query parameters, and request body. Only add the payment header required by the Agent Payments Protocol / x402 flow.
+   After the OKX payment flow completes, replay the same method, URL, query parameters, and request body. Only add the payment header or authorization data required by the selected Agent Payments Protocol / x402 or `charge` flow.
 
 11. **Return the final paid response**
    Return the successful result from the replayed request, not the intermediate 402 payload.
-
-
-## Payment Replay URL Binding
-
-Agent Payments Protocol / x402 proofs are bound to the seller challenge and its `resource.url`. When CoinAnk returns a payment challenge, generate the proof for the upstream resource URL from the challenge, and replay the exact upstream CoinAnk request.
-
-Critical requirements:
-
-- Use the CoinAnk upstream base URL `https://open-api.coinank.com` for paid replay, not a local gateway/proxy route such as `/api/v1/coinank/...`.
-- Do not rewrite endpoint paths when replaying a paid request. For example, liquidation-map requests must remain `/api/liqMap/getLiqMap`, `/api/liqMap/getAggLiqMap`, or `/api/liqMap/getLiqHeatMap`; do not convert them to `/api/v1/coinank/liquidation/.../map`.
-- The replayed method, path, and query parameters must match the original upstream request. Only append the payment header generated from the challenge.
-- If the paid replay returns `HTTP 401` with business `code: "-2"`, treat it as a payment proof verification failure or resource/path mismatch. Do not retry by changing parameters or inventing a new route; regenerate the proof against the exact upstream challenge resource and replay that same upstream URL.
 
 
 ## Multi-Call Guard
