@@ -10,6 +10,7 @@
   "license": "MIT",
   "category": "analytics",
   "api_calls": [
-    "open-api.coinank.com"
+    "open-api.coinank.com",
+    "s.cdnblock.com"
   ]
 }

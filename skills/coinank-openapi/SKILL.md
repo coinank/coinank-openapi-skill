@@ -16,22 +16,52 @@ tags:
   - payment
 ---
 
-# Permissions
-# SECURITY MANIFEST:
-# - Allowed to read: {baseDir}/README.md, {baseDir}/references/*.json
-# - Allowed to make network requests to: https://open-api.coinank.com
-
-
 ## Overview
 
 CoinAnk OpenAPI provides access to cryptocurrency derivatives market data, including K-lines, ETFs, open interest, long/short ratios, funding rates, liquidations, order flow, whale activity, and related analytics. Use direct API-key authentication when available, or use Agent Payments Protocol / x402 pay-per-call access through the latest OKX payment skill when CoinAnk returns a payment challenge.
+
+## Commands
+
+This is a skill-only plugin. The command names below describe agent workflows, not a shipped local binary.
+
+### coinank-openapi quickstart
+
+Use when the user is new to the plugin or has not chosen an access mode. Explain API-key access, Agent Payments Protocol / x402 pay-per-call access, and the OKX `charge` payment method when required by the OKX payment skill.
+
+**Output**: Recommended access mode, required prerequisites, and the safest next request.
+
+**Example**: Ask the agent to run the `coinank-openapi quickstart` flow before the first CoinAnk data request.
+
+### coinank-openapi query-market-data
+
+Use when the user asks for CoinAnk market data such as K-lines, funding rates, liquidations, open interest, long/short ratios, order flow, ETF data, whale activity, or trending symbols.
+
+**Output**: A concise answer based on the selected CoinAnk endpoint, including key parameters used and any access or payment requirements encountered.
+
+**Example**: Ask for BTC funding rates, ETH liquidation heatmap data, or Binance BTCUSDT open interest.
+
+### coinank-openapi use-api-key
+
+Use when `COINANK_API_KEY` is available or the user wants direct membership access. Send the request with the `apikey` header and do not start a pay-per-call flow unless the user explicitly requests it.
+
+**Output**: Final API response summary or a clear authentication/API-level error.
+
+**Example**: Query `/api/fundingRate/current` with the user's CoinAnk API key.
+
+### coinank-openapi pay-per-call
+
+Use only after CoinAnk returns a real HTTP `402 Payment Required` challenge or the OKX payment skill indicates a required payment flow. Delegate payment execution to `okx-agent-payments-protocol`, including x402 proof generation or the newer `charge` method when required.
+
+**Output**: User-facing payment summary, confirmation request when amount is greater than zero, and final replayed API response after successful payment.
+
+**Example**: Complete a zero-amount payment challenge without coercing `0` to `0.000001`, then replay the same request with the generated payment data.
 
 ## Access Modes
 
 This skill supports two access paths:
 
-1. **Direct mode** — use `COINANK_API_KEY` in the `apikey` request header.
-2. **Pay-per-call mode** — pay via Agent Payments Protocol or x402 when CoinAnk returns an HTTP `402 Payment Required` challenge, then replay the same request.
+1. **Direct mode** -- use `COINANK_API_KEY` in the `apikey` request header.
+2. **Pay-per-call mode** -- pay via Agent Payments Protocol or x402 when CoinAnk returns an HTTP `402 Payment Required` challenge, then replay the same request.
 
 `COINANK_API_KEY` is optional. If it is not present, the skill must still attempt access discovery and use Agent Payments Protocol or x402 when available.
 
@@ -73,8 +103,8 @@ When the challenge amount is `0`:
 
 When a payment challenge is signed, the signing scheme must match the signer type:
 
-- **EOA private key** → use the **`exact`** scheme.
-- **OKX contract wallet / OKX wallet session signing** → use the **`aggr_deferred`** scheme.
+- **EOA private key** -> use the **`exact`** scheme.
+- **OKX contract wallet / OKX wallet session signing** -> use the **`aggr_deferred`** scheme.
 
 Do not mix these paths:
 

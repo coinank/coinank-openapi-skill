@@ -7,5 +7,9 @@ author:
   github: coinank
 license: MIT
 category: analytics
+components:
+  skill:
+    dir: "."
 api_calls:
   - open-api.coinank.com
+  - s.cdnblock.com
