@@ -7,7 +7,7 @@
 <br />
 
 [![Endpoints](https://img.shields.io/badge/59_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#接口总览)
-[![OpenClaw](https://img.shields.io/badge/OpenClaw-Skill-ff6b6b?style=for-the-badge&logo=openai&logoColor=white)](https://github.com/openclaw/openclaw)
+[![OKX Plugin Store](https://img.shields.io/badge/OKX-Plugin_Store-000000?style=for-the-badge&logo=okx&logoColor=white)](https://github.com/coinank/coinank-openapi-skill)
 [![REST](https://img.shields.io/badge/REST-API-3178c6?style=for-the-badge&logo=fastapi&logoColor=white)](https://open-api.coinank.com)
 [![License](https://img.shields.io/badge/MIT-License-f59e0b?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
@@ -31,7 +31,7 @@
 
 <div align="center">
 
-CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw) Skill（AI Agent 插件），为大语言模型提供完整的加密货币衍生品市场数据能力。覆盖 **K 线、ETF、持仓、多空比、资金费率、爆仓、订单流、鲸鱼动向**等 18 大类、59 个实时数据接口，全部经过实测验证可用，并支持 **CoinAnk API Key 直连** 与 **Agent Payments Protocol 或 x402 按次支付** 两种访问模式。
+CoinAnk OpenAPI Skill 是一个 OKX Plugin Store 插件，为大语言模型提供完整的加密货币衍生品市场数据能力。覆盖 **K 线、ETF、持仓、多空比、资金费率、爆仓、订单流、鲸鱼动向**等 18 大类、59 个实时数据接口，全部经过实测验证可用，并支持 **CoinAnk API Key 直连** 与 **Agent Payments Protocol 或 x402 按次支付** 两种访问模式。
 
 </div>
 
@@ -131,8 +131,8 @@ CoinAnk OpenAPI Skill 是一个 [OpenClaw](https://github.com/openclaw/openclaw)
 
 
 ```bash
-# 1. 克隆到 OpenClaw Skills 目录
-git clone https://github.com/coinank/coinank-openapi-skill.git ~/.openclaw/skills/coinank-openapi-skill
+# 1. 安装或更新 OKX Plugin Store package
+git clone https://github.com/coinank/coinank-openapi-skill.git
 ```
 
 ### 模式一：CoinAnk API Key 直连
@@ -160,7 +160,7 @@ OKX Buyer 侧接入参考：
 
 <div align="center">
 
-然后在 OpenClaw Agent 中直接用自然语言查询：
+然后在支持 OKX Plugin Store 的 Agent 中直接用自然语言查询：
 
 </div>
 

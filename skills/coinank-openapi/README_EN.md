@@ -7,7 +7,7 @@
 <br />
 
 [![Endpoints](https://img.shields.io/badge/59_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#api-overview)
-[![OpenClaw](https://img.shields.io/badge/OpenClaw-Skill-ff6b6b?style=for-the-badge&logo=openai&logoColor=white)](https://github.com/openclaw/openclaw)
+[![OKX Plugin Store](https://img.shields.io/badge/OKX-Plugin_Store-000000?style=for-the-badge&logo=okx&logoColor=white)](https://github.com/coinank/coinank-openapi-skill)
 [![REST](https://img.shields.io/badge/REST-API-3178c6?style=for-the-badge&logo=fastapi&logoColor=white)](https://open-api.coinank.com)
 [![License](https://img.shields.io/badge/MIT-License-f59e0b?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
@@ -31,7 +31,7 @@
 
 <div align="center">
 
-CoinAnk OpenAPI Skill is an [OpenClaw](https://github.com/openclaw/openclaw) Skill (AI agent plugin) that provides LLMs with comprehensive crypto derivatives market data capabilities. It covers **K-lines, ETF, open interest, long/short ratios, funding rates, liquidations, order flow, whale movements** and more — 18 categories, 59 real-time data endpoints, all battle-tested and verified, with support for both **direct CoinAnk API-key access** and **Agent Payments Protocol or x402 pay-per-call access**.
+CoinAnk OpenAPI Skill is an OKX Plugin Store plugin that provides LLMs with comprehensive crypto derivatives market data capabilities. It covers **K-lines, ETF, open interest, long/short ratios, funding rates, liquidations, order flow, whale movements** and more — 18 categories, 59 real-time data endpoints, all battle-tested and verified, with support for both **direct CoinAnk API-key access** and **Agent Payments Protocol or x402 pay-per-call access**.
 
 </div>
 
@@ -131,8 +131,8 @@ For first-time users, the access choice should be explicit:
 
 
 ```bash
-# 1. Clone into your OpenClaw skills directory
-git clone https://github.com/coinank/coinank-openapi-skill.git ~/.openclaw/skills/coinank-openapi-skill
+# 1. Install or update the OKX Plugin Store package
+git clone https://github.com/coinank/coinank-openapi-skill.git
 ```
 
 ### Mode 1: Direct CoinAnk API-key Access
@@ -160,7 +160,7 @@ Buyer-side integration reference:
 
 <div align="center">
 
-Then query directly with natural language in your OpenClaw agent:
+Then query directly with natural language in an agent that supports the OKX Plugin Store:
 
 </div>
 
