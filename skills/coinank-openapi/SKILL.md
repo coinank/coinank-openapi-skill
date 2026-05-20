@@ -20,6 +20,16 @@ tags:
 
 CoinAnk OpenAPI provides access to cryptocurrency derivatives market data, including K-lines, ETFs, open interest, long/short ratios, funding rates, liquidations, order flow, whale activity, and related analytics. Use direct API-key authentication when available, or use Agent Payments Protocol / x402 pay-per-call access through the latest OKX payment skill when CoinAnk returns a payment challenge.
 
+## Pre-flight Checks
+
+Before using this skill, ensure:
+
+1. Review the user's requested market-data task and select the matching reference OpenAPI file under `references/` when endpoint details are needed.
+2. If `COINANK_API_KEY` is available, use API-key mode and send it only in the `apikey` request header.
+3. If no API key is available, send the original request first and only start Agent Payments Protocol / x402 payment handling after a real HTTP `402 Payment Required` challenge or an OKX payment-skill `charge` requirement.
+4. For paid challenges, use `okx-agent-payments-protocol`; do not implement wallet signing manually in this skill.
+5. Confirm any payment with amount greater than zero with the user before payment execution. Zero-amount challenges are valid and must remain exactly zero.
+
 ## Commands
 
 This is a skill-only plugin. The command names below describe agent workflows, not a shipped local binary.
@@ -277,3 +287,22 @@ CoinAnk supports Agent Payments Protocol or x402 pay-per-call access. In practic
 ## Notes on OpenAPI Examples
 
 Values shown in `references/*.json`, especially timestamps in `example` fields, are historical examples only. Replace them with live values when building requests.
+## Error Handling
+
+| Error | Cause | Resolution |
+|-------|-------|------------|
+| HTTP `401` | Missing, invalid, or rejected `apikey`, or payment data rejected by the gateway/upstream service | Check whether API-key mode or pay-per-call mode is intended. Do not retry with fabricated credentials. If using pay-per-call, request a fresh challenge and replay the same request with the generated payment data. |
+| HTTP `402 Payment Required` | CoinAnk requires Agent Payments Protocol / x402 payment for this request | Delegate payment handling to `okx-agent-payments-protocol`. Confirm non-zero amounts with the user, support zero-amount challenges exactly as returned, and replay the original request after payment proof or `charge` completion. |
+| Missing or unsupported endpoint parameters | Required query parameters are absent, stale, or not accepted by the selected CoinAnk endpoint | Read the relevant OpenAPI reference file, ask the user for missing values, and follow timestamp and symbol formatting rules. |
+| Payment-skill unavailable | The required OKX payment helper is not installed or not accessible | Explain that pay-per-call mode requires `okx-agent-payments-protocol`; ask the user to install or enable it, or use API-key mode if available. |
+| Rate limit, timeout, or upstream unavailable | CoinAnk or a CDN/cache layer temporarily rejected or failed the request | Report the failure clearly, avoid duplicate paid replays without user confirmation, and retry only when safe. |
+
+## Security Notices
+
+- This plugin is for market-data retrieval and payment orchestration only; it does not execute trades or move assets by itself.
+- Never request, print, persist, or expose private keys, seed phrases, API keys, payment proofs, authorization headers, or wallet-session credentials.
+- Use `COINANK_API_KEY` only from the user's configured environment or secret store, and send it only as the CoinAnk `apikey` header.
+- Delegate Agent Payments Protocol / x402 proof generation, OKX wallet signing, and `charge` handling to `okx-agent-payments-protocol`; do not bypass its confirmation flow.
+- Confirm every non-zero payment amount with the user before execution. Do not charge speculatively.
+- Treat zero-amount payment challenges as valid, but never coerce zero to a non-zero fallback amount.
+
