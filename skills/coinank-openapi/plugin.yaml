@@ -1,0 +1,11 @@
+schema_version: 1
+name: coinank-openapi
+version: 1.0.0
+description: Access CoinAnk crypto derivatives market data via API key or Agent Payments Protocol/x402 pay-per-call.
+author:
+  name: CoinAnk
+  github: coinank
+license: MIT
+category: analytics
+api_calls:
+  - open-api.coinank.com

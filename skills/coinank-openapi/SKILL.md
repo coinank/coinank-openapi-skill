@@ -1,15 +1,19 @@
 ---
 name: coinank-openapi
-description: Access CoinAnk OpenAPI through direct API-key auth or pay via Agent Payments Protocol or x402
-metadata:
-  {
-    "openclaw":
-      {
-        "homepage": "https://coinank.com",
-        "priority": 100,
-        "keywords": ["bitcoin", "btc", "ethereum", "eth", "cryptocurrency", "crypto", "price", "trend", "liquidation", "long-short ratio", "agent payments protocol", "x402", "pay-per-call", "payment"]
-      },
-  }
+version: 1.0.0
+description: Access CoinAnk crypto derivatives market data via API key or Agent Payments Protocol/x402 pay-per-call.
+author: CoinAnk
+tags:
+  - bitcoin
+  - ethereum
+  - cryptocurrency
+  - derivatives
+  - market-data
+  - liquidation
+  - analytics
+  - agent-payments-protocol
+  - x402
+  - payment
 ---
 
 # Permissions
@@ -17,6 +21,10 @@ metadata:
 # - Allowed to read: {baseDir}/README.md, {baseDir}/references/*.json
 # - Allowed to make network requests to: https://open-api.coinank.com
 
+
+## Overview
+
+CoinAnk OpenAPI provides access to cryptocurrency derivatives market data, including K-lines, ETFs, open interest, long/short ratios, funding rates, liquidations, order flow, whale activity, and related analytics. Use direct API-key authentication when available, or use Agent Payments Protocol / x402 pay-per-call access through the latest OKX payment skill when CoinAnk returns a payment challenge.
 
 ## Access Modes
 
