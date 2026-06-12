@@ -31,7 +31,7 @@
 
 <div align="center">
 
-CoinAnk OpenAPI Skill 是一个 OKX Plugin Store 插件，为大语言模型提供完整的加密货币衍生品市场数据能力。覆盖 **K 线、ETF、持仓、多空比、资金费率、爆仓、订单流、鲸鱼动向**等 18 大类、78 个实时数据接口，全部经过实测验证可用，并支持 **CoinAnk API Key 直连** 与 **Agent Payments Protocol 或 x402 按次支付** 两种访问模式。
+CoinAnk OpenAPI Skill 是一个开放的 AI Agent 数据技能，任何 Agent、大语言模型或应用均可直接调用（同时已上架 OKX Plugin Store），为其提供完整的加密货币衍生品市场数据能力。覆盖 **K 线、ETF、持仓、多空比、资金费率、爆仓、订单流、鲸鱼动向**等 18 大类、78 个实时数据接口，全部经过实测验证可用，并支持 **CoinAnk API Key 直连** 与 **Agent Payments Protocol 或 x402 按次支付** 两种访问模式。
 
 </div>
 

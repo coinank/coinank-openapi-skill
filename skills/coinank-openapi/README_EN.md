@@ -31,7 +31,7 @@
 
 <div align="center">
 
-CoinAnk OpenAPI Skill is an OKX Plugin Store plugin that provides LLMs with comprehensive crypto derivatives market data capabilities. It covers **K-lines, ETF, open interest, long/short ratios, funding rates, liquidations, order flow, whale movements** and more — 18 categories, 78 real-time data endpoints, all battle-tested and verified, with support for both **direct CoinAnk API-key access** and **Agent Payments Protocol or x402 pay-per-call access**.
+CoinAnk OpenAPI Skill is an open AI agent data skill — any agent, LLM, or application can call it directly (also available on the OKX Plugin Store) — providing comprehensive crypto derivatives market data capabilities. It covers **K-lines, ETF, open interest, long/short ratios, funding rates, liquidations, order flow, whale movements** and more — 18 categories, 78 real-time data endpoints, all battle-tested and verified, with support for both **direct CoinAnk API-key access** and **Agent Payments Protocol or x402 pay-per-call access**.
 
 </div>
 
