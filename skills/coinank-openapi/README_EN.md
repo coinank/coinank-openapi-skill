@@ -6,7 +6,7 @@
 
 <br />
 
-[![Endpoints](https://img.shields.io/badge/59_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#api-overview)
+[![Endpoints](https://img.shields.io/badge/78_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#api-overview)
 [![OKX Plugin Store](https://img.shields.io/badge/OKX-Plugin_Store-000000?style=for-the-badge&logo=okx&logoColor=white)](https://github.com/coinank/coinank-openapi-skill)
 [![REST](https://img.shields.io/badge/REST-API-3178c6?style=for-the-badge&logo=fastapi&logoColor=white)](https://open-api.coinank.com)
 [![License](https://img.shields.io/badge/MIT-License-f59e0b?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
@@ -31,7 +31,7 @@
 
 <div align="center">
 
-CoinAnk OpenAPI Skill is an OKX Plugin Store plugin that provides LLMs with comprehensive crypto derivatives market data capabilities. It covers **K-lines, ETF, open interest, long/short ratios, funding rates, liquidations, order flow, whale movements** and more — 18 categories, 59 real-time data endpoints, all battle-tested and verified, with support for both **direct CoinAnk API-key access** and **Agent Payments Protocol or x402 pay-per-call access**.
+CoinAnk OpenAPI Skill is an open AI agent data skill — any agent, LLM, or application can call it directly (also available on the OKX Plugin Store) — providing comprehensive crypto derivatives market data capabilities. It covers **K-lines, ETF, open interest, long/short ratios, funding rates, liquidations, order flow, whale movements** and more — 18 categories, 78 real-time data endpoints, all battle-tested and verified, with support for both **direct CoinAnk API-key access** and **Agent Payments Protocol or x402 pay-per-call access**.
 
 </div>
 
@@ -40,7 +40,7 @@ CoinAnk OpenAPI Skill is an OKX Plugin Store plugin that provides LLMs with comp
 <table>
 <tr><td>
 
-- All **59 endpoints** tested and verified
+- All **78 endpoints** tested and verified
 - All requests are **GET** — simple and efficient
 - Supports **direct API-key access** and **Agent Payments Protocol or x402 pay-per-call access**
 
@@ -115,7 +115,7 @@ CoinAnk OpenAPI Skill is an OKX Plugin Store plugin that provides LLMs with comp
 
 <div align="center">
 
-**Total: 18 categories · 59 endpoints**
+**Total: 18 categories · 78 endpoints**
 
 <br />
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="-----" />
