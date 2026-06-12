@@ -667,6 +667,165 @@
         },
         "security": []
       }
+    },
+    "/api/instruments/agg": {
+      "get": {
+        "summary": "合约聚合行情(API等级1)",
+        "deprecated": false,
+        "description": "全币种合约聚合行情：价格、聚合未平仓合约及 5m/15m/30m/1h/4h/24h/2D/3D/7D 多周期持仓变化率、流通量，支持分页。<font color = 'red'> # 需要API等级:API1及以上</font>",
+        "tags": [
+          "币种和交易对"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码，默认 1",
+            "required": false,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "每页条数，默认 50",
+            "required": false,
+            "example": "50",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "baseCoin": {
+                                "type": "string",
+                                "description": "币种"
+                              },
+                              "coinImage": {
+                                "type": "string"
+                              },
+                              "price": {
+                                "type": "number",
+                                "description": "最新价"
+                              },
+                              "openInterest": {
+                                "type": "number",
+                                "description": "聚合未平仓合约(USD)"
+                              },
+                              "openInterestChM5": {
+                                "type": "number",
+                                "description": "5分钟持仓变化率"
+                              },
+                              "openInterestChM15": {
+                                "type": "number",
+                                "description": "15分钟持仓变化率"
+                              },
+                              "openInterestChM30": {
+                                "type": "number",
+                                "description": "30分钟持仓变化率"
+                              },
+                              "openInterestCh1": {
+                                "type": "number",
+                                "description": "1小时持仓变化率"
+                              },
+                              "openInterestCh4": {
+                                "type": "number",
+                                "description": "4小时持仓变化率"
+                              },
+                              "openInterestCh24": {
+                                "type": "number",
+                                "description": "24小时持仓变化率"
+                              },
+                              "openInterestCh2D": {
+                                "type": "number",
+                                "description": "2日持仓变化率"
+                              },
+                              "openInterestCh3D": {
+                                "type": "number",
+                                "description": "3日持仓变化率"
+                              },
+                              "openInterestCh7D": {
+                                "type": "number",
+                                "description": "7日持仓变化率"
+                              },
+                              "circulatingSupply": {
+                                "type": "number",
+                                "description": "流通量"
+                              },
+                              "symbol": {
+                                "type": "string"
+                              },
+                              "exchangeName": {
+                                "type": "string"
+                              },
+                              "supportSpot": {
+                                "type": "boolean"
+                              },
+                              "supportContract": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        },
+                        "pagination": {
+                          "type": "object",
+                          "properties": {
+                            "current": {
+                              "type": "integer"
+                            },
+                            "total": {
+                              "type": "integer"
+                            },
+                            "pageSize": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
     }
   },
   "components": {

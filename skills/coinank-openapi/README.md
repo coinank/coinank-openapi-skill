@@ -6,7 +6,7 @@
 
 <br />
 
-[![Endpoints](https://img.shields.io/badge/78_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#接口总览)
+[![Endpoints](https://img.shields.io/badge/80_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#接口总览)
 [![OKX Plugin Store](https://img.shields.io/badge/OKX-Plugin_Store-000000?style=for-the-badge&logo=okx&logoColor=white)](https://github.com/coinank/coinank-openapi-skill)
 [![REST](https://img.shields.io/badge/REST-API-3178c6?style=for-the-badge&logo=fastapi&logoColor=white)](https://open-api.coinank.com)
 [![License](https://img.shields.io/badge/MIT-License-f59e0b?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
@@ -31,7 +31,7 @@
 
 <div align="center">
 
-CoinAnk OpenAPI Skill 是一个开放的 AI Agent 数据技能，任何 Agent、大语言模型或应用均可直接调用（同时已上架 OKX Plugin Store），为其提供完整的加密货币衍生品市场数据能力。覆盖 **K 线、ETF、持仓、多空比、资金费率、爆仓、订单流、鲸鱼动向**等 18 大类、78 个实时数据接口，全部经过实测验证可用，并支持 **CoinAnk API Key 直连** 与 **Agent Payments Protocol 或 x402 按次支付** 两种访问模式。
+CoinAnk OpenAPI Skill 是一个开放的 AI Agent 数据技能，任何 Agent、大语言模型或应用均可直接调用（同时已上架 OKX Plugin Store），为其提供完整的加密货币衍生品市场数据能力。覆盖 **K 线、ETF、持仓、多空比、资金费率、爆仓、订单流、鲸鱼动向**等 18 大类、80 个实时数据接口，全部经过实测验证可用，并支持 **CoinAnk API Key 直连** 与 **Agent Payments Protocol 或 x402 按次支付** 两种访问模式。
 
 </div>
 
@@ -40,7 +40,7 @@ CoinAnk OpenAPI Skill 是一个开放的 AI Agent 数据技能，任何 Agent、
 <table>
 <tr><td>
 
-- 全部 **78 个接口**经过实测验证
+- 全部 **80 个接口**经过实测验证
 - 所有请求均为 **GET**，简洁高效
 - 支持 **API Key 直连** 与 **Agent Payments Protocol 或 x402 按次付费**
 
@@ -65,8 +65,8 @@ CoinAnk OpenAPI Skill 是一个开放的 AI Agent 数据技能，任何 Agent、
 |:--|:--:|:--:|
 | K 线 | 1 | API1 |
 | ETF | 5 | API1 |
-| 币种和交易对 | 4 | API1 |
-| 指标数据 | 10 | API1 |
+| 币种和交易对 | 5 | API1 |
+| 指标数据 | 11 | API1 |
 | 新闻快讯 | 2 | API2 |
 
 </td>
@@ -115,7 +115,7 @@ CoinAnk OpenAPI Skill 是一个开放的 AI Agent 数据技能，任何 Agent、
 
 <div align="center">
 
-**合计：18 大类 · 78 个接口**
+**合计：18 大类 · 80 个接口**
 
 <br />
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="-----" />
@@ -443,7 +443,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>6. 币种和交易对</strong> — 4 个接口 · API1</summary>
+<summary><strong>6. 币种和交易对</strong> — 5 个接口 · API1</summary>
 
 <br />
 
@@ -474,6 +474,15 @@ curl -H "apikey: $APIKEY" \
 | `exchange` | Yes | string | 交易所 | `Binance` |
 | `productType` | Yes | string | `SWAP` / `SPOT` | `SWAP` |
 
+#### `GET /api/instruments/agg` — 合约聚合行情
+
+| 参数 | 必填 | 类型 | 说明 | 示例 |
+|------|------|------|------|------|
+| `page` | No | integer | 页码，默认 1 | `1` |
+| `size` | No | integer | 每页条数，默认 50 | `50` |
+
+返回全币种聚合行情：价格、聚合未平仓合约及 5m～7D 多周期持仓变化率、流通量，支持分页。
+
 ```bash
 curl -H "apikey: $APIKEY" \
   "https://open-api.coinank.com/api/instruments/getLastPrice?symbol=BTCUSDT&exchange=Binance&productType=SWAP"
@@ -486,6 +495,9 @@ curl -H "apikey: $APIKEY" \
 
 curl -H "apikey: $APIKEY" \
   "https://open-api.coinank.com/api/baseCoin/symbols?exchange=Binance&productType=SWAP"
+
+curl -H "apikey: $APIKEY" \
+  "https://open-api.coinank.com/api/instruments/agg?page=1&size=50"
 ```
 
 </details>
@@ -653,7 +665,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>10. 指标数据</strong> — 10 个接口 · API1</summary>
+<summary><strong>10. 指标数据</strong> — 11 个接口 · API1</summary>
 
 <br />
 
@@ -681,6 +693,16 @@ curl -H "apikey: $APIKEY" \
 |------|------|------|------|------|
 | `symbol` | Yes | string | 币种 | `BTC` |
 
+#### `GET /api/indicator/smc` — SMC 聪明钱指标
+
+| 参数 | 必填 | 类型 | 说明 | 示例 |
+|------|------|------|------|------|
+| `symbol` | Yes | string | 交易对 | `BTCUSDT` |
+| `interval` | Yes | string | 周期 | `1d` |
+| `exchange` | No | string | 交易所，默认 Binance | `Binance` |
+
+返回 SMC（Smart Money Concepts）结构数据：摆动高低点、BOS/CHoCH、FVG 公允价值缺口、看涨/看跌订单块、Breaker Block。
+
 #### `GET /api/indicator/index/charts` — 彩虹图等综合指标
 
 | 参数 | 必填 | 类型 | 说明 | 示例 |
@@ -690,6 +712,7 @@ curl -H "apikey: $APIKEY" \
 ```bash
 curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/getCnnEntity"
 curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/getMarketCapRank?symbol=BTC"
+curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/smc?symbol=BTCUSDT&interval=1d"
 curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/index/charts?type=bitcoin-rainbow-v2"
 ```
 

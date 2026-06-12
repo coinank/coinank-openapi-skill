@@ -6,7 +6,7 @@
 
 <br />
 
-[![Endpoints](https://img.shields.io/badge/78_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#api-overview)
+[![Endpoints](https://img.shields.io/badge/80_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#api-overview)
 [![OKX Plugin Store](https://img.shields.io/badge/OKX-Plugin_Store-000000?style=for-the-badge&logo=okx&logoColor=white)](https://github.com/coinank/coinank-openapi-skill)
 [![REST](https://img.shields.io/badge/REST-API-3178c6?style=for-the-badge&logo=fastapi&logoColor=white)](https://open-api.coinank.com)
 [![License](https://img.shields.io/badge/MIT-License-f59e0b?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
@@ -31,7 +31,7 @@
 
 <div align="center">
 
-CoinAnk OpenAPI Skill is an open AI agent data skill — any agent, LLM, or application can call it directly (also available on the OKX Plugin Store) — providing comprehensive crypto derivatives market data capabilities. It covers **K-lines, ETF, open interest, long/short ratios, funding rates, liquidations, order flow, whale movements** and more — 18 categories, 78 real-time data endpoints, all battle-tested and verified, with support for both **direct CoinAnk API-key access** and **Agent Payments Protocol or x402 pay-per-call access**.
+CoinAnk OpenAPI Skill is an open AI agent data skill — any agent, LLM, or application can call it directly (also available on the OKX Plugin Store) — providing comprehensive crypto derivatives market data capabilities. It covers **K-lines, ETF, open interest, long/short ratios, funding rates, liquidations, order flow, whale movements** and more — 18 categories, 80 real-time data endpoints, all battle-tested and verified, with support for both **direct CoinAnk API-key access** and **Agent Payments Protocol or x402 pay-per-call access**.
 
 </div>
 
@@ -40,7 +40,7 @@ CoinAnk OpenAPI Skill is an open AI agent data skill — any agent, LLM, or appl
 <table>
 <tr><td>
 
-- All **78 endpoints** tested and verified
+- All **80 endpoints** tested and verified
 - All requests are **GET** — simple and efficient
 - Supports **direct API-key access** and **Agent Payments Protocol or x402 pay-per-call access**
 
@@ -65,8 +65,8 @@ CoinAnk OpenAPI Skill is an open AI agent data skill — any agent, LLM, or appl
 |:--|:--:|:--:|
 | K-Lines | 1 | API1 |
 | ETF | 5 | API1 |
-| Coins & Pairs | 4 | API1 |
-| Indicators | 10 | API1 |
+| Coins & Pairs | 5 | API1 |
+| Indicators | 11 | API1 |
 | News & Flash | 2 | API2 |
 
 </td>
@@ -115,7 +115,7 @@ CoinAnk OpenAPI Skill is an open AI agent data skill — any agent, LLM, or appl
 
 <div align="center">
 
-**Total: 18 categories · 78 endpoints**
+**Total: 18 categories · 80 endpoints**
 
 <br />
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" alt="-----" />
@@ -442,7 +442,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>6. Coins & Trading Pairs</strong> — 4 endpoints · API1</summary>
+<summary><strong>6. Coins & Trading Pairs</strong> — 5 endpoints · API1</summary>
 
 <br />
 
@@ -473,6 +473,15 @@ curl -H "apikey: $APIKEY" \
 | `exchange` | Yes | string | Exchange | `Binance` |
 | `productType` | Yes | string | `SWAP` / `SPOT` | `SWAP` |
 
+#### `GET /api/instruments/agg` — Aggregated Futures Market Data
+
+| Param | Required | Type | Description | Example |
+|------|------|------|------|------|
+| `page` | No | integer | Page number, default 1 | `1` |
+| `size` | No | integer | Page size, default 50 | `50` |
+
+Returns aggregated market data for all coins: price, aggregated open interest with multi-period (5m–7D) OI change rates, circulating supply. Paginated.
+
 ```bash
 curl -H "apikey: $APIKEY" \
   "https://open-api.coinank.com/api/instruments/getLastPrice?symbol=BTCUSDT&exchange=Binance&productType=SWAP"
@@ -485,6 +494,9 @@ curl -H "apikey: $APIKEY" \
 
 curl -H "apikey: $APIKEY" \
   "https://open-api.coinank.com/api/baseCoin/symbols?exchange=Binance&productType=SWAP"
+
+curl -H "apikey: $APIKEY" \
+  "https://open-api.coinank.com/api/instruments/agg?page=1&size=50"
 ```
 
 </details>
@@ -652,7 +664,7 @@ curl -H "apikey: $APIKEY" \
 ---
 
 <details>
-<summary><strong>10. Indicators</strong> — 10 endpoints · API1</summary>
+<summary><strong>10. Indicators</strong> — 11 endpoints · API1</summary>
 
 <br />
 
@@ -680,6 +692,16 @@ curl -H "apikey: $APIKEY" \
 |-------|----------|------|-------------|---------|
 | `symbol` | Yes | string | Coin | `BTC` |
 
+#### `GET /api/indicator/smc` — SMC (Smart Money Concepts) Indicator
+
+| Param | Required | Type | Description | Example |
+|------|------|------|------|------|
+| `symbol` | Yes | string | Trading pair | `BTCUSDT` |
+| `interval` | Yes | string | Interval | `1d` |
+| `exchange` | No | string | Exchange, default Binance | `Binance` |
+
+Returns SMC structure data: swing highs/lows, BOS/CHoCH, fair value gaps (FVG), bullish/bearish order blocks, breaker blocks.
+
 #### `GET /api/indicator/index/charts` — Rainbow Chart & Composite Indicators
 
 | Param | Required | Type | Description | Example |
@@ -689,6 +711,7 @@ curl -H "apikey: $APIKEY" \
 ```bash
 curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/getCnnEntity"
 curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/getMarketCapRank?symbol=BTC"
+curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/smc?symbol=BTCUSDT&interval=1d"
 curl -H "apikey: $APIKEY" "https://open-api.coinank.com/api/indicator/index/charts?type=bitcoin-rainbow-v2"
 ```
 

@@ -1179,6 +1179,267 @@
         },
         "security": []
       }
+    },
+    "/api/indicator/smc": {
+      "get": {
+        "summary": "SMC指标(API等级1)",
+        "deprecated": false,
+        "description": "SMC（Smart Money Concepts）聪明钱指标：返回摆动高低点、BOS/CHoCH 结构突破、FVG 公允价值缺口、看涨/看跌订单块（Order Block）、Breaker Block 等结构数据。<font color = 'red'> # 需要API等级:API1及以上</font>",
+        "tags": [
+          "指标数据"
+        ],
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "description": "交易对，如 BTCUSDT",
+            "required": true,
+            "example": "BTCUSDT",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "K线周期，如 1h、4h、1d",
+            "required": true,
+            "example": "1d",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "exchange",
+            "in": "query",
+            "description": "交易所，默认 Binance",
+            "required": false,
+            "example": "Binance",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "apikey",
+            "in": "header",
+            "description": "Register and activate to obtain apikey",
+            "required": true,
+            "example": "{{apikey}}",
+            "schema": {
+              "type": "string",
+              "default": "{{apikey}}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "contractCode": {
+                          "type": "string",
+                          "description": "合约代码"
+                        },
+                        "baseCoin": {
+                          "type": "string"
+                        },
+                        "quoteCoin": {
+                          "type": "string"
+                        },
+                        "contractType": {
+                          "type": "string",
+                          "description": "合约类型，如 SWAP"
+                        },
+                        "exchangeName": {
+                          "type": "string"
+                        },
+                        "interval": {
+                          "type": "string"
+                        },
+                        "klineTs": {
+                          "type": "integer",
+                          "description": "最新K线时间戳(ms)"
+                        },
+                        "swingHighs": {
+                          "type": "array",
+                          "description": "摆动高点",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "idx": {
+                                "type": "integer"
+                              },
+                              "ts": {
+                                "type": "integer"
+                              },
+                              "price": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        },
+                        "swingLows": {
+                          "type": "array",
+                          "description": "摆动低点",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "idx": {
+                                "type": "integer"
+                              },
+                              "ts": {
+                                "type": "integer"
+                              },
+                              "price": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        },
+                        "bos": {
+                          "type": "array",
+                          "description": "BOS 结构突破",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "choch": {
+                          "type": "array",
+                          "description": "CHoCH 趋势转换",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "idx": {
+                                "type": "integer"
+                              },
+                              "ts": {
+                                "type": "integer"
+                              },
+                              "price": {
+                                "type": "number"
+                              },
+                              "dir": {
+                                "type": "integer",
+                                "description": "方向 1=多 -1=空"
+                              }
+                            }
+                          }
+                        },
+                        "fvgData": {
+                          "type": "array",
+                          "description": "FVG 公允价值缺口",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "ts": {
+                                "type": "integer"
+                              },
+                              "low": {
+                                "type": "number"
+                              },
+                              "high": {
+                                "type": "number"
+                              },
+                              "direction": {
+                                "type": "integer"
+                              },
+                              "barCount": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        },
+                        "bullishOB": {
+                          "type": "array",
+                          "description": "看涨订单块",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "idx": {
+                                "type": "integer"
+                              },
+                              "ts": {
+                                "type": "integer"
+                              },
+                              "h": {
+                                "type": "number"
+                              },
+                              "l": {
+                                "type": "number"
+                              },
+                              "o": {
+                                "type": "number"
+                              },
+                              "c": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        },
+                        "bearishOB": {
+                          "type": "array",
+                          "description": "看跌订单块",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "idx": {
+                                "type": "integer"
+                              },
+                              "ts": {
+                                "type": "integer"
+                              },
+                              "h": {
+                                "type": "number"
+                              },
+                              "l": {
+                                "type": "number"
+                              },
+                              "o": {
+                                "type": "number"
+                              },
+                              "c": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        },
+                        "breakerBullish": {
+                          "type": "array",
+                          "description": "看涨 Breaker Block",
+                          "items": {
+                            "type": "object"
+                          }
+                        },
+                        "breakerBearish": {
+                          "type": "array",
+                          "description": "看跌 Breaker Block",
+                          "items": {
+                            "type": "object"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
     }
   },
   "components": {
