@@ -9,13 +9,13 @@
 [![Endpoints](https://img.shields.io/badge/80_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#接口总览)
 [![OKX Plugin Store](https://img.shields.io/badge/OKX-Plugin_Store-000000?style=for-the-badge&logo=okx&logoColor=white)](https://github.com/coinank/coinank-openapi-skill)
 [![REST](https://img.shields.io/badge/REST-API-3178c6?style=for-the-badge&logo=fastapi&logoColor=white)](https://open-api.coinank.com)
-[![License](https://img.shields.io/badge/MIT-License-f59e0b?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./skills/coinank-openapi/LICENSE)
+[![License](https://img.shields.io/badge/MIT-License-f59e0b?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
 <br />
 
 [简体中文](./README.md) · [English](./skills/coinank-openapi/README_EN.md)
 
-OKX Plugin package files: [`skills/coinank-openapi`](./skills/coinank-openapi/)
+OKX Plugin package files: [`skills/coinank-openapi`](./skills/coinank-openapi/) · Cursor / Grok Bot Agent Plugin: root [`plugin.json`](./plugin.json)
 
 <br />
 
@@ -136,6 +136,45 @@ CoinAnk OpenAPI Skill 是一个开放的 AI Agent 数据技能，任何 Agent、
 # 1. 安装或更新 OKX Plugin Store package
 git clone https://github.com/coinank/coinank-openapi-skill.git
 ```
+
+
+### Cursor / Grok Bot Marketplace（本地测试）
+
+本仓库根目录 `plugin.json` 符合 [Agent Plugins](https://agent-plugins.org) 规范，可直接作为 Cursor / Grok Bot Marketplace 的 Agent Plugin 提交。现有 `skills/coinank-openapi/`（含 `.claude-plugin/`）保持不变，继续兼容 OKX Plugin Store。
+
+**本地加载路径：**
+
+```bash
+# 将本仓库（或 symlink）放到 Cursor 本地插件目录后 Reload Window
+mkdir -p ~/.cursor/plugins/local
+cp -R /path/to/coinank-openapi-skill ~/.cursor/plugins/local/coinank-openapi
+# 或: ln -s /path/to/coinank-openapi-skill ~/.cursor/plugins/local/coinank-openapi
+```
+
+然后在 Cursor 中执行 **Developer: Reload Window**，打开 Customize 确认已加载 skill `coinank-openapi`。
+
+**鉴权：**
+
+```bash
+export COINANK_API_KEY="your_api_key_here"
+```
+
+请求时把 key 放在 HTTP header `apikey`（不是 `Authorization`）：
+
+```bash
+curl -H "apikey: $COINANK_API_KEY" \
+  "https://open-api.coinank.com/api/fundingRate/current?type=current"
+```
+
+无 API Key 时也可走 Agent Payments Protocol / x402 按次支付（见下方模式二）。
+
+**推荐测试任务（test task）：**
+
+> 查 BTC 当前资金费率
+
+Agent 应读取 `skills/coinank-openapi/references/funding-rate.openapi.json`，调用 `GET /api/fundingRate/current`，并用自然语言汇报 BTC 相关费率。
+
+提交 Marketplace：将公开 Git 仓提交到 https://cursor.com/marketplace/publish
 
 ### 模式一：CoinAnk API Key 直连
 

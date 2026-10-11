@@ -1,0 +1,25 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "coinank-openapi",
+  "version": "1.0.0",
+  "description": "Access CoinAnk crypto derivatives market data via API key or Agent Payments Protocol/x402 pay-per-call.",
+  "author": {
+    "name": "CoinAnk",
+    "url": "https://github.com/coinank"
+  },
+  "homepage": "https://github.com/coinank/coinank-openapi-skill",
+  "repository": "https://github.com/coinank/coinank-openapi-skill",
+  "license": "MIT",
+  "keywords": [
+    "bitcoin",
+    "ethereum",
+    "cryptocurrency",
+    "derivatives",
+    "market-data",
+    "funding-rate",
+    "liquidation",
+    "analytics",
+    "coinank",
+    "x402"
+  ]
+}
