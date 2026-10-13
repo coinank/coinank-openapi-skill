@@ -8,6 +8,7 @@
 
 [![Endpoints](https://img.shields.io/badge/80_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#api-overview)
 [![OKX Plugin Store](https://img.shields.io/badge/OKX-Plugin_Store-000000?style=for-the-badge&logo=okx&logoColor=white)](https://github.com/coinank/coinank-openapi-skill)
+[![cursor.directory](https://img.shields.io/badge/cursor.directory-Plugin-6366f1?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.directory/plugins/coinank-openapi)
 [![REST](https://img.shields.io/badge/REST-API-3178c6?style=for-the-badge&logo=fastapi&logoColor=white)](https://open-api.coinank.com)
 [![License](https://img.shields.io/badge/MIT-License-f59e0b?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
@@ -133,6 +134,19 @@ For first-time users, the access choice should be explicit:
 ```bash
 # 1. Install or update the OKX Plugin Store package
 git clone https://github.com/coinank/coinank-openapi-skill.git
+```
+
+### Install in Cursor (cursor.directory)
+
+One-click install: [coinank-openapi](https://cursor.directory/plugins/coinank-openapi)
+
+1. Open the page above and click **Install**; or in Cursor go to **Customize → Plugins** and search `coinank-openapi`
+2. After install, paste a one-liner:
+
+```
+> Use CoinAnk OpenAPI to check the current BTC funding rate
+> Show BTC liquidations for the past 24 hours
+> Get BTC open interest (OI)
 ```
 
 ### Mode 1: Direct CoinAnk API-key Access
