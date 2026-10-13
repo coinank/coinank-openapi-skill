@@ -8,6 +8,7 @@
 
 [![Endpoints](https://img.shields.io/badge/80_Endpoints-18_Categories-00d4aa?style=for-the-badge&logo=bitcoin&logoColor=white)](#接口总览)
 [![OKX Plugin Store](https://img.shields.io/badge/OKX-Plugin_Store-000000?style=for-the-badge&logo=okx&logoColor=white)](https://github.com/coinank/coinank-openapi-skill)
+[![cursor.directory](https://img.shields.io/badge/cursor.directory-Plugin-6366f1?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.directory/plugins/coinank-openapi)
 [![REST](https://img.shields.io/badge/REST-API-3178c6?style=for-the-badge&logo=fastapi&logoColor=white)](https://open-api.coinank.com)
 [![License](https://img.shields.io/badge/MIT-License-f59e0b?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
@@ -133,6 +134,19 @@ CoinAnk OpenAPI Skill 是一个开放的 AI Agent 数据技能，任何 Agent、
 ```bash
 # 1. 安装或更新 OKX Plugin Store package
 git clone https://github.com/coinank/coinank-openapi-skill.git
+```
+
+### 在 Cursor 安装（cursor.directory）
+
+一键安装：[coinank-openapi](https://cursor.directory/plugins/coinank-openapi)
+
+1. 打开上述页面，点击 **Install**；或在 Cursor 中打开 **Customize → Plugins**，搜索 `coinank-openapi` 添加
+2. 安装后直接用自然语言试一句：
+
+```
+> 用 CoinAnk OpenAPI 查 BTC 当前资金费率
+> 看看过去 24 小时 BTC 爆仓数据
+> 获取 BTC 未平仓合约（OI）
 ```
 
 ### 模式一：CoinAnk API Key 直连
